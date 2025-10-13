@@ -1,0 +1,22 @@
+{
+  "name": "w4_5",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "env:staging": "cross-env test_env=staging npx playwright test --project chromium",
+    "env:prod": "cross-env test_env=prod npx playwright test --project chromium",
+    "env:dev": "cross-env test_env=dev npx playwright test --project chromium"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.1",
+    "allure-playwright": "^3.4.1",
+    "cross-env": "^10.1.0"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3"
+  }
+}
