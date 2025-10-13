@@ -1,4 +1,4 @@
-import {expect, Locator, Page} from '@playwright/test';
+import {expect, Page} from '@playwright/test';
 import ButtonLocators from '../locators/button.locator';
 
 export default class ButtonPage {
