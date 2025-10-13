@@ -1,0 +1,14 @@
+{
+  "dev": {
+    "fullName": "Nguyen Van A",
+    "email": "nguyenvana@example.com",
+    "currentAddress": "123 Dev Street, Hanoi",
+    "permanentAddress": "456 Home Road, Hanoi"
+  },
+  "stg": {
+    "fullName": "Tran Thi B",
+    "email": "tranthib@example.com",
+    "currentAddress": "789 Stg Ave, HCM",
+    "permanentAddress": "101 Home Blvd, HCM"
+  }
+}

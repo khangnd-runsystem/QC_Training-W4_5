@@ -1,12 +1,14 @@
 import { defineConfig, devices } from '@playwright/test';
+import dotenv from 'dotenv';
+import path from 'path';
 
-/**
- * Read environment variables from file.
- * https://github.com/motdotla/dotenv
- */
-// import dotenv from 'dotenv';
-// import path from 'path';
-// dotenv.config({ path: path.resolve(__dirname, '.env') });
+// Load environment file based on test_env (for example: .env.dev, .env.stg)
+if (process.env.test_env) {
+  dotenv.config({ path: path.resolve(__dirname, `.env.${process.env.test_env}`), override: true });
+} else {
+  // fallback to .env if present
+  dotenv.config({ path: path.resolve(__dirname, `.env`), override: false });
+}
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -20,7 +22,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : Number(process.env.WORKERS) || 4,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['html', { open: 'always', outputFolder: 'reports/html-report' }],
@@ -33,28 +35,43 @@ export default defineConfig({
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    headless: false,
-    screenshot: 'on',
-    video: 'on',
+    // headless mode controlled by .env via HEADLESS=true/false
+    headless: process.env.HEADLESS === 'true',
+    // Use null viewport to allow fullscreen window
+    viewport: null,
+    // Force browser to start in fullscreen on supported channels
+    // Optional slowMo (ms) can be set via SLOW_MO env var or .env file to slow actions for easier visual debugging
+    launchOptions: {
+      args: ['--start-fullscreen'],
+      slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+    },
+    screenshot: 'only-on-failure',
+    video: 'retain-on-failure',
   },
   globalSetup: "src/utils/globalSetup.ts",
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      name: 'chrome',
+      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
     },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // // Run against Microsoft Edge (Chromium) as requested
+    // {
+    //   name: 'edge',
+    //   use: { ...devices['Desktop Chrome'], channel: 'msedge' },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
+
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
