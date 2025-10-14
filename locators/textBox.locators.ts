@@ -1,21 +1,26 @@
 import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from './common-locators';
 
-export default class TextBoxLocators {
-  readonly page: Page;
-  readonly fullNameInput: Locator;
-  readonly emailInput: Locator;
-  readonly currentAddressInput: Locator;
-  readonly permanentAddressInput: Locator;
-  readonly submitButton: Locator;
-  readonly resultBox: Locator;
+export default class TextBoxLocators extends CommonLocators {
+  fullNameInput!: Locator;
+  emailInput!: Locator;
+  currentAddressInput!: Locator;
+  permanentAddressInput!: Locator;
+  submitButton!: Locator;
+  resultBox!: Locator;
 
   constructor(page: Page) {
-    this.page = page;
-    this.fullNameInput = page.locator('#userName');
-    this.emailInput = page.locator('#userEmail');
-    this.currentAddressInput = page.locator('#currentAddress');
-    this.permanentAddressInput = page.locator('#permanentAddress');
-    this.submitButton = page.locator('#submit');
-    this.resultBox = page.locator('#output');
+    super(page);
+  }
+
+  protected override initializeLocators(): void {
+    super.initializeLocators();
+
+    this.fullNameInput = this.page.locator('#userName');
+    this.emailInput = this.page.locator('#userEmail');
+    this.currentAddressInput = this.page.locator('#currentAddress');
+    this.permanentAddressInput = this.page.locator('#permanentAddress');
+    this.submitButton = this.page.locator('#submit');
+    this.resultBox = this.page.locator('#output');
   }
 }

@@ -1,6 +1,6 @@
 import { expect, Locator, Page, test } from "@playwright/test";
 
-import { logger, step } from "../utils/logging";
+import { step } from "../utils/logging";
 import { CommonLocators } from "../locators/common-locators";
 import { Helper } from "../utils/helper";
 
@@ -25,7 +25,7 @@ export class CommonPage {
    *   waitForSelector: a selector to wait for after navigation
    *   timeout: max wait time in ms
    */
-  @step((url) => `Navigate to URL: ${url}`)
+  @step((url: string) => `Navigate to URL: ${url}`)
   async navigate(
     url: string,
     options?: {
@@ -75,7 +75,7 @@ export class CommonPage {
    * @returns A promise that resolves when the URL matches the pattern
    * @throws Error if the URL doesn't match the pattern within the timeout period
    */
-  @step((url) => `Wait current url match with: ${url}`)
+  @step((url: string) => `Wait current url match with: ${url}`)
   async waitForURLMatch(
     pattern: string | RegExp,
     timeout = DEFAULT_TIMEOUT
@@ -108,7 +108,7 @@ export class CommonPage {
    * Click on Locator
    * @param locator
    */
-  @step((locator) => `Click on locator: ${locator}`)
+  @step((locator: Locator) => `Click on locator: ${locator}`)
   async click(locator: Locator, option?: object): Promise<void> {
     await this.waitForVisible(locator);
     await expect.soft(locator).toBeVisible();
@@ -128,7 +128,7 @@ export class CommonPage {
    */
   //@step('Fill input value')
   @step(
-    (locator, value) => `Fill input value: Locator=${locator}, Value=${value}`
+    (locator: Locator, value: string) => `Fill input value: Locator=${locator}, Value=${value}`
   )
   async fill(
     locator: Locator,
@@ -148,7 +148,7 @@ export class CommonPage {
    * Check on checkbox or radio button
    *
    */
-  @step((locator) => `Check checkbox/radio button: ${locator}`)
+  @step((locator: Locator) => `Check checkbox/radio button: ${locator}`)
   async check(locator: Locator): Promise<void> {
     await this.waitForVisible(locator);
     await locator.check();
@@ -158,7 +158,7 @@ export class CommonPage {
    * Uncheck on checkbox or radio button
    *
    */
-  @step((locator) => `Uncheck checkbox/radio button: ${locator}`)
+  @step((locator: Locator) => `Uncheck checkbox/radio button: ${locator}`)
   async uncheck(locator: Locator): Promise<void> {
     await this.waitForVisible(locator);
     await locator.uncheck();
@@ -168,7 +168,7 @@ export class CommonPage {
    * Click on Text
    * @param text
    */
-  @step((text) => `Click on Text: ${text}`)
+  @step((text: string) => `Click on Text: ${text}`)
   async clickByText(text: string): Promise<void> {
     await this.page.getByText(text).click();
   }
@@ -177,7 +177,7 @@ export class CommonPage {
    * Double Click on Locator
    * @param locator
    */
-  @step((locator) => `Double Click on Locator: ${locator}`)
+  @step((locator: Locator) => `Double Click on Locator: ${locator}`)
   async dblclick(locator: Locator, option?: object): Promise<void> {
     await this.waitForVisible(locator);
     await expect.soft(locator).toBeVisible();
@@ -189,12 +189,24 @@ export class CommonPage {
       }
     }
   }
+  @step((locator: Locator) => `Right Click on Locator: ${locator}`)
+  async rightClick(locator: Locator, option?: object): Promise<void> {
+    await this.waitForVisible(locator);
+    await expect.soft(locator).toBeVisible();
+    await expect.soft(locator).toBeEnabled();
+    if (await locator.isEnabled()) {
+      const att = await this.getAttribute(locator, "disabled");
+      if (att !== "disabled") {
+        await locator.click({button: 'right'})
+      }
+    }
+  }
 
   /**
    * Hover over a Locator
    * @param locator
    */
-  @step((locator) => `Hover over Locator: ${locator}`)
+  @step((locator: Locator) => `Hover over Locator: ${locator}`)
   async hover(locator: Locator): Promise<void> {
     await this.waitForVisible(locator);
     await expect.soft(locator).toBeVisible();
@@ -206,7 +218,7 @@ export class CommonPage {
    * @param locator
    * @param key
    */
-  @step((locator, key) => `Focus on locator: ${locator} and press key: ${key}`)
+  @step((locator: Locator, key: string) => `Focus on locator: ${locator} and press key: ${key}`)
   async press(locator: Locator, key: string): Promise<void> {
     await this.waitForVisible(locator);
     await locator.press(key);
@@ -218,7 +230,7 @@ export class CommonPage {
    * @param value
    */
   @step(
-    (inputLocator, value) =>
+    (inputLocator: Locator, value: string) =>
       `Fill input if visible: Locator=${inputLocator}, Value=${value}`
   )
   async fillInputIfVisible(
@@ -236,7 +248,7 @@ export class CommonPage {
    * Clear input field
    * @param locator
    */
-  @step((locator) => `Clear input field: Locator=${locator}`)
+  @step((locator: Locator) => `Clear input field: Locator=${locator}`)
   async clearInput(locator: Locator): Promise<void> {
     await this.waitForVisible(locator);
     await locator.fill("");
@@ -249,7 +261,7 @@ export class CommonPage {
    * @param optionsLocator - optional locator for the list of all options
    */
   @step(
-    (dropdownLocator, optionText) =>
+    (dropdownLocator: Locator, optionText: string) =>
       `Select custom dropdown option: Locator=${dropdownLocator}, OptionText=${optionText}`
   )
   async selectOptionByText(
@@ -276,7 +288,7 @@ export class CommonPage {
    * @param filePath
    */
   @step(
-    (locator, filePath) =>
+    (locator: Locator, filePath: string) =>
       `Upload a file to a file input field: Locator=${locator}, FilePath=${filePath}`
   )
   async uploadFile(locator: Locator, filePath: string): Promise<void> {
@@ -291,7 +303,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Check Locator is visible or not: Locator=${locator}`)
+  @step((locator: Locator) => `Check Locator is visible or not: Locator=${locator}`)
   async isVisible(locator: Locator): Promise<boolean> {
     return await locator.isVisible();
   }
@@ -301,7 +313,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Check Locator is enabled or not: Locator=${locator}`)
+  @step((locator: Locator) => `Check Locator is enabled or not: Locator=${locator}`)
   async isEnabled(locator: Locator): Promise<boolean> {
     return await locator.isEnabled();
   }
@@ -311,7 +323,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Check Locator is editable or not: Locator=${locator}`)
+  @step((locator: Locator) => `Check Locator is editable or not: Locator=${locator}`)
   async isEditable(locator: Locator): Promise<boolean> {
     return await locator.isEditable();
   }
@@ -331,7 +343,7 @@ export class CommonPage {
    * @param text
    */
   @step(
-    (locator, text) =>
+    (locator: Locator, text: string) =>
       `Wait for text to appear in locator: Locator=${locator}, Text=${text}`
   )
   async waitForText(locator: Locator, text: string): Promise<void> {
@@ -343,7 +355,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Wait Locator with visible state: Locator=${locator}`)
+  @step((locator: Locator) => `Wait Locator with visible state: Locator=${locator}`)
   async waitForVisible(locator: Locator): Promise<void> {
     await locator.waitFor({ state: "visible" });
   }
@@ -353,7 +365,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Wait Locator with attached state: Locator=${locator}`)
+  @step((locator: Locator) => `Wait Locator with attached state: Locator=${locator}`)
   async waitForAttached(locator: Locator): Promise<void> {
     await locator.waitFor({ state: "attached" });
   }
@@ -363,7 +375,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Wait Locator with detached state: Locator=${locator}`)
+  @step((locator: Locator) => `Wait Locator with detached state: Locator=${locator}`)
   async waitForDetached(locator: Locator): Promise<void> {
     await locator.waitFor({ state: "detached", timeout: DEFAULT_TIMEOUT });
   }
@@ -373,7 +385,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Wait Locator with hidden state: Locator=${locator}`)
+  @step((locator: Locator) => `Wait Locator with hidden state: Locator=${locator}`)
   async waitForHidden(locator: Locator): Promise<void> {
     await locator.waitFor({ state: "hidden" });
   }
@@ -382,7 +394,7 @@ export class CommonPage {
    * Wait for an element to disappear
    * @param locator
    */
-  @step((locator) => `Wait for an element to disappear: Locator=${locator}`)
+  @step((locator: Locator) => `Wait for an element to disappear: Locator=${locator}`)
   async waitForElementToDisappear(locator: Locator): Promise<void> {
     await locator.waitFor({ state: "hidden" });
   }
@@ -391,7 +403,7 @@ export class CommonPage {
    * Wait for a Locator to be enabled
    * @param locator
    */
-  @step((locator) => `Wait for Locator to be enabled: Locator=${locator}`)
+  @step((locator: Locator) => `Wait for Locator to be enabled: Locator=${locator}`)
   async waitForElementToBeEnabled(locator: Locator): Promise<void> {
     for (let i = 0; i < 10; i++) {
       if (await locator.isEnabled()) return;
@@ -406,7 +418,7 @@ export class CommonPage {
    * @param retries - Number of retry attempts (default: 3)
    */
   @step(
-    (locator, retries) =>
+    (locator: Locator, retries: number) =>
       `Retry clicking on Locator: Locator=${locator}, Retries=${retries}`
   )
   async retryClick(locator: Locator, retries: number = 3): Promise<void> {
@@ -449,7 +461,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Get text of locator: Locator=${locator}`)
+  @step((locator: Locator) => `Get text of locator: Locator=${locator}`)
   async getText(locator: Locator): Promise<string> {
     await this.waitForVisible(locator);
     const text = await locator.textContent();
@@ -461,7 +473,7 @@ export class CommonPage {
    * @param label
    * @returns
    */
-  @step((label) => `Get text by label: Label=${label}`)
+  @step((label: string) => `Get text by label: Label=${label}`)
   async getTextByLabel(label: string): Promise<string> {
     const text = await this.page.getByLabel(label).textContent();
     return text ?? "";
@@ -472,7 +484,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Get input value: Locator=${locator}`)
+  @step((locator: string) => `Get input value: Locator=${locator}`)
   async getInputValue(locator: string): Promise<string> {
     return await this.page.locator(locator).inputValue();
   }
@@ -484,7 +496,7 @@ export class CommonPage {
    * @returns
    */
   @step(
-    (locator, attribute) =>
+    (locator: Locator, attribute: string) =>
       `Check Locator attribute: Locator=${locator}, Attribute=${attribute}`
   )
   async getAttribute(locator: Locator, attribute: string): Promise<string> {
@@ -504,7 +516,7 @@ export class CommonPage {
    * Scroll an element into view with logging
    * @param locator
    */
-  @step((locator) => `Scroll an element into view: Locator=${locator}`)
+  @step((locator: Locator) => `Scroll an element into view: Locator=${locator}`)
   async scrollIntoView(locator: Locator): Promise<void> {
     await expect.soft(locator).toBeVisible();
     console.log("Scrolling element into view");
@@ -517,7 +529,7 @@ export class CommonPage {
    * @returns
    */
   @step(
-    (locator) =>
+    (locator: Locator) =>
       `Get the count of elements matching the locator: Locator=${locator}`
   )
   async count(locator: Locator): Promise<number> {
@@ -533,7 +545,7 @@ export class CommonPage {
    * @returns
    */
   @step(
-    (locator, trim) => `Get Text of Locator: Locator=${locator}, Trim=${trim}`
+    (locator: Locator, trim: boolean) => `Get Text of Locator: Locator=${locator}, Trim=${trim}`
   )
   async textContent(locator: Locator, trim: boolean = true): Promise<string> {
     await expect.soft(locator).toBeVisible();
@@ -548,7 +560,7 @@ export class CommonPage {
    * @param locator
    * @returns
    */
-  @step((locator) => `Get Inner Text of Locator: Locator=${locator}`)
+  @step((locator: Locator) => `Get Inner Text of Locator: Locator=${locator}`)
   async innerText(locator: Locator): Promise<string> {
     return (await locator.innerText())?.trim() ?? "";
   }
@@ -560,7 +572,7 @@ export class CommonPage {
    * @returns
    */
   @step(
-    (locator, text) =>
+    (locator: Locator, text: string) =>
       `Check if a Locator contains a specific text: Locator=${locator}, Text=${text}`
   )
   async checkContainsText(locator: Locator, text: string): Promise<boolean> {
@@ -596,7 +608,7 @@ export class CommonPage {
    * @param targetLocator - The target to drop onto
    */
   @step(
-    (sourceLocator, targetLocator) =>
+    (sourceLocator: Locator, targetLocator: Locator) =>
       `Drag and drop: ${sourceLocator} to ${targetLocator}`
   )
   async dragAndDrop(
