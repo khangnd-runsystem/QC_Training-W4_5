@@ -11,4 +11,11 @@
     "currentAddress": "789 Stg Ave, HCM",
     "permanentAddress": "101 Home Blvd, HCM"
   }
+  ,
+  "prod": {
+    "fullName": "Pham Van C",
+    "email": "phamvanc@company.com",
+    "currentAddress": "1 Production Way, Da Nang",
+    "permanentAddress": "22 Corporate Park, Da Nang"
+  }
 }
