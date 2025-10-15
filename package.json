@@ -3,9 +3,15 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "env:stg": "cross-env test_env=stg npx playwright test ./tests/demo/textbox.spec.ts ",
-    "env:prod": "cross-env test_env=prod npx playwright test ./tests/demo/textbox.spec.ts ",
-    "env:dev": "cross-env test_env=dev npx playwright test ./tests/demo/textbox.spec.ts "
+    "test:demo": "npx playwright test ./tests/demo --project=chrome --project=edge",
+    "test:demo:dev": "cross-env test_env=dev npx playwright test ./tests/demo --project=chrome --project=edge",
+    "test:demo:stg": "cross-env test_env=stg npx playwright test ./tests/demo --project=chrome --project=edge",
+    "test:demo:prod": "cross-env test_env=prod npx playwright test ./tests/demo --project=chrome --project=edge",
+    "test:demo:chrome": "npx playwright test ./tests/demo --project=chrome",
+    "test:demo:edge": "npx playwright test ./tests/demo --project=edge",
+    "env:stg": "cross-env test_env=stg npx playwright test ./tests/demo/",
+    "env:prod": "cross-env test_env=prod npx playwright test ./tests/demo/",
+    "env:dev": "cross-env test_env=dev npx playwright test ./tests/demo/"
   },
   "author": "",
   "license": "ISC",

@@ -16,11 +16,11 @@ export default class TextBoxLocators extends CommonLocators {
   protected override initializeLocators(): void {
     super.initializeLocators();
 
-    this.fullNameInput = this.page.locator('#userName');
-    this.emailInput = this.page.locator('#userEmail');
-    this.currentAddressInput = this.page.locator('#currentAddress');
-    this.permanentAddressInput = this.page.locator('#permanentAddress');
-    this.submitButton = this.page.locator('#submit');
-    this.resultBox = this.page.locator('#output');
+    this.fullNameInput = this.page.locator('//input[@id="userName"]');
+    this.emailInput = this.page.locator('//input[@id="userEmail"]');
+    this.currentAddressInput = this.page.locator('//textarea[@id="currentAddress"]');
+    this.permanentAddressInput = this.page.locator('//textarea[@id="permanentAddress"]');
+    this.submitButton = this.page.locator('//button[@id="submit"]');
+    this.resultBox = this.page.locator('//div[@id="output"]');
   }
 }

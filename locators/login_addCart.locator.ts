@@ -11,6 +11,8 @@ export default class Login_AddCartLocators extends CommonLocators {
     productTitle!: Locator;
     cartProductTitle!: Locator;
     pageTitle!: Locator;
+    menuButton!: Locator;
+    logOutButton!: Locator;
 
     constructor(page: Page) {
         super(page);
@@ -25,6 +27,8 @@ export default class Login_AddCartLocators extends CommonLocators {
         this.productTitle = this.page.locator('//a[@id="item_4_title_link"]//div[@class="inventory_item_name"]');
         this.cartProductTitle = this.page.locator('//div[@id="inventory-item-name"]');
         this.pageTitle = this.page.locator('//span[@class="title"]');
+        this.menuButton = this.page.locator('//button[@id="react-burger-menu-btn"]');
+        this.logOutButton = this.page.locator('//a[@id="logout_sidebar_link"]');
         
     }
 }

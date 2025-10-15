@@ -17,12 +17,12 @@ export class ButtonLocators extends CommonLocators {
     protected override initializeLocators(): void {
         super.initializeLocators();
 
-        this.btn_doubleClickButton = this.page.locator('#doubleClickBtn');
-        this.btn_rightClickButton = this.page.locator('#rightClickBtn');
-        this.btn_dynamicClickButton = this.page.locator('button:has-text("Click Me")').nth(2);
-        this.btn_doubleClickMessage = this.page.locator('#doubleClickMessage');
-        this.btn_rightClickMessage = this.page.locator('#rightClickMessage');
-        this.btn_dynamicClickMessage = this.page.locator('#dynamicClickMessage');
+        this.btn_doubleClickButton = this.page.locator('//button[@id="doubleClickBtn"]');
+        this.btn_rightClickButton = this.page.locator('//button[@id="rightClickBtn"]');
+        this.btn_dynamicClickButton = this.page.locator('//button[@id = "hm9hl"]');
+        this.btn_doubleClickMessage = this.page.locator('//p[@id="doubleClickMessage"]');
+        this.btn_rightClickMessage = this.page.locator('//p[@id="rightClickMessage"]');
+        this.btn_dynamicClickMessage = this.page.locator('//p[@id="dynamicClickMessage"]');
     }
 
 }

@@ -17,4 +17,18 @@ export default class LoginAddCartPage extends CommonPage {
         await expect(this.locators.pageTitle).toHaveText('Products');
         console.log(`Title của trang web là: ${await this.locators.pageTitle.textContent()}`);
     }
+    async addToCart() {
+        await this.click(this.locators.addToCartButton);
+    }
+    async goToCart() {
+        await this.click(this.locators.goToCartButton);
+    }
+    async verifyProductInCart() {
+        await expect(this.locators.cartProductTitle).toBeVisible();
+        await expect(this.locators.cartProductTitle).toHaveText(await this.locators.productTitle.innerText());
+    }
+    async logout() {
+        await this.click(this.locators.menuButton);
+        await this.click(this.locators.logOutButton);
+    }
 }

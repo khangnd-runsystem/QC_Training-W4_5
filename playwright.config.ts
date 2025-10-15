@@ -54,44 +54,30 @@ export default defineConfig({
   projects: [
     {
       name: 'chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'chrome',
+        viewport: null,
+        launchOptions: {
+          args: ['--start-fullscreen'],
+          slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+        },
+      },
     },
 
-    // // Run against Microsoft Edge (Chromium) as requested
-    // {
-    //   name: 'edge',
-    //   use: { ...devices['Desktop Chrome'], channel: 'msedge' },
-    // },
-
-    // {
-    //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
-    // },
-
-    // {
-    //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
-    // },
-
-    /* Test against mobile viewports. */
-    // {
-    //   name: 'Mobile Chrome',
-    //   use: { ...devices['Pixel 5'] },
-    // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: { ...devices['iPhone 12'] },
-    // },
-
-    /* Test against branded browsers. */
-    // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
-    // },
-    // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
-    // },
+    // Run against Microsoft Edge (Chromium)
+    {
+      name: 'edge',
+      use: {
+        ...devices['Desktop Chrome'],
+        channel: 'msedge',
+        viewport: null,
+        launchOptions: {
+          args: ['--start-fullscreen'],
+          slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+        },
+      },
+    },
   ],
 
   /* Run your local dev server before starting the tests */
