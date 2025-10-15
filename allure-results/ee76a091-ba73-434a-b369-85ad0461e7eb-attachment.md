@@ -1,0 +1,128 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - img "adplus-dvertising" [ref=e6] [cursor=pointer]
+    - iframe [ref=e9]:
+      - generic [ref=f1e6]:
+        - generic [ref=f1e8] [cursor=pointer]:
+          - link [ref=f1e10]:
+            - /url: https://clck.mgid.com/ghits/24486325/i/58092114/0/pp/1/9?h=fI5wWVSiJ9R4gqDnKAckZjMb4ZK_DEClNEI9JyIV93MNZ3XRCaW6UEadtKfroFt372fuenrAZbE1KZHxMM-RfdHZ6fRZoRCaGW4jzdtG10XAr6d-i59HPFs_ItfGXVvP&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+          - generic [ref=f1e13]:
+            - 'link "Từ 80kg xuống 45kg: Thật sự tôi không cần ăn kiêng!" [ref=f1e15]':
+              - /url: https://clck.mgid.com/ghits/24486325/i/58092114/0/pp/1/9?h=fI5wWVSiJ9R4gqDnKAckZjMb4ZK_DEClNEI9JyIV93MNZ3XRCaW6UEadtKfroFt372fuenrAZbE1KZHxMM-RfdHZ6fRZoRCaGW4jzdtG10XAr6d-i59HPFs_ItfGXVvP&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+            - link "Slim Maxx" [ref=f1e17]:
+              - /url: https://clck.mgid.com/ghits/24486325/i/58092114/0/pp/1/9?h=fI5wWVSiJ9R4gqDnKAckZjMb4ZK_DEClNEI9JyIV93MNZ3XRCaW6UEadtKfroFt372fuenrAZbE1KZHxMM-RfdHZ6fRZoRCaGW4jzdtG10XAr6d-i59HPFs_ItfGXVvP&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+        - generic [ref=f1e19] [cursor=pointer]:
+          - link [ref=f1e21]:
+            - /url: https://clck.mgid.com/ghits/24439394/i/58092114/0/pp/2/9?h=fI5wWVSiJ9R4gqDnKAckZj69744QSqEjK7_t_xHvVK4d34D6_muA_KoCDllDYRi_81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VqPCsYsrGb7T5_tAU2Fi_W&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+          - generic [ref=f1e24]:
+            - link "Ăn món này vào buổi sáng, mỡ thừa biến mất sau 14 ngày" [ref=f1e26]:
+              - /url: https://clck.mgid.com/ghits/24439394/i/58092114/0/pp/2/9?h=fI5wWVSiJ9R4gqDnKAckZj69744QSqEjK7_t_xHvVK4d34D6_muA_KoCDllDYRi_81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VqPCsYsrGb7T5_tAU2Fi_W&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+            - link "Slim Maxx" [ref=f1e28]:
+              - /url: https://clck.mgid.com/ghits/24439394/i/58092114/0/pp/2/9?h=fI5wWVSiJ9R4gqDnKAckZj69744QSqEjK7_t_xHvVK4d34D6_muA_KoCDllDYRi_81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VqPCsYsrGb7T5_tAU2Fi_W&rid=541ca379-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9f84trjeJ72&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**
+  - generic [ref=e10]:
+    - banner [ref=e11]:
+      - link [ref=e12] [cursor=pointer]:
+        - /url: https://demoqa.com
+        - img [ref=e13]
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e22] [cursor=pointer]:
+            - generic [ref=e23]:
+              - img [ref=e25]
+              - text: Elements
+            - img [ref=e30]
+          - list [ref=e35]:
+            - listitem [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+              - generic [ref=e39]: Text Box
+            - listitem [ref=e40] [cursor=pointer]:
+              - img [ref=e41]
+              - generic [ref=e43]: Check Box
+            - listitem [ref=e44] [cursor=pointer]:
+              - img [ref=e45]
+              - generic [ref=e47]: Radio Button
+            - listitem [ref=e48] [cursor=pointer]:
+              - img [ref=e49]
+              - generic [ref=e51]: Web Tables
+            - listitem [ref=e52] [cursor=pointer]:
+              - img [ref=e53]
+              - generic [ref=e55]: Buttons
+            - listitem [ref=e56] [cursor=pointer]:
+              - img [ref=e57]
+              - generic [ref=e59]: Links
+            - listitem [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+              - generic [ref=e63]: Broken Links - Images
+            - listitem [ref=e64] [cursor=pointer]:
+              - img [ref=e65]
+              - generic [ref=e67]: Upload and Download
+            - listitem [ref=e68] [cursor=pointer]:
+              - img [ref=e69]
+              - generic [ref=e71]: Dynamic Properties
+        - generic [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]:
+            - img [ref=e77]
+            - text: Forms
+          - img [ref=e83]
+        - generic [ref=e89] [cursor=pointer]:
+          - generic [ref=e90]:
+            - img [ref=e92]
+            - text: Alerts, Frame & Windows
+          - img [ref=e97]
+        - generic [ref=e103] [cursor=pointer]:
+          - generic [ref=e104]:
+            - img [ref=e106]
+            - text: Widgets
+          - img [ref=e111]
+        - generic [ref=e117] [cursor=pointer]:
+          - generic [ref=e118]:
+            - img [ref=e120]
+            - text: Interactions
+          - img [ref=e125]
+        - generic [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]:
+            - img [ref=e134]
+            - text: Book Store Application
+          - img [ref=e139]
+      - generic [ref=e143]:
+        - iframe [ref=e146]:
+          - generic [ref=f2e8] [cursor=pointer]:
+            - link [ref=f2e10]:
+              - /url: https://clck.mgid.com/ghits/24486729/i/58092122/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvM1ej3KC2PUGxdjCQUgbsvcCnsqAHekFuBiDiDmHLxXjg5KxA1ZlpL9YWF1h4jnnQ9HZ6fRZoRCaGW4jzdtG10U8pFuKoqMPX3BxXdcwh_CZ&rid=5551cd3b-a9a6-11f0-a64b-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIS0S7QsOb4TyE5H_wq1CwLYKjQ9Kz5Qmfrvw4Hq5_xGRQ**&muid=p9f84trjeJ72
+            - generic [ref=f2e14]:
+              - link "Slim Maxx" [ref=f2e16]:
+                - /url: https://clck.mgid.com/ghits/24486729/i/58092122/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvM1ej3KC2PUGxdjCQUgbsvcCnsqAHekFuBiDiDmHLxXjg5KxA1ZlpL9YWF1h4jnnQ9HZ6fRZoRCaGW4jzdtG10U8pFuKoqMPX3BxXdcwh_CZ&rid=5551cd3b-a9a6-11f0-a64b-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIS0S7QsOb4TyE5H_wq1CwLYKjQ9Kz5Qmfrvw4Hq5_xGRQ**&muid=p9f84trjeJ72
+              - link "Ăn món này vào buổi sáng, mỡ thừa biến mất sau 14 ngày" [ref=f2e18]:
+                - /url: https://clck.mgid.com/ghits/24486729/i/58092122/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvM1ej3KC2PUGxdjCQUgbsvcCnsqAHekFuBiDiDmHLxXjg5KxA1ZlpL9YWF1h4jnnQ9HZ6fRZoRCaGW4jzdtG10U8pFuKoqMPX3BxXdcwh_CZ&rid=5551cd3b-a9a6-11f0-a64b-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIS0S7QsOb4TyE5H_wq1CwLYKjQ9Kz5Qmfrvw4Hq5_xGRQ**&muid=p9f84trjeJ72
+              - link "Tìm hiểu thêm→" [ref=f2e20]:
+                - /url: https://clck.mgid.com/ghits/24486729/i/58092122/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvM1ej3KC2PUGxdjCQUgbsvcCnsqAHekFuBiDiDmHLxXjg5KxA1ZlpL9YWF1h4jnnQ9HZ6fRZoRCaGW4jzdtG10U8pFuKoqMPX3BxXdcwh_CZ&rid=5551cd3b-a9a6-11f0-a64b-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIS0S7QsOb4TyE5H_wq1CwLYKjQ9Kz5Qmfrvw4Hq5_xGRQ**&muid=p9f84trjeJ72
+        - generic [ref=e147]:
+          - heading "Buttons" [level=1] [ref=e148]
+          - button "Double Click Me" [active] [ref=e150] [cursor=pointer]
+          - button "Right Click Me" [ref=e152] [cursor=pointer]
+          - button "Click Me" [ref=e154] [cursor=pointer]
+          - paragraph [ref=e155]: You have done a double click
+      - generic [ref=e161]:
+        - img "Build PlayWright tests with AI" [ref=e163] [cursor=pointer]
+        - iframe [ref=e166]:
+          - generic [ref=f3e7] [cursor=pointer]:
+            - link [ref=f3e8]:
+              - /url: https://clck.mgid.com/ghits/24486729/i/58092113/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvD3KdtnJRHfnq7zYgmXolAwCnsqAHekFuBiDiDmHLxXjCdmiTwrpD4IkD3-uXj_HS9HZ6fRZoRCaGW4jzdtG10Vkx8cxYaaWoqipTj_KtbgK&rid=554fb4fe-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**&muid=p9f84trjeJ72
+            - generic [ref=f3e9]:
+              - link [ref=f3e11]:
+                - /url: https://clck.mgid.com/ghits/24486729/i/58092113/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvD3KdtnJRHfnq7zYgmXolAwCnsqAHekFuBiDiDmHLxXjCdmiTwrpD4IkD3-uXj_HS9HZ6fRZoRCaGW4jzdtG10Vkx8cxYaaWoqipTj_KtbgK&rid=554fb4fe-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**&muid=p9f84trjeJ72
+              - generic [ref=f3e15]:
+                - link "Ăn món này vào buổi sáng, mỡ thừa biến mất sau 14 ngày" [ref=f3e17]:
+                  - /url: https://clck.mgid.com/ghits/24486729/i/58092113/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvD3KdtnJRHfnq7zYgmXolAwCnsqAHekFuBiDiDmHLxXjCdmiTwrpD4IkD3-uXj_HS9HZ6fRZoRCaGW4jzdtG10Vkx8cxYaaWoqipTj_KtbgK&rid=554fb4fe-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**&muid=p9f84trjeJ72
+                - link "Slim Maxx" [ref=f3e19]:
+                  - /url: https://clck.mgid.com/ghits/24486729/i/58092113/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvD3KdtnJRHfnq7zYgmXolAwCnsqAHekFuBiDiDmHLxXjCdmiTwrpD4IkD3-uXj_HS9HZ6fRZoRCaGW4jzdtG10Vkx8cxYaaWoqipTj_KtbgK&rid=554fb4fe-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**&muid=p9f84trjeJ72
+                - link [ref=f3e20]:
+                  - /url: https://clck.mgid.com/ghits/24486729/i/58092113/0/pp/1/11?h=MHjeN1SLkaHqBzbd14sAvD3KdtnJRHfnq7zYgmXolAwCnsqAHekFuBiDiDmHLxXjCdmiTwrpD4IkD3-uXj_HS9HZ6fRZoRCaGW4jzdtG10Vkx8cxYaaWoqipTj_KtbgK&rid=554fb4fe-a9a6-11f0-89d2-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqa1rzEWQZezd-64DXb6fFOmpL8B9BSoIJKKfloKLTcLnQ**&muid=p9f84trjeJ72
+                  - img [ref=f3e21]
+    - contentinfo [ref=e167]:
+      - generic [ref=e168]: © 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.
+```
