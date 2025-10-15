@@ -1,5 +1,6 @@
 import {test} from '@playwright/test';
 import CheckBoxPage from '../../pages/checkBox.page';
+import { URLS } from '../../constants/paths';
 
 const envKey = process.env.test_env || 'dev';
 test.describe('Check Box Demo Test', () => {
@@ -7,7 +8,7 @@ test.describe('Check Box Demo Test', () => {
         const pageObj = new CheckBoxPage(page);
 
         // Navigate to checkbox page
-        await pageObj.navigate('https://demoqa.com/checkbox');
+        await pageObj.navigate(URLS.DEMOQA.CHECKBOX);
 
         // Expand home toggle
         await pageObj.click(pageObj.locators.cb_homeToggle);

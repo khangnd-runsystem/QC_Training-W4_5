@@ -2,6 +2,7 @@ import { test } from '@playwright/test';
 import { readJson } from '../../utils/jsonReader';
 import TextBoxData from '../../interfaces/textBoxData';
 import TextBoxPage from '../../pages/textBox.page';
+import { URLS } from '../../constants/paths';
 
 // Determine environment key
 const envKey = process.env.test_env || 'dev';
@@ -13,7 +14,7 @@ test.describe('Text box form', () => {
     const pageObj = new TextBoxPage(page);
 
     // Navigate to text box page
-    await pageObj.navigate('https://demoqa.com/text-box');
+    await pageObj.navigate(URLS.DEMOQA.TEXT_BOX);
 
     // Fill form fields
     await pageObj.fill(pageObj.locators.fullNameInput, data.fullName);

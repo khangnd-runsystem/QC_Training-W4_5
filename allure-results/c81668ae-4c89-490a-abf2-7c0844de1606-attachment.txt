@@ -1,0 +1,2 @@
+[INFO] [STEP] navigate -> Navigate to URL: https://www.saucedemo.com
+[NAVIGATE] Navigating to: https://www.saucedemo.com | loadState: domcontentloaded

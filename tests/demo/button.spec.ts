@@ -1,5 +1,6 @@
 import { test } from '@playwright/test';
 import ButtonPage from '../../pages/button.page';
+import { URLS } from '../../constants/paths';
 
 // Determine environment key
 const envKey = process.env.test_env || 'dev';
@@ -8,7 +9,7 @@ test.describe('Button actions', () => {
         const pageObj = new ButtonPage(page);
 
         // Navigate to buttons page
-        await pageObj.navigate('https://demoqa.com/buttons');
+        await pageObj.navigate(URLS.DEMOQA.BUTTONS);
 
         // Double click button
         await pageObj.dblclick(pageObj.locators.btn_doubleClickButton);
