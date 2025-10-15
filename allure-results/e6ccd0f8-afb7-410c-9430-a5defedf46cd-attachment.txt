@@ -1,0 +1,12 @@
+[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/checkbox
+[NAVIGATE] Navigating to: https://demoqa.com/checkbox | loadState: domcontentloaded
+[NAVIGATE] Navigation to https://demoqa.com/checkbox complete.
+[INFO] [STEP] click -> Click on locator: getByRole('button', { name: 'Toggle' })
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=getByRole('button', { name: 'Toggle' })
+[INFO] [STEP] getAttribute -> Check Locator attribute: Locator=getByRole('button', { name: 'Toggle' }), Attribute=disabled
+[INFO] [STEP] click -> Click on locator: getByRole('button', { name: 'Toggle' }).nth(1)
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=getByRole('button', { name: 'Toggle' }).nth(1)
+[INFO] [STEP] getAttribute -> Check Locator attribute: Locator=getByRole('button', { name: 'Toggle' }).nth(1), Attribute=disabled
+[INFO] [STEP] check -> Check checkbox/radio button: locator('.rct-node.rct-node-leaf > .rct-text > label > .rct-checkbox > .rct-icon').first()
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('.rct-node.rct-node-leaf > .rct-text > label > .rct-checkbox > .rct-icon').first()
+[INFO] [STEP] takeScreenshot -> Take a screenshot of the current page

@@ -1,0 +1,5 @@
+[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/text-box
+[NAVIGATE] Navigating to: https://demoqa.com/text-box | loadState: domcontentloaded
+[NAVIGATE] Navigation to https://demoqa.com/text-box complete.
+[INFO] [STEP] fill -> Fill input value: Locator=undefined, Value=Tran Thi B
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=undefined

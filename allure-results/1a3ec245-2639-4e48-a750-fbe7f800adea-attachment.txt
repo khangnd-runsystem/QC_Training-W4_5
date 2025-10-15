@@ -1,0 +1,9 @@
+[INFO] [STEP] navigate -> Navigate to URL: https://www.saucedemo.com/
+[NAVIGATE] Navigating to: https://www.saucedemo.com/ | loadState: domcontentloaded
+[NAVIGATE] Navigation to https://www.saucedemo.com/ complete.
+[INFO] [STEP] fill -> Fill input value: Locator=locator('//input[@id="user-name"]'), Value=standard_user
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('//input[@id="user-name"]')
+[INFO] [STEP] fill -> Fill input value: Locator=locator('//input[@id="password"]'), Value=secret_sauce
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('//input[@id="password"]')
+[INFO] [STEP] click -> Click on locator: locator('//[@id="login-button"]')
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('//[@id="login-button"]')

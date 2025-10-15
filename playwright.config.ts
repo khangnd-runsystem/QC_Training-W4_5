@@ -42,11 +42,12 @@ export default defineConfig({
     // Force browser to start in fullscreen on supported channels
     // Optional slowMo (ms) can be set via SLOW_MO env var or .env file to slow actions for easier visual debugging
     launchOptions: {
-      args: ['--start-fullscreen'],
       slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
     },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
+    actionTimeout: 30_000,
+    navigationTimeout: 60_000,
   },
   globalSetup: "src/utils/globalSetup.ts",
 
@@ -58,7 +59,7 @@ export default defineConfig({
         channel: 'chrome',
         viewport: null,
         launchOptions: {
-          args: ['--start-fullscreen'],
+          args: ['--start-maximized'],
           slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
         },
       },
@@ -71,7 +72,7 @@ export default defineConfig({
         channel: 'msedge',
         viewport: null,
         launchOptions: {
-          args: ['--start-fullscreen'],
+          args: ['--start-maximized'],
           slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
         },
       },

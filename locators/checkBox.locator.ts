@@ -4,6 +4,7 @@ import {CommonLocators} from './common-locators';
 export default class CheckBoxLocators extends CommonLocators {
     constructor(page: Page) {
         super(page);
+        this.initializeLocators();
     }
     // checkbox-specific locator properties (initialized in initializeLocators)
     cb_homeToggle!: Locator;

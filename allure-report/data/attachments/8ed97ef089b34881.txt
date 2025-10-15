@@ -1,0 +1,92 @@
+[NAVIGATE] Failed to navigate to https://demoqa.com/text-box: page.goto: Target page, context or browser has been closed
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:46:40)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TextBoxPage.navigate (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\textbox.spec.ts:16:19 {
+  [Symbol(step)]: {
+    location: {
+      file: 'D:\\QC_training\\W4_5\\pages\\common-page.ts',
+      line: 46,
+      column: 40,
+      function: 'TextBoxPage.apply'
+    },
+    category: 'pw:api',
+    title: 'Navigate to "/text-box"',
+    apiName: 'page.goto',
+    params: {
+      url: 'https://demoqa.com/text-box',
+      waitUntil: 'domcontentloaded',
+      timeout: 20000
+    },
+    group: undefined,
+    stepId: 'pw:api@39',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@39',
+      _title: 'Navigate to "/text-box"',
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1760502148254,
+    error: {
+      message: 'Error: page.goto: Target page, context or browser has been closed',
+      stack: 'Error: page.goto: Target page, context or browser has been closed\n' +
+        '    at TextBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:46:40)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at TextBoxPage.navigate (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at D:\\QC_training\\W4_5\\tests\\demo\\textbox.spec.ts:16:19',
+      cause: undefined
+    }
+  }
+}
+[ERROR] [STEP] Error in navigate: page.goto: Target page, context or browser has been closed
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:46:40)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TextBoxPage.navigate (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\textbox.spec.ts:16:19 {
+  [Symbol(step)]: {
+    location: {
+      file: 'D:\\QC_training\\W4_5\\pages\\common-page.ts',
+      line: 46,
+      column: 40,
+      function: 'TextBoxPage.apply'
+    },
+    category: 'pw:api',
+    title: 'Navigate to "/text-box"',
+    apiName: 'page.goto',
+    params: {
+      url: 'https://demoqa.com/text-box',
+      waitUntil: 'domcontentloaded',
+      timeout: 20000
+    },
+    group: undefined,
+    stepId: 'pw:api@39',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@39',
+      _title: 'Navigate to "/text-box"',
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1760502148254,
+    error: {
+      message: 'Error: page.goto: Target page, context or browser has been closed',
+      stack: 'Error: page.goto: Target page, context or browser has been closed\n' +
+        '    at TextBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:46:40)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at TextBoxPage.navigate (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at D:\\QC_training\\W4_5\\tests\\demo\\textbox.spec.ts:16:19',
+      cause: undefined
+    }
+  }
+}

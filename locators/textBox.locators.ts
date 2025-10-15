@@ -11,6 +11,7 @@ export default class TextBoxLocators extends CommonLocators {
 
   constructor(page: Page) {
     super(page);
+    this.initializeLocators();
   }
 
   protected override initializeLocators(): void {

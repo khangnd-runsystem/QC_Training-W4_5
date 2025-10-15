@@ -1,0 +1,169 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - img "adplus-dvertising" [ref=e6] [cursor=pointer]
+    - iframe [ref=e9]:
+      - generic [ref=f1e8] [cursor=pointer]:
+        - link [ref=f1e10]:
+          - /url: https://clck.mgid.com/ghits/24486728/i/58092114/0/pp/1/16?h=me70xqdEpXdA_96hYW0yeeVVThh5zg0oIBFSpKrht__eezQpgp6Q2qImDAB_bgpX81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VmoG0KaFHigX4f11yNeBgA&rid=52cb8681-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9eU9jyvH1rl&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+        - generic [ref=f1e13]:
+          - link "Bí quyết eo thon từ loại quả quen thuộc" [ref=f1e15]:
+            - /url: https://clck.mgid.com/ghits/24486728/i/58092114/0/pp/1/16?h=me70xqdEpXdA_96hYW0yeeVVThh5zg0oIBFSpKrht__eezQpgp6Q2qImDAB_bgpX81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VmoG0KaFHigX4f11yNeBgA&rid=52cb8681-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9eU9jyvH1rl&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+          - link "Slim Maxx" [ref=f1e17]:
+            - /url: https://clck.mgid.com/ghits/24486728/i/58092114/0/pp/1/16?h=me70xqdEpXdA_96hYW0yeeVVThh5zg0oIBFSpKrht__eezQpgp6Q2qImDAB_bgpX81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10VmoG0KaFHigX4f11yNeBgA&rid=52cb8681-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9eU9jyvH1rl&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+  - generic [ref=e10]:
+    - banner [ref=e11]:
+      - link [ref=e12] [cursor=pointer]:
+        - /url: https://demoqa.com
+        - img [ref=e13]
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e22] [cursor=pointer]:
+            - generic [ref=e23]:
+              - img [ref=e25]
+              - text: Elements
+            - img [ref=e30]
+          - list [ref=e35]:
+            - listitem [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+              - generic [ref=e39]: Text Box
+            - listitem [ref=e40] [cursor=pointer]:
+              - img [ref=e41]
+              - generic [ref=e43]: Check Box
+            - listitem [ref=e44] [cursor=pointer]:
+              - img [ref=e45]
+              - generic [ref=e47]: Radio Button
+            - listitem [ref=e48] [cursor=pointer]:
+              - img [ref=e49]
+              - generic [ref=e51]: Web Tables
+            - listitem [ref=e52] [cursor=pointer]:
+              - img [ref=e53]
+              - generic [ref=e55]: Buttons
+            - listitem [ref=e56] [cursor=pointer]:
+              - img [ref=e57]
+              - generic [ref=e59]: Links
+            - listitem [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+              - generic [ref=e63]: Broken Links - Images
+            - listitem [ref=e64] [cursor=pointer]:
+              - img [ref=e65]
+              - generic [ref=e67]: Upload and Download
+            - listitem [ref=e68] [cursor=pointer]:
+              - img [ref=e69]
+              - generic [ref=e71]: Dynamic Properties
+        - generic [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]:
+            - img [ref=e77]
+            - text: Forms
+          - img [ref=e83]
+        - generic [ref=e89] [cursor=pointer]:
+          - generic [ref=e90]:
+            - img [ref=e92]
+            - text: Alerts, Frame & Windows
+          - img [ref=e97]
+        - generic [ref=e103] [cursor=pointer]:
+          - generic [ref=e104]:
+            - img [ref=e106]
+            - text: Widgets
+          - img [ref=e111]
+        - generic [ref=e117] [cursor=pointer]:
+          - generic [ref=e118]:
+            - img [ref=e120]
+            - text: Interactions
+          - img [ref=e125]
+        - generic [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]:
+            - img [ref=e134]
+            - text: Book Store Application
+          - img [ref=e139]
+      - generic [ref=e143]:
+        - heading "Check Box" [level=1] [ref=e144]
+        - generic [ref=e145]:
+          - generic [ref=e146]:
+            - generic [ref=e147]:
+              - button "Expand all" [ref=e148] [cursor=pointer]:
+                - img [ref=e149]: 
+              - button "Collapse all" [ref=e151] [cursor=pointer]:
+                - img [ref=e152]: 
+            - list [ref=e154]:
+              - listitem [ref=e155]:
+                - generic [ref=e156]:
+                  - button "Toggle" [ref=e157] [cursor=pointer]:
+                    - img [ref=e158]: 
+                  - generic [ref=e160] [cursor=pointer]:
+                    - img [ref=e162]: 
+                    - img [ref=e165]: 
+                    - text: Home
+                - list [ref=e167]:
+                  - listitem [ref=e168]:
+                    - generic [ref=e169]:
+                      - button "Toggle" [ref=e170] [cursor=pointer]:
+                        - img [ref=e171]: 
+                      - generic [ref=e173] [cursor=pointer]:
+                        - img [ref=e175]: 
+                        - img [ref=e178]: 
+                        - text: Desktop
+                    - list [ref=e180]:
+                      - listitem [ref=e181]:
+                        - generic [ref=e184] [cursor=pointer]:
+                          - img [ref=e186]: 
+                          - img [ref=e189]
+                          - text: Notes
+                      - listitem [ref=e191]:
+                        - generic [ref=e194] [cursor=pointer]:
+                          - img [ref=e196]: 
+                          - img [ref=e199]
+                          - text: Commands
+                  - listitem [ref=e201]:
+                    - generic [ref=e202]:
+                      - button "Toggle" [ref=e203] [cursor=pointer]:
+                        - img [ref=e204]: 
+                      - generic [ref=e206] [cursor=pointer]:
+                        - img [ref=e208]: 
+                        - img [ref=e211]: 
+                        - text: Documents
+                  - listitem [ref=e213]:
+                    - generic [ref=e214]:
+                      - button "Toggle" [ref=e215] [cursor=pointer]:
+                        - img [ref=e216]: 
+                      - generic [ref=e218] [cursor=pointer]:
+                        - img [ref=e220]: 
+                        - img [ref=e223]: 
+                        - text: Downloads
+          - generic [ref=e225]:
+            - generic [ref=e226]: "You have selected :"
+            - generic [ref=e227]: notes
+        - iframe [ref=e231]:
+          - generic [ref=f2e8] [cursor=pointer]:
+            - link [ref=f2e10]:
+              - /url: https://clck.mgid.com/ghits/24486728/i/58092122/0/pp/1/17?h=me70xqdEpXdA_96hYW0yeVz6wFFdOP2JACGyvD-0GoVAlFccWsCR37wn6dujnN8digDL4BuFg3hZCbg8PWW0S9HZ6fRZoRCaGW4jzdtG10XA9i_FUm-0qxREnjK9YZ_F&rid=53147a5d-a97f-11f0-8e70-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIQCxQVIyhFlf97PBeF6OmlMFfseZWwAJQlzQk5mU-EKMw**&muid=p9eU9jyvH1rl
+            - generic [ref=f2e13]:
+              - link "Slim Maxx" [ref=f2e15]:
+                - /url: https://clck.mgid.com/ghits/24486728/i/58092122/0/pp/1/17?h=me70xqdEpXdA_96hYW0yeVz6wFFdOP2JACGyvD-0GoVAlFccWsCR37wn6dujnN8digDL4BuFg3hZCbg8PWW0S9HZ6fRZoRCaGW4jzdtG10XA9i_FUm-0qxREnjK9YZ_F&rid=53147a5d-a97f-11f0-8e70-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIQCxQVIyhFlf97PBeF6OmlMFfseZWwAJQlzQk5mU-EKMw**&muid=p9eU9jyvH1rl
+              - link "Bí quyết eo thon từ loại quả quen thuộc" [ref=f2e17]:
+                - /url: https://clck.mgid.com/ghits/24486728/i/58092122/0/pp/1/17?h=me70xqdEpXdA_96hYW0yeVz6wFFdOP2JACGyvD-0GoVAlFccWsCR37wn6dujnN8digDL4BuFg3hZCbg8PWW0S9HZ6fRZoRCaGW4jzdtG10XA9i_FUm-0qxREnjK9YZ_F&rid=53147a5d-a97f-11f0-8e70-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIQCxQVIyhFlf97PBeF6OmlMFfseZWwAJQlzQk5mU-EKMw**&muid=p9eU9jyvH1rl
+              - link "Tìm hiểu thêm→" [ref=f2e19]:
+                - /url: https://clck.mgid.com/ghits/24486728/i/58092122/0/pp/1/17?h=me70xqdEpXdA_96hYW0yeVz6wFFdOP2JACGyvD-0GoVAlFccWsCR37wn6dujnN8digDL4BuFg3hZCbg8PWW0S9HZ6fRZoRCaGW4jzdtG10XA9i_FUm-0qxREnjK9YZ_F&rid=53147a5d-a97f-11f0-8e70-c4cbe1e8d8dc&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrIQCxQVIyhFlf97PBeF6OmlMFfseZWwAJQlzQk5mU-EKMw**&muid=p9eU9jyvH1rl
+      - generic [ref=e236]:
+        - img "Build PlayWright tests with AI" [ref=e238] [cursor=pointer]
+        - iframe [ref=e241]:
+          - generic [ref=f3e7] [cursor=pointer]:
+            - link [ref=f3e8]:
+              - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/17?h=me70xqdEpXdA_96hYW0yedMpf2CiHD6JbmIo8EFh_u_ZSkNYGFawAUFdra9djaVI81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10XU66vNzxRKLijpRPiZn-qc&rid=53073e3f-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**&muid=p9eU9jyvH1rl
+            - generic [ref=f3e9]:
+              - link [ref=f3e11]:
+                - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/17?h=me70xqdEpXdA_96hYW0yedMpf2CiHD6JbmIo8EFh_u_ZSkNYGFawAUFdra9djaVI81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10XU66vNzxRKLijpRPiZn-qc&rid=53073e3f-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**&muid=p9eU9jyvH1rl
+              - generic [ref=f3e14]:
+                - link "Bí quyết eo thon từ loại quả quen thuộc" [ref=f3e16]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/17?h=me70xqdEpXdA_96hYW0yedMpf2CiHD6JbmIo8EFh_u_ZSkNYGFawAUFdra9djaVI81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10XU66vNzxRKLijpRPiZn-qc&rid=53073e3f-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**&muid=p9eU9jyvH1rl
+                - link "Slim Maxx" [ref=f3e18]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/17?h=me70xqdEpXdA_96hYW0yedMpf2CiHD6JbmIo8EFh_u_ZSkNYGFawAUFdra9djaVI81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10XU66vNzxRKLijpRPiZn-qc&rid=53073e3f-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**&muid=p9eU9jyvH1rl
+                - link [ref=f3e19]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/17?h=me70xqdEpXdA_96hYW0yedMpf2CiHD6JbmIo8EFh_u_ZSkNYGFawAUFdra9djaVI81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10XU66vNzxRKLijpRPiZn-qc&rid=53073e3f-a97f-11f0-b554-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**&muid=p9eU9jyvH1rl
+                  - img [ref=f3e20]
+    - contentinfo [ref=e242]:
+      - generic [ref=e243]: © 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.
+```

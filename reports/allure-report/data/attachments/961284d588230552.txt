@@ -1,0 +1,99 @@
+[ERROR] [STEP] Error in waitForVisible: TypeError: Cannot read properties of undefined (reading 'waitFor')
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:360:19)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TestStepInfoImpl._runStepBody (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:476:20)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:244:36
+    at raceAgainstDeadline (D:\QC_training\W4_5\node_modules\playwright-core\lib\utils\isomorphic\timeoutRunner.js:29:5)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:242:61
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Zone.run (D:\QC_training\W4_5\node_modules\playwright-core\lib\server\utils\zones.js:42:36)
+    at TestTypeImpl.step [as _step] (D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:239:73)
+    at TextBoxPage.waitForVisible (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:138:16)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TestStepInfoImpl._runStepBody (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:476:20)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:244:36
+    at raceAgainstDeadline (D:\QC_training\W4_5\node_modules\playwright-core\lib\utils\isomorphic\timeoutRunner.js:29:5)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:242:61
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Zone.run (D:\QC_training\W4_5\node_modules\playwright-core\lib\server\utils\zones.js:42:36)
+    at TestTypeImpl.step [as _step] (D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:239:73)
+    at TextBoxPage.fill (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\textbox.spec.ts:21:19
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:310:9
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:305:11
+    at TimeoutManager.withRunnable (D:\QC_training\W4_5\node_modules\playwright\lib\worker\timeoutManager.js:67:14)
+    at TestInfoImpl._runWithTimeout (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:303:7)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:308:7
+    at WorkerMain._runTest (D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:283:5)
+    at WorkerMain.runTestGroup (D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:198:11)
+    at process.<anonymous> (D:\QC_training\W4_5\node_modules\playwright\lib\common\process.js:65:22)
+[ERROR] [STEP] Error in fill: TypeError: Cannot read properties of undefined (reading 'waitFor')
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:360:19)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TestStepInfoImpl._runStepBody (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:476:20)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:244:36
+    at raceAgainstDeadline (D:\QC_training\W4_5\node_modules\playwright-core\lib\utils\isomorphic\timeoutRunner.js:29:5)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:242:61
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Zone.run (D:\QC_training\W4_5\node_modules\playwright-core\lib\server\utils\zones.js:42:36)
+    at TestTypeImpl.step [as _step] (D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:239:73)
+    at TextBoxPage.waitForVisible (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at TextBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:138:16)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at TestStepInfoImpl._runStepBody (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:476:20)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:244:36
+    at raceAgainstDeadline (D:\QC_training\W4_5\node_modules\playwright-core\lib\utils\isomorphic\timeoutRunner.js:29:5)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:242:61
+    at AsyncLocalStorage.run (node:internal/async_local_storage/async_hooks:91:14)
+    at Zone.run (D:\QC_training\W4_5\node_modules\playwright-core\lib\server\utils\zones.js:42:36)
+    at TestTypeImpl.step [as _step] (D:\QC_training\W4_5\node_modules\playwright\lib\common\testType.js:239:73)
+    at TextBoxPage.fill (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\textbox.spec.ts:21:19
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:310:9
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:305:11
+    at TimeoutManager.withRunnable (D:\QC_training\W4_5\node_modules\playwright\lib\worker\timeoutManager.js:67:14)
+    at TestInfoImpl._runWithTimeout (D:\QC_training\W4_5\node_modules\playwright\lib\worker\testInfo.js:303:7)
+    at D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:308:7
+    at WorkerMain._runTest (D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:283:5)
+    at WorkerMain.runTestGroup (D:\QC_training\W4_5\node_modules\playwright\lib\worker\workerMain.js:198:11)
+    at process.<anonymous> (D:\QC_training\W4_5\node_modules\playwright\lib\common\process.js:65:22) {
+  [Symbol(step)]: {
+    category: 'test.step',
+    title: 'Wait Locator with visible state: Locator=undefined',
+    location: {
+      file: 'D:\\QC_training\\W4_5\\utils\\logging.ts',
+      line: 77,
+      column: 36,
+      function: 'TextBoxPage.waitForVisible'
+    },
+    box: undefined,
+    stepId: 'test.step@42',
+    group: undefined,
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'test.step@42',
+      _title: 'Wait Locator with visible state: Locator=undefined',
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1760500129038,
+    error: {
+      message: "TypeError: Cannot read properties of undefined (reading 'waitFor')",
+      stack: "TypeError: Cannot read properties of undefined (reading 'waitFor')\n" +
+        '    at TextBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:360:19)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at TextBoxPage.waitForVisible (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at TextBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:138:16)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at TextBoxPage.fill (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at D:\\QC_training\\W4_5\\tests\\demo\\textbox.spec.ts:21:19',
+      cause: undefined
+    }
+  }
+}

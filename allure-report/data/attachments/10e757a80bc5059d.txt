@@ -1,0 +1,5 @@
+[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/checkbox
+[NAVIGATE] Navigating to: https://demoqa.com/checkbox | loadState: domcontentloaded
+[NAVIGATE] Navigation to https://demoqa.com/checkbox complete.
+[INFO] [STEP] click -> Click on locator: undefined
+[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=undefined

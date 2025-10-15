@@ -20,10 +20,8 @@ test.describe('Text box form', () => {
     await pageObj.fill(pageObj.locators.emailInput, data.email);
     await pageObj.fill(pageObj.locators.currentAddressInput, data.currentAddress);
     await pageObj.fill(pageObj.locators.permanentAddressInput, data.permanentAddress);
-
     // Submit form
     await pageObj.click(pageObj.locators.submitButton);
-
     // Verify result and take screenshot
     await pageObj.verifyResult(data);
     await pageObj.takeScreenshot(`textbox_verify_${envKey}_${testInfo.project?.name || 'local'}`);
