@@ -1,24 +1,22 @@
 import {test} from '@playwright/test';
 import CheckBoxPage from '../../pages/checkBox.page';
-import CheckBoxLocators from '../../locators/checkBox.locator';
 
 const envKey = process.env.test_env || 'dev';
 test.describe('Check Box Demo Test', () => {
     test('Check Box Test', async ({page}, testInfo) => {
         const pageObj = new CheckBoxPage(page);
-        const locators = new CheckBoxLocators(page);
 
         // Navigate to checkbox page
         await pageObj.navigate('https://demoqa.com/checkbox');
 
         // Expand home toggle
-        await pageObj.click(locators.cb_homeToggle);
+        await pageObj.click(pageObj.locators.cb_homeToggle);
 
         // Expand desktop toggle
-        await pageObj.click(locators.cb_desktopToggle);
+        await pageObj.click(pageObj.locators.cb_desktopToggle);
 
         // Check notes checkbox
-        await pageObj.check(locators.cb_notesCheckBox);
+        await pageObj.check(pageObj.locators.cb_notesCheckBox);
 
         // Verify checkbox and take screenshot
         await pageObj.verifyCheckBox();

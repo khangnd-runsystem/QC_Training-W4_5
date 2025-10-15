@@ -55,7 +55,6 @@ export default defineConfig({
     {
       name: 'chrome',
       use: {
-        ...devices['Desktop Chrome'],
         channel: 'chrome',
         viewport: null,
         launchOptions: {
@@ -69,7 +68,6 @@ export default defineConfig({
     {
       name: 'edge',
       use: {
-        ...devices['Desktop Chrome'],
         channel: 'msedge',
         viewport: null,
         launchOptions: {
