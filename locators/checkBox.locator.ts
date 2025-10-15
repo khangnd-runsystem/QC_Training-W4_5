@@ -17,10 +17,11 @@ export default class CheckBoxLocators extends CommonLocators {
         super.initializeLocators();
 
         // initialize checkbox locators for this subclass
-        this.cb_homeToggle = this.page.getByRole('button', { name: 'Toggle' });
-        this.cb_desktopToggle = this.page.getByRole('button', { name: 'Toggle' }).nth(1);
-        this.cb_notesCheckBox = this.page.locator('.rct-node.rct-node-leaf > .rct-text > label > .rct-checkbox > .rct-icon').first();
-        this.cb_resultBox = this.page.locator('#result');
+        this.cb_homeToggle = this.page.locator('//button[@title="Toggle"]').first();
+        // this.cb_desktopToggle = this.page.locator('//span[text()="Desktop"]//preceding::button[1]');
+        this.cb_desktopToggle = this.page.locator('//span[text()="Desktop"]//ancestor::span//button');
+        this.cb_notesCheckBox = this.page.locator('//span[text()="Notes"]//preceding-sibling::span[@class ="rct-checkbox"]');
+        this.cb_resultBox = this.page.locator('//div[@id="result"]');
     }
 
 

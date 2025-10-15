@@ -12,7 +12,7 @@
     "env:stg": "cross-env test_env=stg npx playwright test ./tests/demo/",
     "env:prod": "cross-env test_env=prod npx playwright test ./tests/demo/",
     "env:dev": "cross-env test_env=dev npx playwright test ./tests/demo/",
-    "allure:generate": "allure generate allure-results --clean",
+    "allure:generate": "allure generate allure-results -o ./reports/allure-report --clean",
     "allure:open": "allure open reports/allure-report"
   },
   "author": "",

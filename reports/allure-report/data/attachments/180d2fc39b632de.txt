@@ -1,9 +1,0 @@
-[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/buttons
-[NAVIGATE] Navigating to: https://demoqa.com/buttons | loadState: domcontentloaded
-[NAVIGATE] Navigation to https://demoqa.com/buttons complete.
-[INFO] [STEP] dblclick -> Double Click on Locator: locator('//button[@id="doubleClickBtn"]')
-[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('//button[@id="doubleClickBtn"]')
-[INFO] [STEP] getAttribute -> Check Locator attribute: Locator=locator('//button[@id="doubleClickBtn"]'), Attribute=disabled
-[INFO] [STEP] takeScreenshot -> Take a screenshot of the current page
-[INFO] [STEP] rightClick -> Right Click on Locator: locator('//button[@id="rightClickBtn"]')
-[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=locator('//button[@id="rightClickBtn"]')

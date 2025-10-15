@@ -1,0 +1,156 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - generic [ref=e3]:
+    - img "adplus-dvertising" [ref=e6] [cursor=pointer]
+    - iframe [ref=e9]:
+      - generic [ref=f1e8] [cursor=pointer]:
+        - link [ref=f1e10]:
+          - /url: https://clck.mgid.com/ghits/24486180/i/58092114/0/pp/1/8?h=NdWubBQRh4oK_Wd2fwM4PuBvO8nXV6EWc7zt_AglCujrL7Bj9MYuLh-bKoGBsx6H81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10Wt2LBDg4Mo7UKNloD5sSFY&rid=5520162d-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9ftAQm0mt50&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+        - generic [ref=f1e13]:
+          - link "Uống một cốc buổi sáng, giảm 3kg sau 1 tuần" [ref=f1e15]:
+            - /url: https://clck.mgid.com/ghits/24486180/i/58092114/0/pp/1/8?h=NdWubBQRh4oK_Wd2fwM4PuBvO8nXV6EWc7zt_AglCujrL7Bj9MYuLh-bKoGBsx6H81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10Wt2LBDg4Mo7UKNloD5sSFY&rid=5520162d-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9ftAQm0mt50&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+          - link "Slim Maxx" [ref=f1e17]:
+            - /url: https://clck.mgid.com/ghits/24486180/i/58092114/0/pp/1/8?h=NdWubBQRh4oK_Wd2fwM4PuBvO8nXV6EWc7zt_AglCujrL7Bj9MYuLh-bKoGBsx6H81gTETv2M6reshe4xaoXJtHZ6fRZoRCaGW4jzdtG10Wt2LBDg4Mo7UKNloD5sSFY&rid=5520162d-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&muid=p9ftAQm0mt50&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryYNLSG4UbKMGxZxPQBEUpqYCxQVIyhFlf97PBeF6OmlMZ44itrT3oXhWiz6vl_FXCQ**
+  - generic [ref=e10]:
+    - banner [ref=e11]:
+      - link [ref=e12] [cursor=pointer]:
+        - /url: https://demoqa.com
+        - img [ref=e13]
+    - generic [ref=e16]:
+      - generic [ref=e19]:
+        - generic [ref=e20]:
+          - generic [ref=e22] [cursor=pointer]:
+            - generic [ref=e23]:
+              - img [ref=e25]
+              - text: Elements
+            - img [ref=e30]
+          - list [ref=e35]:
+            - listitem [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+              - generic [ref=e39]: Text Box
+            - listitem [ref=e40] [cursor=pointer]:
+              - img [ref=e41]
+              - generic [ref=e43]: Check Box
+            - listitem [ref=e44] [cursor=pointer]:
+              - img [ref=e45]
+              - generic [ref=e47]: Radio Button
+            - listitem [ref=e48] [cursor=pointer]:
+              - img [ref=e49]
+              - generic [ref=e51]: Web Tables
+            - listitem [ref=e52] [cursor=pointer]:
+              - img [ref=e53]
+              - generic [ref=e55]: Buttons
+            - listitem [ref=e56] [cursor=pointer]:
+              - img [ref=e57]
+              - generic [ref=e59]: Links
+            - listitem [ref=e60] [cursor=pointer]:
+              - img [ref=e61]
+              - generic [ref=e63]: Broken Links - Images
+            - listitem [ref=e64] [cursor=pointer]:
+              - img [ref=e65]
+              - generic [ref=e67]: Upload and Download
+            - listitem [ref=e68] [cursor=pointer]:
+              - img [ref=e69]
+              - generic [ref=e71]: Dynamic Properties
+        - generic [ref=e74] [cursor=pointer]:
+          - generic [ref=e75]:
+            - img [ref=e77]
+            - text: Forms
+          - img [ref=e83]
+        - generic [ref=e89] [cursor=pointer]:
+          - generic [ref=e90]:
+            - img [ref=e92]
+            - text: Alerts, Frame & Windows
+          - img [ref=e97]
+        - generic [ref=e103] [cursor=pointer]:
+          - generic [ref=e104]:
+            - img [ref=e106]
+            - text: Widgets
+          - img [ref=e111]
+        - generic [ref=e117] [cursor=pointer]:
+          - generic [ref=e118]:
+            - img [ref=e120]
+            - text: Interactions
+          - img [ref=e125]
+        - generic [ref=e131] [cursor=pointer]:
+          - generic [ref=e132]:
+            - img [ref=e134]
+            - text: Book Store Application
+          - img [ref=e139]
+      - generic [ref=e143]:
+        - heading "Check Box" [level=1] [ref=e144]
+        - generic [ref=e146]:
+          - generic [ref=e147]:
+            - button "Expand all" [ref=e148] [cursor=pointer]:
+              - img [ref=e149]: 
+            - button "Collapse all" [ref=e151] [cursor=pointer]:
+              - img [ref=e152]: 
+          - list [ref=e154]:
+            - listitem [ref=e155]:
+              - generic [ref=e156]:
+                - button "Toggle" [ref=e157] [cursor=pointer]:
+                  - img [ref=e158]: 
+                - generic [ref=e160] [cursor=pointer]:
+                  - img [ref=e162]: 
+                  - img [ref=e165]: 
+                  - text: Home
+              - list [ref=e167]:
+                - listitem [ref=e168]:
+                  - generic [ref=e169]:
+                    - button "Toggle" [active] [ref=e170] [cursor=pointer]:
+                      - img [ref=e171]: 
+                    - generic [ref=e173] [cursor=pointer]:
+                      - img [ref=e175]: 
+                      - img [ref=e178]: 
+                      - text: Desktop
+                  - list [ref=e180]:
+                    - listitem [ref=e181]:
+                      - generic [ref=e184] [cursor=pointer]:
+                        - img [ref=e186]: 
+                        - img [ref=e189]
+                        - text: Notes
+                    - listitem [ref=e191]:
+                      - generic [ref=e194] [cursor=pointer]:
+                        - img [ref=e196]: 
+                        - img [ref=e199]
+                        - text: Commands
+                - listitem [ref=e201]:
+                  - generic [ref=e202]:
+                    - button "Toggle" [ref=e203] [cursor=pointer]:
+                      - img [ref=e204]: 
+                    - generic [ref=e206] [cursor=pointer]:
+                      - img [ref=e208]: 
+                      - img [ref=e211]: 
+                      - text: Documents
+                - listitem [ref=e213]:
+                  - generic [ref=e214]:
+                    - button "Toggle" [ref=e215] [cursor=pointer]:
+                      - img [ref=e216]: 
+                    - generic [ref=e218] [cursor=pointer]:
+                      - img [ref=e220]: 
+                      - img [ref=e223]: 
+                      - text: Downloads
+        - iframe [ref=e228]:
+          
+      - generic [ref=e233]:
+        - img "Build PlayWright tests with AI" [ref=e235] [cursor=pointer]
+        - iframe [ref=e238]:
+          - generic [ref=f3e7] [cursor=pointer]:
+            - link [ref=f3e8]:
+              - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/10?h=NdWubBQRh4oK_Wd2fwM4Pu8bN0cElqI-R78R6Og8oTdg1fKmQKRq0d6PQEOzqOtpAwOk_qjas_inef6vN0l9KNHZ6fRZoRCaGW4jzdtG10XZV_oXIvThty3EBddMsQWO&rid=554f03be-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrITqUd95bTSEBwmXOMB8XK7TYuXnuhFSHJqpTlau578lFg**&muid=p9ftAQm0mt50
+            - generic [ref=f3e9]:
+              - link [ref=f3e11]:
+                - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/10?h=NdWubBQRh4oK_Wd2fwM4Pu8bN0cElqI-R78R6Og8oTdg1fKmQKRq0d6PQEOzqOtpAwOk_qjas_inef6vN0l9KNHZ6fRZoRCaGW4jzdtG10XZV_oXIvThty3EBddMsQWO&rid=554f03be-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrITqUd95bTSEBwmXOMB8XK7TYuXnuhFSHJqpTlau578lFg**&muid=p9ftAQm0mt50
+              - generic [ref=f3e14]:
+                - link "Bí quyết eo thon từ loại quả quen thuộc" [ref=f3e16]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/10?h=NdWubBQRh4oK_Wd2fwM4Pu8bN0cElqI-R78R6Og8oTdg1fKmQKRq0d6PQEOzqOtpAwOk_qjas_inef6vN0l9KNHZ6fRZoRCaGW4jzdtG10XZV_oXIvThty3EBddMsQWO&rid=554f03be-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrITqUd95bTSEBwmXOMB8XK7TYuXnuhFSHJqpTlau578lFg**&muid=p9ftAQm0mt50
+                - link "Slim Maxx" [ref=f3e18]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/10?h=NdWubBQRh4oK_Wd2fwM4Pu8bN0cElqI-R78R6Og8oTdg1fKmQKRq0d6PQEOzqOtpAwOk_qjas_inef6vN0l9KNHZ6fRZoRCaGW4jzdtG10XZV_oXIvThty3EBddMsQWO&rid=554f03be-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrITqUd95bTSEBwmXOMB8XK7TYuXnuhFSHJqpTlau578lFg**&muid=p9ftAQm0mt50
+                - link [ref=f3e19]:
+                  - /url: https://clck.mgid.com/ghits/24486728/i/58092113/0/pp/1/10?h=NdWubBQRh4oK_Wd2fwM4Pu8bN0cElqI-R78R6Og8oTdg1fKmQKRq0d6PQEOzqOtpAwOk_qjas_inef6vN0l9KNHZ6fRZoRCaGW4jzdtG10XZV_oXIvThty3EBddMsQWO&rid=554f03be-a995-11f0-80f9-d404e676c2e0&ts=demoqa.com&tt=Referral&att=4&cpm=1&abd=1&iv=17&ct=1&gdprApplies=0&st=420&mp4=1&h2=Vt3_nBafiKvyGys58teryTotcHMnYqNGVwm8XjpUrITqUd95bTSEBwmXOMB8XK7TYuXnuhFSHJqpTlau578lFg**&muid=p9ftAQm0mt50
+                  - img [ref=f3e20]
+    - contentinfo [ref=e239]:
+      - generic [ref=e240]: © 2013-2020 TOOLSQA.COM | ALL RIGHTS RESERVED.
+```

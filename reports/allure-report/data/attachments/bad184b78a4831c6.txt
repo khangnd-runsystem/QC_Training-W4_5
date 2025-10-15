@@ -1,0 +1,124 @@
+[ERROR] [STEP] Error in waitForVisible: locator.waitFor: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//span[text()="notes"]//parent::label') to be visible
+
+    at CheckBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:360:19)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at CheckBoxPage.waitForVisible (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at CheckBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:153:16)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at CheckBoxPage.check (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\checkBox.spec.ts:19:23 {
+  [Symbol(step)]: {
+    location: {
+      file: 'D:\\QC_training\\W4_5\\pages\\common-page.ts',
+      line: 360,
+      column: 19,
+      function: 'CheckBoxPage.apply'
+    },
+    category: 'pw:api',
+    title: `Wait for selector locator('//span[text()="notes"]//parent::label')`,
+    apiName: 'locator.waitFor',
+    params: {
+      selector: '//span[text()="notes"]//parent::label',
+      strict: true,
+      omitReturnValue: true,
+      state: 'visible',
+      timeout: 30000
+    },
+    group: undefined,
+    stepId: 'pw:api@61',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@61',
+      _title: `Wait for selector locator('//span[text()="notes"]//parent::label')`,
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1760511965738,
+    error: {
+      message: 'Error: locator.waitFor: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//span[text()="notes"]//parent::label') to be visible\x1B[22m\n`,
+      stack: 'Error: locator.waitFor: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//span[text()="notes"]//parent::label') to be visible\x1B[22m\n` +
+        '\n' +
+        '    at CheckBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:360:19)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at CheckBoxPage.waitForVisible (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at CheckBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:153:16)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at CheckBoxPage.check (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at D:\\QC_training\\W4_5\\tests\\demo\\checkBox.spec.ts:19:23',
+      cause: undefined
+    }
+  }
+}
+[ERROR] [STEP] Error in check: locator.waitFor: Test timeout of 30000ms exceeded.
+Call log:
+  - waiting for locator('//span[text()="notes"]//parent::label') to be visible
+
+    at CheckBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:360:19)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at CheckBoxPage.waitForVisible (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at CheckBoxPage.apply (D:\QC_training\W4_5\pages\common-page.ts:153:16)
+    at wrapped (D:\QC_training\W4_5\utils\logging.ts:68:43)
+    at CheckBoxPage.check (D:\QC_training\W4_5\utils\logging.ts:77:36)
+    at D:\QC_training\W4_5\tests\demo\checkBox.spec.ts:19:23 {
+  [Symbol(step)]: {
+    location: {
+      file: 'D:\\QC_training\\W4_5\\pages\\common-page.ts',
+      line: 360,
+      column: 19,
+      function: 'CheckBoxPage.apply'
+    },
+    category: 'pw:api',
+    title: `Wait for selector locator('//span[text()="notes"]//parent::label')`,
+    apiName: 'locator.waitFor',
+    params: {
+      selector: '//span[text()="notes"]//parent::label',
+      strict: true,
+      omitReturnValue: true,
+      state: 'visible',
+      timeout: 30000
+    },
+    group: undefined,
+    stepId: 'pw:api@61',
+    boxedStack: undefined,
+    steps: [],
+    attachmentIndices: [],
+    info: TestStepInfoImpl {
+      annotations: [],
+      _testInfo: [TestInfoImpl],
+      _stepId: 'pw:api@61',
+      _title: `Wait for selector locator('//span[text()="notes"]//parent::label')`,
+      _parentStep: [TestStepInfoImpl],
+      skip: [Function (anonymous)]
+    },
+    complete: [Function: complete],
+    endWallTime: 1760511965738,
+    error: {
+      message: 'Error: locator.waitFor: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//span[text()="notes"]//parent::label') to be visible\x1B[22m\n`,
+      stack: 'Error: locator.waitFor: Test timeout of 30000ms exceeded.\n' +
+        'Call log:\n' +
+        `\x1B[2m  - waiting for locator('//span[text()="notes"]//parent::label') to be visible\x1B[22m\n` +
+        '\n' +
+        '    at CheckBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:360:19)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at CheckBoxPage.waitForVisible (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at CheckBoxPage.apply (D:\\QC_training\\W4_5\\pages\\common-page.ts:153:16)\n' +
+        '    at wrapped (D:\\QC_training\\W4_5\\utils\\logging.ts:68:43)\n' +
+        '    at CheckBoxPage.check (D:\\QC_training\\W4_5\\utils\\logging.ts:77:36)\n' +
+        '    at D:\\QC_training\\W4_5\\tests\\demo\\checkBox.spec.ts:19:23',
+      cause: undefined
+    }
+  }
+}
