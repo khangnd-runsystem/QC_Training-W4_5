@@ -15,7 +15,7 @@ export class ButtonLocators extends CommonLocators {
         this.initializeLocators();
     }
 
-    protected override initializeLocators(): void {
+    protected initializeLocators(): void {
         super.initializeLocators();
 
         this.btn_doubleClickButton = this.page.locator('//button[@id="doubleClickBtn"]');

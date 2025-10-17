@@ -1,2 +1,0 @@
-[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/text-box
-[NAVIGATE] Navigating to: https://demoqa.com/text-box | loadState: domcontentloaded

@@ -1,5 +1,0 @@
-[INFO] [STEP] navigate -> Navigate to URL: https://www.saucedemo.com/
-[NAVIGATE] Navigating to: https://www.saucedemo.com/ | loadState: domcontentloaded
-[NAVIGATE] Navigation to https://www.saucedemo.com/ complete.
-[INFO] [STEP] fill -> Fill input value: Locator=undefined, Value=standard_user
-[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=undefined
