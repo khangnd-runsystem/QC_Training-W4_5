@@ -1,5 +1,0 @@
-[INFO] [STEP] navigate -> Navigate to URL: https://demoqa.com/buttons
-[NAVIGATE] Navigating to: https://demoqa.com/buttons | loadState: domcontentloaded
-[NAVIGATE] Navigation to https://demoqa.com/buttons complete.
-[INFO] [STEP] dblclick -> Double Click on Locator: undefined
-[INFO] [STEP] waitForVisible -> Wait Locator with visible state: Locator=undefined
