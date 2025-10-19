@@ -1,7 +1,7 @@
 import {test} from '@playwright/test';
 import LoginAddCartPage from '../../pages/login-addcart-page';
 import { URLS } from '../../constants/paths';
-import { readJson } from '../../utils/jsonReader';
+import { readCsv } from '../../utils/dataReader';
 import { SauceDemoData } from '../../interfaces/sauceDemoData';
 
 const envKey = process.env.test_env || 'dev';
@@ -10,15 +10,15 @@ test.describe('Login and Add to Cart Test Suite', () => {
     test('Login, Add to Cart, Verify Cart, and Logout', async ({page}, testInfo) => {
         const loginAddCartPageObj = new LoginAddCartPage(page);
 
-        // Load test data from JSON
-        const testData = readJson<SauceDemoData>('./data/saucedemo.testdata.json');
-        const user = testData.users.standard;
+        // Load test data from CSV
+        const testData = readCsv<SauceDemoData>('./data/saucedemo.testdata.csv');
+        const user = testData[0]; // Get the first user for testing
 
         // Navigate to website
         await loginAddCartPageObj.navigate(URLS.SAUCEDEMO.BASE);
 
         // Login
-        await loginAddCartPageObj.login(user.username, user.password);
+        await loginAddCartPageObj.login((user as any).username, (user as any).password);
 
         // Verify login success and take screenshot
         await loginAddCartPageObj.verifyLoginSuccess();
