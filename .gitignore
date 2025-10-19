@@ -8,3 +8,7 @@ node_modules/
 /playwright/.auth/
 /test-results/
 /allure-results
+.env.dev
+.env.stg
+.env.prod
+/reports/

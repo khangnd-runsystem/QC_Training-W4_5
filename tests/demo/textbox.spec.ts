@@ -18,9 +18,13 @@ test.describe('Text box form', () => {
 
     // Fill form fields
     await textBoxPageObj.fill(textBoxPageObj.locators.tb_fullNameInput, textBoxData.tb_fullName);
+    console.log('Debug:', textBoxData.tb_fullName);
     await textBoxPageObj.fill(textBoxPageObj.locators.tb_emailInput, textBoxData.tb_email);
+    console.log('Debug:', textBoxData.tb_email);
     await textBoxPageObj.fill(textBoxPageObj.locators.tb_currentAddressInput, textBoxData.tb_currentAddress);
+    console.log('Debug:', textBoxData.tb_currentAddress);
     await textBoxPageObj.fill(textBoxPageObj.locators.tb_permanentAddressInput, textBoxData.tb_permanentAddress);
+    console.log('Debug:', textBoxData.tb_permanentAddress);
     // Submit form
     await textBoxPageObj.click(textBoxPageObj.locators.tb_submitButton);
     // Verify result and take screenshot
