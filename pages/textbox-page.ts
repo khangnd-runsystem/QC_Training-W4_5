@@ -1,5 +1,5 @@
 import { expect, Page } from '@playwright/test';
-import TextBoxLocators from '../locators/textBox.locators';
+import TextBoxLocators from '../locators/textbox-locators';
 import TextBoxData from '../interfaces/textBoxData';
 import { CommonPage } from './common-page';
 
@@ -13,10 +13,11 @@ export default class TextBoxPage extends CommonPage {
 
   async verifyResult(data: TextBoxData) {
     // Verify that submitted values appear in the output
-    await expect(this.locators.resultBox).toContainText(data.fullName);
-    await expect(this.locators.resultBox).toContainText(data.email);
-    await expect(this.locators.resultBox).toContainText(data.currentAddress);
-    await expect(this.locators.resultBox).toContainText(data.permanentAddress);
+    await expect(this.locators.tb_resultBox).toContainText(data.tb_fullName);
+    await expect(this.locators.tb_resultBox).toContainText(data.tb_email);
+    await expect(this.locators.tb_resultBox).toContainText(data.tb_currentAddress);
+    await expect(this.locators.tb_resultBox).toContainText(data.tb_permanentAddress);
     
   }
 }
+
