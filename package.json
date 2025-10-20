@@ -9,6 +9,7 @@
     "test:demo:prod": "cross-env test_env=prod npx playwright test ./tests/demo --project=chrome --project=edge",
     "test:demo:chrome": "npx playwright test ./tests/demo --project=chrome",
     "test:demo:edge": "npx playwright test ./tests/demo --project=edge",
+    "test:stg": "cross-env test_env=stg npx playwright test",
     "env:stg": "cross-env test_env=stg npx playwright test ./tests/demo/",
     "env:prod": "cross-env test_env=prod npx playwright test ./tests/demo/",
     "env:dev": "cross-env test_env=dev npx playwright test ./tests/demo/",
@@ -19,10 +20,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
-    "@playwright/test": "^1.56.0",
+    "@playwright/test": "^1.56.1",
     "@types/node": "^24.7.1",
     "allure-playwright": "^3.4.1",
-    "cross-env": "^10.1.0"
+    "cross-env": "^10.1.0",
+    "csv-parse": "^5.5.6",
+    "typescript": "^5.9.3"
   },
   "dependencies": {
     "dotenv": "^17.2.3"
