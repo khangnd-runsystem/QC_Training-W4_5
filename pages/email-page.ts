@@ -10,10 +10,14 @@ export default class EmailPage extends CommonPage {
         this.locators = new EmailLocators(page);
     }
     async loginEmail(email: string, password: string) {
+        await this.locators.email_inputField.click();
         await this.locators.email_inputField.fill(email);
         await this.locators.email_nextButton.click();
+        await this.page.waitForSelector('//input[@type="password"]', { state: "visible", timeout: 20000 });
+        
+        await this.locators.email_passwordField.click();
         await this.locators.email_passwordField.fill(password);
-        await this.locators.email_nextButton.click();
+        await this.locators.email_loginButton.click();
     }
 
 

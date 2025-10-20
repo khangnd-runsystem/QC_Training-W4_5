@@ -43,6 +43,12 @@ export default defineConfig({
     // Optional slowMo (ms) can be set via SLOW_MO env var or .env file to slow actions for easier visual debugging
     launchOptions: {
       slowMo: process.env.SLOW_MO ? Number(process.env.SLOW_MO) : undefined,
+      	
+      args: [
+        '--disable-blink-features=AutomationControlled',
+        '--no-sandbox',
+        '--disable-dev-shm-usage',
+      ],
     },
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
