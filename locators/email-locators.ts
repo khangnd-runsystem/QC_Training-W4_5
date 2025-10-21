@@ -22,7 +22,7 @@ export class EmailLocators extends CommonLocators {
         // this.email_inbox = this.page.locator(`/(//span[text() = ${}  and @name =${} ]//ancestor::tr)[1]`);
     }
 
-    getEmailInbox(text: string, name: string): Locator {
-        return this.page.locator(`(//span[text()="${text}" and @name="${name}"]//ancestor::tr)[1]`);
-    }
+    // getEmailInbox(text: string, name: string): Locator {
+    //     return this.page.locator(`(//span[text()="${text}" and @name="${name}"]//ancestor::tr)[1]`);
+    // }
 }

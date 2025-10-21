@@ -19,6 +19,11 @@ export default class EmailPage extends CommonPage {
         await this.locators.email_passwordField.fill(password);
         await this.locators.email_loginButton.click();
     }
+    async clickEmail(text : string, name: string)
+    {
+        const email = this.page.locator(`(//span[text()="${text}" and @name="${name}"]//ancestor::tr)[1]`)
+        await email.click()
+    }
 
 
 

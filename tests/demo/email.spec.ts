@@ -15,7 +15,7 @@ test.describe('Email Login Test', () => {
         await emailPageObj.loginEmail(ENV.EMAIL, ENV.PASSWORD);
         // await page.waitForTimeout(25000);
         // Click on the email
-        await emailPageObj.click(emailPageObj.locators.getEmailInbox('GitHub Education', 'GitHub Education'))
+        await emailPageObj.clickEmail('GitHub Education','GitHub Education' )
         // Take screenshot after login and inbox verification
         await emailPageObj.takeScreenshot(`email_inbox_verify_${envKey}_${testInfo.project?.name || 'local'}`);
     })
