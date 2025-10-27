@@ -20,7 +20,7 @@ export class HomeLocators extends CommonLocators {
     super.initializeLocators();
     
     // Use XPath for all static locators
-    this.lnkCategoryPhones = this.page.locator('//a[text()="Phones"]');
+    this.lnkCategoryPhones = this.page.locator('//a[contains(text(), "Phones")]');
     this.lnkCategoryLaptops = this.page.locator('//a[text()="Laptops"]');
     this.lnkCategoryMonitors = this.page.locator('//a[text()="Monitors"]');
     this.lnkHome = this.page.locator('//a[@class="nav-link" and contains(text(), "Home")]');

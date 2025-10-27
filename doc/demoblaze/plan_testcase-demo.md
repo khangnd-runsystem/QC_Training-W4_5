@@ -308,10 +308,6 @@ const customer = checkoutData.customer1;
   "validUser": {
     "username": "autouser_20251005_1234",
     "password": "autouser_20251005_1234"
-  },
-  "invalidUser": {
-    "username": "invalid_user",
-    "password": "wrong_password"
   }
 }
 ```
@@ -374,31 +370,6 @@ const customer = checkoutData.customer1;
 }
 ```
 
-**4. test-scenarios.json** - Test-Specific Combinations
-```json
-{
-  "tc2_cart_multiple_items": {
-    "products": [
-      "Samsung galaxy s6",
-      "MacBook Pro"
-    ]
-  },
-  "tc4_remove_item": {
-    "productsToAdd": [
-      "Sony xperia z5",
-      "MacBook Air"
-    ],
-    "productToRemove": "Sony xperia z5"
-  },
-  "tc5_full_flow": {
-    "products": [
-      "Sony vaio i5",
-      "Apple monitor 24"
-    ],
-    "customer": "customer2"
-  }
-}
-```
 
 ### Interface Definitions for Test Data
 

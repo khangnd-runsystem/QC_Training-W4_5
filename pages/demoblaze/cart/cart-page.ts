@@ -36,7 +36,7 @@ export class CartPage extends CommonPage {
     const deleteButtons = this.page.locator('//a[text()="Delete"]');
     const count = await deleteButtons.count();
     
-    for (let i = 0; i < count; i++) {
+    while (count > 0) {
       // Always click the first delete button since the list updates after each deletion
       const firstDeleteButton = deleteButtons.first();
       if (await firstDeleteButton.isVisible()) {

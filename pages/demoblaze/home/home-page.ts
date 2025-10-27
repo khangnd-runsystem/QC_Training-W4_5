@@ -20,7 +20,7 @@ export class HomePage extends CommonPage {
     // Handle dynamic category selection in page method using XPath
     const categoryLocator = this.page.locator(`//a[text()="${categoryName}"]`);
     await this.click(categoryLocator);
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForTimeout(1000); // Wait for products to load
   }
 
   async selectProduct(productName: string): Promise<void> {

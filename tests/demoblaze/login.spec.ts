@@ -1,8 +1,9 @@
 import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
+import { UsersData } from '../../interfaces/demoblaze';
 
 test.describe('Login Feature', () => {
-  test.beforeEach(async ({ page, cartPage }) => {
+  test.beforeEach(async ({ page, homePage, cartPage }) => {
     await page.goto('https://www.demoblaze.com/');
     
     // Clear cart for clean state
@@ -15,8 +16,8 @@ test.describe('Login Feature', () => {
     loginPage, 
     homePage 
   }) => {
-    // Load test data from JSON
-    const users: any = readJson('data/demoblaze/users.json');
+    // Load test data from JSON with type safety
+    const users = readJson('data/demoblaze/users.json') as UsersData;
     const validUser = users.validUser;
     
     // Step 1: Open login modal

@@ -1,12 +1,13 @@
 import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
+import { CheckoutData, ProductsData } from '../../interfaces/demoblaze';
 
 test.describe('Checkout Flow', () => {
   test.beforeEach(async ({ page, homePage, productPage, cartPage }) => {
     await page.goto('https://www.demoblaze.com/');
     
-    // Load test data
-    const products: any = readJson('data/demoblaze/products.json');
+    // Load test data with type safety
+    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.samsungGalaxyS6;
     
     // Clear cart for clean state
@@ -15,7 +16,7 @@ test.describe('Checkout Flow', () => {
     
     // Add a product for checkout tests
     await homePage.navigateToHome();
-    await homePage.selectCategory(phone.category);
+    await homePage.selectCategory(phone.category!);
     await homePage.selectProduct(phone.name);
     await productPage.addToCart();
   });
@@ -26,10 +27,10 @@ test.describe('Checkout Flow', () => {
     checkoutPage, 
     homePage 
   }) => {
-    // Load checkout test data
-    const checkoutData: any = readJson('data/demoblaze/checkout-info.json');
+    // Load checkout test data with type safety
+    const checkoutData = readJson('data/demoblaze/checkout-info.json') as CheckoutData;
     const customer = checkoutData.customer1;
-    const products: any = readJson('data/demoblaze/products.json');
+    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.samsungGalaxyS6;
     
     // Steps 1-2: Navigate to cart and verify items
@@ -44,7 +45,7 @@ test.describe('Checkout Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      creditCard: customer.creditCard,
+      creditCard: customer.card,
       month: customer.month,
       year: customer.year
     });

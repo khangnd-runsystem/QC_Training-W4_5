@@ -2,9 +2,5 @@
   "validUser": {
     "username": "autouser_20251005_1234",
     "password": "autouser_20251005_1234"
-  },
-  "invalidUser": {
-    "username": "invalid_user",
-    "password": "wrong_password"
   }
 }
