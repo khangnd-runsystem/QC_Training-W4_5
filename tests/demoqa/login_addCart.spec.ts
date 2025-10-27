@@ -1,8 +1,8 @@
 import {test} from '@playwright/test';
-import LoginAddCartPage from '../../pages/login-addcart-page';
+import LoginAddCartPage from '../../pages/demoqa/login-addcart-page';
 import { URLS } from '../../constants/paths';
 import { readCsv } from '../../utils/dataReader';
-import { SauceDemoData } from '../../interfaces/sauceDemoData';
+import { SauceDemoData } from '../../interfaces/demoqa/sauceDemoData';
 
 const envKey = process.env.test_env || 'dev';
 test.describe('Login and Add to Cart Test Suite', () => {

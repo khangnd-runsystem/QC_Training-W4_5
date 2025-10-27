@@ -1,7 +1,7 @@
 import { expect, Page } from '@playwright/test';
 import TextBoxLocators from '../locators/textbox-locators';
-import TextBoxData from '../interfaces/textBoxData';
-import { CommonPage } from './common-page';
+import TextBoxData from '../../interfaces/demoqa/textBoxData';
+import { CommonPage } from '../common-page';
 
 export default class TextBoxPage extends CommonPage {
   readonly locators: TextBoxLocators;

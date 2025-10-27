@@ -1,5 +1,5 @@
 import {test} from '@playwright/test';
-import CheckBoxPage from '../../pages/checkbox-page';
+import CheckBoxPage from '../../pages/demoqa/checkbox-page';
 import { URLS } from '../../constants/paths';
 
 const envKey = process.env.test_env || 'dev';

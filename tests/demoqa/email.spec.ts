@@ -1,5 +1,5 @@
 import {test} from '@playwright/test';
-import EmailPage from '../../pages/email-page';
+import EmailPage from '../../pages/demoqa/email-page';
 import ENV from '../../src/utils/env';
 
 const envKey = process.env.ENV_KEY || 'stg';

@@ -1,6 +1,6 @@
 import {expect, Page} from '@playwright/test';
 import {ButtonLocators} from '../locators/button-locators';
-import { CommonPage } from './common-page';
+import { CommonPage } from '../common-page';
 
 export default class ButtonPage extends CommonPage {
 	readonly locators: ButtonLocators;

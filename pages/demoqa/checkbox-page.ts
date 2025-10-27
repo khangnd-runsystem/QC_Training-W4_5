@@ -1,6 +1,6 @@
 import { Page, expect } from '@playwright/test';
 import CheckBoxLocators from '../locators/checkbox-locators';
-import { CommonPage } from './common-page';
+import { CommonPage } from '../common-page';
 
 export default class CheckBoxPage extends CommonPage {
 	readonly locators: CheckBoxLocators;

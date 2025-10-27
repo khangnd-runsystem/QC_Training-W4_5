@@ -1,5 +1,5 @@
 import { test } from '@playwright/test';
-import ButtonPage from '../../pages/button-page';
+import ButtonPage from '../../pages/demoqa/button-page';
 import { URLS } from '../../constants/paths';
 
 // Determine environment key

@@ -1,7 +1,7 @@
 import { test } from '@playwright/test';
 import { readJson } from '../../utils/dataReader';
-import TextBoxData from '../../interfaces/textBoxData';
-import TextBoxPage from '../../pages/textbox-page';
+import TextBoxData from '../../interfaces/demoqa/textBoxData';
+import TextBoxPage from '../../pages/demoqa/textbox-page';
 import { URLS } from '../../constants/paths';
 
 // Determine environment key

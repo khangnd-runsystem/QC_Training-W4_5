@@ -1,6 +1,6 @@
 import {expect, Page, Locator} from '@playwright/test';
 import { EmailLocators } from '../locators/email-locators';
-import { CommonPage } from './common-page';
+import { CommonPage } from '../common-page';
 
 export default class EmailPage extends CommonPage {
     readonly locators: EmailLocators;
