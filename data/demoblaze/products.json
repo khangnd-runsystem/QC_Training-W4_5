@@ -1,0 +1,38 @@
+{
+  "phones": {
+    "samsungGalaxyS6": {
+      "name": "Samsung galaxy s6",
+      "category": "Phones",
+      "price": 360
+    },
+    "sonyXperiaZ5": {
+      "name": "Sony xperia z5",
+      "category": "Phones",
+      "price": 320
+    }
+  },
+  "laptops": {
+    "sonyVaioI5": {
+      "name": "Sony vaio i5",
+      "category": "Laptops",
+      "price": 790
+    },
+    "macBookPro": {
+      "name": "MacBook Pro",
+      "category": "Laptops",
+      "price": 1100
+    },
+    "macBookAir": {
+      "name": "MacBook air",
+      "category": "Laptops",
+      "price": 700
+    }
+  },
+  "monitors": {
+    "appleMonitor24": {
+      "name": "Apple monitor 24",
+      "category": "Monitors",
+      "price": 400
+    }
+  }
+}
