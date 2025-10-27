@@ -188,11 +188,11 @@ tests/demoblaze/
 - Use kebab-case for multi-word features
 
 #### Test Functions
-- Format: `test('TC<ID>: <Feature> - <Scenario>', async ({ fixtures }) => { ... })`
+- Format: `test('TestcaseID - test case description - condition - expected outcome', async ({ page }) => { })`
 - Examples:
-  - `test('TC1: Login - Valid Login', async ({ loginPage, page }) => { ... })`
-  - `test('TC2: Cart - Add Multiple Items', async ({ homePage, cartPage }) => { ... })`
-- **Pattern**: Start with test case ID, followed by feature and specific scenario
+  - `test('TC001 - Login successfully - when using valid credentials - user is redirected to dashboard', async ({ page }) => { })`
+  - `test('TC002 - Add multiple products to cart - when selecting items from different categories - all selected products appear in cart', async ({ page }) => { })`
+
 
 #### Page Object Classes
 - Format: `<Page>Page` (PascalCase)
@@ -213,13 +213,15 @@ tests/demoblaze/
 
 ```
 pages/demoblaze/
-├── index.ts                     # Export all page objects
-├── login-page.ts                # Login modal interactions
-├── home-page.ts                 # Home page with categories and products
-├── product-page.ts              # Product detail page
-├── cart-page.ts                 # Shopping cart page
-├── checkout-page.ts             # Checkout modal interactions
-└── navigation-bar.ts            # Persistent navigation component
+├── auth/
+│   └── login-page.ts            # Login modal interactions
+├── home/
+│   └── home-page.ts             # Home page with categories and products
+├── product/
+│   └── product-page.ts          # Product detail page
+└── cart/
+    ├── cart-page.ts             # Shopping cart page
+    └── checkout-page.ts         # Checkout modal interactions
 ```
 
 **Key Principles:**
@@ -227,26 +229,30 @@ pages/demoblaze/
 - Each page object imports and uses its corresponding locator class
 - Page objects focus on business-level methods, not low-level interactions
 - Page objects should return other page objects when navigation occurs (fluent API)
+- **All user interactions and assertions must be encapsulated in page object methods**
+- **Test files should NEVER contain hardcoded Playwright actions (page.click(), page.fill(), etc.) or assertions directly**
+- **Dynamic locators are handled within page object methods, NOT in locator classes**
 
 ### Locator Organization
 
 ```
 locators/demoblaze/
-├── index.ts                     # Export all locator classes
 ├── login-locators.ts            # Login modal selectors
 ├── home-locators.ts             # Home page selectors
 ├── product-locators.ts          # Product page selectors
 ├── cart-locators.ts             # Cart page selectors
-├── checkout-locators.ts         # Checkout modal selectors
-└── navigation-locators.ts       # Navigation bar selectors
+└── checkout-locators.ts         # Checkout modal selectors
 ```
 
 **Key Principles:**
 - All locator classes extend `CommonLocators`
 - Override `initializeLocators()` method to define page-specific selectors
-- Use descriptive property names for locators (e.g., `loginButton`, `usernameInput`)
+- **Use XPath exclusively for all locators** (e.g., `//button[@id="addToCart"]`, `//input[@name="username"]`)
+- Use descriptive property names for locators (e.g., `btnAddToCart`, `txtProductName`, `lnkCategory`)
 - Group related locators logically (e.g., all form fields together)
 - **Locators must be in separate files, never inline in page objects**
+- **NO dynamic locator methods in locator classes** (e.g., NO `productByName(name: string)` methods)
+- **Dynamic locators are handled in page object methods using XPath with string interpolation**
 
 ### Common Utilities
 
@@ -267,37 +273,87 @@ Reuse existing utilities from `common_template/`:
 data/demoblaze/
 ├── users.json                   # User credentials
 ├── products.json                # Product details (names, expected prices)
-└── checkout-info.json           # Checkout form data variations
+├── checkout-info.json           # Checkout form data variations
+└── test-scenarios.json          # Test-specific data combinations
 ```
 
-#### Data Access
-- Use existing `dataReader.ts` utility (if available) or create JSON loader
-- Load data at test setup/beforeEach hook
+#### Data Access Strategy
+- **CRITICAL**: NO hardcoded data in test files
+- Use `readJson()` utility function to load test data
+- Load data at test setup or beforeEach hook
 - Pass data as parameters to page object methods
 
-#### Data Structure
+#### Reading Data with readJson()
 ```typescript
-// Example: users.json
+import { readJson } from '../../utils/data-reader';
+
+// Example: Load user credentials
+const users = readJson('data/demoblaze/users.json');
+const validUser = users.validUser;
+
+// Example: Load products
+const products = readJson('data/demoblaze/products.json');
+const phoneProduct = products.phones[0];
+
+// Example: Load checkout info
+const checkoutData = readJson('data/demoblaze/checkout-info.json');
+const customer = checkoutData.customer1;
+```
+
+#### Data File Structures
+
+**1. users.json** - User Credentials
+```json
 {
   "validUser": {
     "username": "autouser_20251005_1234",
     "password": "autouser_20251005_1234"
+  },
+  "invalidUser": {
+    "username": "invalid_user",
+    "password": "wrong_password"
   }
 }
+```
 
-// Example: products.json
+**2. products.json** - Product Catalog
+```json
 {
   "phones": [
-    { "name": "Samsung galaxy s6", "expectedPrice": 360 },
-    { "name": "Sony xperia z5", "expectedPrice": 320 }
+    {
+      "name": "Samsung galaxy s6",
+      "category": "Phones"
+    },
+    {
+      "name": "Sony xperia z5",
+      "category": "Phones"
+    }
   ],
   "laptops": [
-    { "name": "MacBook Pro", "expectedPrice": 1100 },
-    { "name": "Sony vaio i5", "expectedPrice": 790 }
+    {
+      "name": "MacBook Pro",
+      "category": "Laptops"
+    },
+    {
+      "name": "MacBook Air",
+      "category": "Laptops"
+    },
+    {
+      "name": "Sony vaio i5",
+      "category": "Laptops"
+    }
+  ],
+  "monitors": [
+    {
+      "name": "Apple monitor 24",
+      "category": "Monitors"
+    }
   ]
 }
+```
 
-// Example: checkout-info.json
+**3. checkout-info.json** - Customer Information
+```json
 {
   "customer1": {
     "name": "John Doe",
@@ -306,6 +362,40 @@ data/demoblaze/
     "creditCard": "4111111111111111",
     "month": "12",
     "year": "2025"
+  },
+  "customer2": {
+    "name": "Anna",
+    "country": "VN",
+    "city": "HCM",
+    "creditCard": "12345678",
+    "month": "01",
+    "year": "2026"
+  }
+}
+```
+
+**4. test-scenarios.json** - Test-Specific Combinations
+```json
+{
+  "tc2_cart_multiple_items": {
+    "products": [
+      "Samsung galaxy s6",
+      "MacBook Pro"
+    ]
+  },
+  "tc4_remove_item": {
+    "productsToAdd": [
+      "Sony xperia z5",
+      "MacBook Air"
+    ],
+    "productToRemove": "Sony xperia z5"
+  },
+  "tc5_full_flow": {
+    "products": [
+      "Sony vaio i5",
+      "Apple monitor 24"
+    ],
+    "customer": "customer2"
   }
 }
 ```
@@ -392,400 +482,1105 @@ Use `beforeEach` hooks for common preconditions:
 test.beforeEach(async ({ page }) => {
   // Navigate to homepage
   await page.goto('https://www.demoblaze.com/');
+  
+  // Clear cart to ensure clean state
+  const cartPage = new CartPage(page);
+  await cartPage.navigateToCart();
+  await cartPage.clearAllItems();
 });
 ```
 
-**Recommended Approach**: Combination of fixtures for authentication state and helper methods for cart setup.
+**Recommended Approach**: 
+- Combination of fixtures for authentication state
+- Helper methods for cart setup
+- **`beforeEach` hook to clear cart before each test to ensure clean state**
 
 ---
 
 ## 4. Page Objects Definition
 
+### Important Implementation Rules
+
+**CRITICAL: Page Object Model (POM) Principles**
+
+1. **NO Direct Playwright Actions in Test Files**
+   - ❌ **NEVER** use `page.click()`, `page.fill()`, `page.locator()`, or any Playwright action directly in test files
+   - ❌ **NEVER** use `expect()` or assertions directly in test files
+   - ✅ **ALWAYS** create methods in page object classes for ALL interactions and verifications
+   - ✅ Test files should ONLY call page object methods
+
+2. **Complete Method Coverage in Page Objects**
+   - Create dedicated methods for every user action (click, fill, select, hover, etc.)
+   - Create dedicated methods for every verification (visibility, text content, state, count, etc.)
+   - Group related actions into business-level methods when appropriate
+
+3. **Locator Class Structure (Follow ButtonLocators Example)**
+   ```typescript
+   import { Locator, Page } from '@playwright/test';
+   import { CommonLocators } from '../common-locators';
+
+   export class ProductLocators extends CommonLocators {
+     // Declare locator properties with ! (definite assignment)
+     btnAddToCart!: Locator;
+     txtProductName!: Locator;
+     txtProductPrice!: Locator;
+
+     constructor(page: Page) {
+       super(page);
+       this.initializeLocators();
+     }
+
+     protected initializeLocators(): void {
+       super.initializeLocators();
+       
+       // Use XPath for all locators
+       this.btnAddToCart = this.page.locator('//button[contains(@class, "btn-success")]');
+       this.txtProductName = this.page.locator('//h2[@class="name"]');
+       this.txtProductPrice = this.page.locator('//h3[@class="price-container"]');
+     }
+   }
+   ```
+
+4. **Page Class Structure (Follow CheckBoxPage Example)**
+   ```typescript
+   import { Page, expect } from '@playwright/test';
+   import { CommonPage } from '../../common_template/common-page';
+   import { ProductLocators } from '../../locators/demoblaze/product-locators';
+
+   export class ProductPage extends CommonPage {
+     readonly locators: ProductLocators;
+
+     constructor(page: Page) {
+       super(page);
+       this.locators = new ProductLocators(page);
+     }
+
+     // Business methods that use locators and CommonPage utilities
+     async addToCart(): Promise<void> {
+       await this.click(this.locators.btnAddToCart);
+     }
+
+     async verifyProductName(expectedName: string): Promise<void> {
+       await expect.soft(this.locators.txtProductName).toHaveText(expectedName);
+     }
+   }
+   ```
+
+5. **XPath for All Locators**
+   - **Mandatory**: Use XPath syntax for all element selectors
+   - Examples: `//button[@id="purchase"]`, `//input[@name="username"]`, `//div[text()="Welcome"]`
+   - Leverage XPath features: text matching, attribute matching, hierarchy navigation
+
+6. **Dynamic Locators Handling**
+   - ❌ **DO NOT** create dynamic locator methods in locator classes
+   - ✅ **DO** handle dynamic locators within page object methods using XPath with template literals
+   
+   **Example:**
+   ```typescript
+   // ❌ WRONG - In locator class
+   lnkProductByName(name: string): Locator {
+     return this.page.locator(`//a[text()="${name}"]`);
+   }
+   
+   // ✅ CORRECT - In page class method
+   async selectProduct(productName: string): Promise<void> {
+     const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+     await this.click(productLocator);
+   }
+   ```
+
+7. **Test File Structure - NO Hardcoded Actions or Assertions**
+   ```typescript
+   // ❌ WRONG - Direct Playwright calls and assertions in test
+   test('add product to cart', async ({ page }) => {
+     await page.click('//button[@id="addToCart"]');
+     await page.fill('//input[@name="quantity"]', '2');
+     await expect(page.locator('//div[@class="cart"]')).toBeVisible();
+   });
+   
+   // ✅ CORRECT - Only page object methods
+   test('add product to cart', async ({ page }) => {
+     const productPage = new ProductPage(page);
+     await productPage.addToCart();
+     await productPage.setQuantity(2);
+     await productPage.verifyCartVisible();
+   });
+   ```
+
+---
+
 ### 4.1 LoginPage (Login Modal)
 
-**Locator File**: `login-locators.ts`
+**File**: `pages/demoblaze/auth/login-page.ts`
+
+**Locator File**: `locators/demoblaze/login-locators.ts`
 
 **Purpose**: Handle all interactions with the login modal dialog.
 
-**Methods**:
-1. `openLoginModal(): Promise<void>`
-   - Clicks the "Log in" button in navbar to open modal
-   - Waits for modal to be visible
-   - **Navigation**: Stays on current page, modal appears
-
-2. `loginWithCredentials(username: string, password: string): Promise<void>`
-   - Fills username and password fields
-   - Clicks the modal's "Log in" button
-   - Waits for modal to close
-   - **Navigation**: Returns to previous page with authenticated state
-
-3. `closeModal(): Promise<void>`
-   - Clicks the close button (X) or backdrop
-   - Waits for modal to be hidden
-
-4. `isLoginModalVisible(): Promise<boolean>`
-   - Checks if login modal is currently displayed
-
-**Locators** (defined in `login-locators.ts`):
+**Locators Class Definition** (following ButtonLocators pattern):
 ```typescript
-// Extends CommonLocators
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.loginModalButton = // Navbar "Log in" button selector
-  this.loginModal = // Modal container selector
-  this.usernameInput = // Username input field
-  this.passwordInput = // Password input field
-  this.submitButton = // Modal "Log in" button
-  this.closeButton = // Modal close button
+import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from '../common-locators';
+
+export class LoginLocators extends CommonLocators {
+  // Declare all locator properties
+  btnLoginNav!: Locator;
+  modalLogin!: Locator;
+  inputUsername!: Locator;
+  inputPassword!: Locator;
+  btnSubmit!: Locator;
+  btnClose!: Locator;
+
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();
+  }
+
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    
+    // Use XPath for all locators
+    this.btnLoginNav = this.page.locator('//a[@id="login2"]');
+    this.modalLogin = this.page.locator('//div[@id="logInModal"]');
+    this.inputUsername = this.page.locator('//input[@id="loginusername"]');
+    this.inputPassword = this.page.locator('//input[@id="loginpassword"]');
+    this.btnSubmit = this.page.locator('//button[text()="Log in" and @onclick]');
+    this.btnClose = this.page.locator('//div[@id="logInModal"]//button[@class="close"]');
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `loginWithCredentials()`: Verify modal is hidden, welcome message appears, logout button visible
+**Page Class Definition** (following CheckBoxPage pattern):
+```typescript
+import { Page, expect } from '@playwright/test';
+import { CommonPage } from '../../../common_template/common-page';
+import { LoginLocators } from '../../../locators/demoblaze/login-locators';
+
+export class LoginPage extends CommonPage {
+  readonly locators: LoginLocators;
+
+  constructor(page: Page) {
+    super(page);
+    this.locators = new LoginLocators(page);
+  }
+
+  // Action methods
+  async openLoginModal(): Promise<void> {
+    await this.click(this.locators.btnLoginNav);
+    await this.waitForVisible(this.locators.modalLogin);
+  }
+
+  async loginWithCredentials(username: string, password: string): Promise<void> {
+    await this.fill(this.locators.inputUsername, username);
+    await this.fill(this.locators.inputPassword, password);
+    await this.click(this.locators.btnSubmit);
+    await this.waitForHidden(this.locators.modalLogin);
+  }
+
+  async closeModal(): Promise<void> {
+    await this.click(this.locators.btnClose);
+    await this.waitForHidden(this.locators.modalLogin);
+  }
+
+  // Verification methods
+  async verifyLoginModalVisible(): Promise<void> {
+    await expect.soft(this.locators.modalLogin).toBeVisible();
+  }
+
+  async verifyLoginModalHidden(): Promise<void> {
+    await expect.soft(this.locators.modalLogin).toBeHidden();
+  }
+}
+```
+
+**Navigation**: 
+- `openLoginModal()`: Stays on current page, modal appears
+- `loginWithCredentials()`: Returns to previous page with authenticated state
+- `closeModal()`: Returns to previous page, modal closes
 
 ---
 
 ### 4.2 HomePage
 
-**Locator File**: `home-locators.ts`
+**File**: `pages/demoblaze/home/home-page.ts`
+
+**Locator File**: `locators/demoblaze/home-locators.ts`
 
 **Purpose**: Handle product browsing, category navigation, and product selection on the home page.
 
-**Methods**:
-1. `navigateToHome(): Promise<void>`
-   - Navigates to https://www.demoblaze.com/
-   - Waits for page load and key elements
-   - **Navigation**: Lands on HomePage
-
-2. `selectCategory(categoryName: 'Phones' | 'Laptops' | 'Monitors'): Promise<void>`
-   - Clicks on the specified category link
-   - Waits for product list to update
-   - **Navigation**: Stays on HomePage, product list filtered
-
-3. `selectProduct(productName: string): Promise<ProductPage>`
-   - Clicks on a product link by name
-   - Waits for product detail page to load
-   - **Navigation**: Navigates to ProductPage, returns ProductPage instance
-
-4. `clickHomeInNavbar(): Promise<void>`
-   - Clicks "Home" link in navbar
-   - Waits for home page to reload
-   - **Navigation**: Refreshes HomePage
-
-5. `isProductDisplayed(productName: string): Promise<boolean>`
-   - Checks if a product with the given name is visible in the current list
-
-**Locators** (defined in `home-locators.ts`):
+**Locators Class Definition**:
 ```typescript
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.categoryPhones = // "Phones" category link
-  this.categoryLaptops = // "Laptops" category link
-  this.categoryMonitors = // "Monitors" category link
-  this.productLinks = // All product name links
-  this.productByName = (name: string) => // Dynamic product link by name
-  this.homeLink = // "Home" link in navbar
+import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from '../common-locators';
+
+export class HomeLocators extends CommonLocators {
+  // Declare all locator properties
+  lnkCategoryPhones!: Locator;
+  lnkCategoryLaptops!: Locator;
+  lnkCategoryMonitors!: Locator;
+  lnkHome!: Locator;
+  lnkCart!: Locator;
+  btnLogout!: Locator;
+  txtWelcome!: Locator;
+
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();
+  }
+
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    
+    // Use XPath for all static locators
+    this.lnkCategoryPhones = this.page.locator('//a[text()="Phones"]');
+    this.lnkCategoryLaptops = this.page.locator('//a[text()="Laptops"]');
+    this.lnkCategoryMonitors = this.page.locator('//a[text()="Monitors"]');
+    this.lnkHome = this.page.locator('//a[@class="nav-link" and contains(text(), "Home")]');
+    this.lnkCart = this.page.locator('//a[@id="cartur"]');
+    this.btnLogout = this.page.locator('//a[@id="logout2"]');
+    this.txtWelcome = this.page.locator('//a[@id="nameofuser"]');
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `selectCategory()`: Verify products from that category are displayed
-- After `selectProduct()`: Verify product detail page URL/title
+**Page Class Definition**:
+```typescript
+import { Page, expect } from '@playwright/test';
+import { CommonPage } from '../../../common_template/common-page';
+import { HomeLocators } from '../../../locators/demoblaze/home-locators';
+
+export class HomePage extends CommonPage {
+  readonly locators: HomeLocators;
+
+  constructor(page: Page) {
+    super(page);
+    this.locators = new HomeLocators(page);
+  }
+
+  // Navigation methods
+  async navigateToHome(): Promise<void> {
+    await this.navigate('https://www.demoblaze.com/');
+    await this.waitForVisible(this.locators.lnkHome);
+  }
+
+  async selectCategory(categoryName: 'Phones' | 'Laptops' | 'Monitors'): Promise<void> {
+    // Handle dynamic category selection in page method using XPath
+    const categoryLocator = this.page.locator(`//a[text()="${categoryName}"]`);
+    await this.click(categoryLocator);
+    await this.page.waitForLoadState('networkidle');
+  }
+
+  async selectProduct(productName: string): Promise<void> {
+    // Handle dynamic product selection in page method using XPath
+    const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+    await this.click(productLocator);
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async clickHomeInNavbar(): Promise<void> {
+    await this.click(this.locators.lnkHome);
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async navigateToCart(): Promise<void> {
+    await this.click(this.locators.lnkCart);
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  async logout(): Promise<void> {
+    await this.click(this.locators.btnLogout);
+    await this.page.waitForTimeout(1000);
+  }
+
+  // Verification methods
+  async verifyOnHomePage(): Promise<void> {
+    await expect.soft(this.page).toHaveURL(/index\.html/);
+  }
+
+  async verifyProductDisplayed(productName: string): Promise<void> {
+    const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+    await expect.soft(productLocator).toBeVisible();
+  }
+
+  async verifyWelcomeMessage(username: string): Promise<void> {
+    await expect.soft(this.locators.txtWelcome).toContainText(username);
+  }
+
+  async verifyLogoutVisible(): Promise<void> {
+    await expect.soft(this.locators.btnLogout).toBeVisible();
+  }
+}
+```
+
+**Navigation**: 
+- `navigateToHome()`: Lands on HomePage
+- `selectCategory()`: Stays on HomePage, product list filtered
+- `selectProduct()`: Navigates to ProductPage
+- `navigateToCart()`: Navigates to CartPage
 
 ---
 
 ### 4.3 ProductPage
 
-**Locator File**: `product-locators.ts`
+**File**: `pages/demoblaze/product/product-page.ts`
+
+**Locator File**: `locators/demoblaze/product-locators.ts`
 
 **Purpose**: Handle product detail viewing and adding products to cart.
 
-**Methods**:
-1. `addToCart(): Promise<void>`
-   - Clicks "Add to cart" button
-   - Waits for and accepts JavaScript alert
-   - **Navigation**: Stays on ProductPage
-
-2. `getProductName(): Promise<string>`
-   - Returns the product name displayed on the page
-
-3. `getProductPrice(): Promise<number>`
-   - Returns the product price as a number
-
-4. `isAddToCartButtonVisible(): Promise<boolean>`
-   - Checks if "Add to cart" button is displayed
-
-**Locators** (defined in `product-locators.ts`):
+**Locators Class Definition**:
 ```typescript
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.productName = // Product title/name element
-  this.productPrice = // Product price element
-  this.addToCartButton = // "Add to cart" button
+import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from '../common-locators';
+
+export class ProductLocators extends CommonLocators {
+  btnAddToCart!: Locator;
+  txtProductName!: Locator;
+  txtProductPrice!: Locator;
+
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();
+  }
+
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    
+    this.btnAddToCart = this.page.locator('//a[contains(@class, "btn-success") and text()="Add to cart"]');
+    this.txtProductName = this.page.locator('//h2[@class="name"]');
+    this.txtProductPrice = this.page.locator('//h3[@class="price-container"]');
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `addToCart()`: Verify alert appears with success message, verify cart count increases (if tracked)
-
-**Alert Handling**:
+**Page Class Definition**:
 ```typescript
-// Use Playwright's dialog handler
-page.on('dialog', async (dialog) => {
-  await dialog.accept();
-});
+import { Page, expect } from '@playwright/test';
+import { CommonPage } from '../../../common_template/common-page';
+import { ProductLocators } from '../../../locators/demoblaze/product-locators';
+
+export class ProductPage extends CommonPage {
+  readonly locators: ProductLocators;
+
+  constructor(page: Page) {
+    super(page);
+    this.locators = new ProductLocators(page);
+  }
+
+  // Action methods
+  async addToCart(): Promise<void> {
+    // Handle alert in the method
+    this.page.once('dialog', async (dialog) => {
+      await dialog.accept();
+    });
+    await this.click(this.locators.btnAddToCart);
+    await this.page.waitForTimeout(500);
+  }
+
+  // Getter methods
+  async getProductName(): Promise<string> {
+    return await this.getText(this.locators.txtProductName);
+  }
+
+  async getProductPrice(): Promise<string> {
+    return await this.getText(this.locators.txtProductPrice);
+  }
+
+  // Verification methods
+  async verifyAddToCartButtonVisible(): Promise<void> {
+    await expect.soft(this.locators.btnAddToCart).toBeVisible();
+  }
+
+  async verifyProductName(expectedName: string): Promise<void> {
+    await expect.soft(this.locators.txtProductName).toHaveText(expectedName);
+  }
+}
 ```
+
+**Navigation**: 
+- `addToCart()`: Stays on ProductPage (alert is handled internally)
 
 ---
 
 ### 4.4 CartPage
 
-**Locator File**: `cart-locators.ts`
+**File**: `pages/demoblaze/cart/cart-page.ts`
+
+**Locator File**: `locators/demoblaze/cart-locators.ts`
 
 **Purpose**: Display cart contents, manage items, and initiate checkout.
 
-**Methods**:
-1. `navigateToCart(): Promise<void>`
-   - Clicks "Cart" link in navbar
-   - Waits for cart page to load
-   - **Navigation**: Navigates to CartPage
-
-2. `getCartItems(): Promise<Array<{ name: string; price: number }>>`
-   - Returns array of cart items with names and prices
-
-3. `getTotalPrice(): Promise<number>`
-   - Returns the calculated total price from the cart
-
-4. `removeItem(productName: string): Promise<void>`
-   - Clicks "Delete" link for specified product
-   - Waits for item to be removed from DOM
-   - **Navigation**: Stays on CartPage
-
-5. `clickPlaceOrder(): Promise<CheckoutPage>`
-   - Clicks "Place Order" button
-   - Waits for checkout modal to appear
-   - **Navigation**: Stays on CartPage, checkout modal appears, returns CheckoutPage instance
-
-6. `isItemInCart(productName: string): Promise<boolean>`
-   - Checks if specified product is in the cart
-
-7. `getItemCount(): Promise<number>`
-   - Returns the number of items in the cart
-
-**Locators** (defined in `cart-locators.ts`):
+**Locators Class Definition**:
 ```typescript
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.cartItemRows = // All cart item rows
-  this.itemName = // Product name in cart row
-  this.itemPrice = // Product price in cart row
-  this.deleteButton = // "Delete" link (may need dynamic selector by product)
-  this.deleteButtonByProduct = (name: string) => // Delete button for specific product
-  this.totalPrice = // Total price element
-  this.placeOrderButton = // "Place Order" button
+import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from '../common-locators';
+
+export class CartLocators extends CommonLocators {
+  rowCartItem!: Locator;
+  txtItemName!: Locator;
+  txtItemPrice!: Locator;
+  btnDelete!: Locator;
+  txtTotalPrice!: Locator;
+  btnPlaceOrder!: Locator;
+
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();
+  }
+
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    
+    this.rowCartItem = this.page.locator('//tbody[@id="tbodyid"]/tr');
+    this.txtItemName = this.page.locator('//tbody[@id="tbodyid"]//td[2]');
+    this.txtItemPrice = this.page.locator('//tbody[@id="tbodyid"]//td[3]');
+    this.btnDelete = this.page.locator('//a[text()="Delete"]');
+    this.txtTotalPrice = this.page.locator('//h3[@id="totalp"]');
+    this.btnPlaceOrder = this.page.locator('//button[text()="Place Order"]');
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `removeItem()`: Verify item not in cart, total updated
-- After `clickPlaceOrder()`: Verify checkout modal visible
+**Page Class Definition**:
+```typescript
+import { Page, expect } from '@playwright/test';
+import { CommonPage } from '../../../common_template/common-page';
+import { CartLocators } from '../../../locators/demoblaze/cart-locators';
+
+export class CartPage extends CommonPage {
+  readonly locators: CartLocators;
+
+  constructor(page: Page) {
+    super(page);
+    this.locators = new CartLocators(page);
+  }
+
+  // Navigation methods
+  async navigateToCart(): Promise<void> {
+    const cartLink = this.page.locator('//a[@id="cartur"]');
+    await this.click(cartLink);
+    await this.page.waitForLoadState('domcontentloaded');
+  }
+
+  // Action methods
+  async removeItem(productName: string): Promise<void> {
+    // Handle dynamic delete button using XPath in page method
+    const deleteButton = this.page.locator(`//tr[td[contains(text(), "${productName}")]]//a[text()="Delete"]`);
+    await this.click(deleteButton);
+    await this.page.waitForTimeout(1000);
+  }
+
+  async clearAllItems(): Promise<void> {
+    const itemCount = await this.locators.rowCartItem.count();
+    for (let i = 0; i < itemCount; i++) {
+      const deleteBtn = this.locators.btnDelete.first();
+      if (await deleteBtn.isVisible()) {
+        await this.click(deleteBtn);
+        await this.page.waitForTimeout(500);
+      }
+    }
+  }
+
+  async clickPlaceOrder(): Promise<void> {
+    await this.click(this.locators.btnPlaceOrder);
+    await this.page.waitForTimeout(1000);
+  }
+
+  // Getter methods
+  async getCartItems(): Promise<Array<{ name: string; price: string }>> {
+    const items: Array<{ name: string; price: string }> = [];
+    const count = await this.locators.rowCartItem.count();
+    
+    for (let i = 0; i < count; i++) {
+      const name = await this.locators.txtItemName.nth(i).textContent() || '';
+      const price = await this.locators.txtItemPrice.nth(i).textContent() || '';
+      items.push({ name: name.trim(), price: price.trim() });
+    }
+    
+    return items;
+  }
+
+  async getTotalPrice(): Promise<string> {
+    return await this.getText(this.locators.txtTotalPrice);
+  }
+
+  async getItemCount(): Promise<number> {
+    return await this.locators.rowCartItem.count();
+  }
+
+  // Verification methods
+  async verifyItemInCart(productName: string): Promise<void> {
+    const itemLocator = this.page.locator(`//td[contains(text(), "${productName}")]`);
+    await expect.soft(itemLocator).toBeVisible();
+  }
+
+  async verifyItemNotInCart(productName: string): Promise<void> {
+    const itemLocator = this.page.locator(`//td[contains(text(), "${productName}")]`);
+    await expect.soft(itemLocator).toBeHidden();
+  }
+
+  async verifyTotalPrice(expectedTotal: string): Promise<void> {
+    await expect.soft(this.locators.txtTotalPrice).toHaveText(expectedTotal);
+  }
+
+  async verifyItemCount(expectedCount: number): Promise<void> {
+    await expect.soft(this.locators.rowCartItem).toHaveCount(expectedCount);
+  }
+}
+```
+
+**Navigation**: 
+- `navigateToCart()`: Navigates to CartPage
+- `removeItem()`: Stays on CartPage
+- `clickPlaceOrder()`: Opens checkout modal, stays on CartPage
 
 ---
 
 ### 4.5 CheckoutPage (Checkout Modal)
 
-**Locator File**: `checkout-locators.ts`
+**File**: `pages/demoblaze/cart/checkout-page.ts`
+
+**Locator File**: `locators/demoblaze/checkout-locators.ts`
 
 **Purpose**: Handle order placement form submission.
 
-**Methods**:
-1. `fillCheckoutForm(info: CheckoutInfo): Promise<void>`
-   - Fills all form fields with provided data
-   - **Navigation**: Stays on modal
-
-2. `clickPurchase(): Promise<void>`
-   - Clicks "Purchase" button
-   - Waits for confirmation popup
-   - **Navigation**: Checkout modal closes, confirmation popup appears
-
-3. `getOrderConfirmation(): Promise<OrderConfirmation>`
-   - Extracts order ID, amount, and other details from confirmation popup
-   - Returns structured confirmation data
-
-4. `closeConfirmation(): Promise<void>`
-   - Clicks "OK" on confirmation popup
-   - Waits for popup to close
-   - **Navigation**: Returns to HomePage
-
-5. `isCheckoutModalVisible(): Promise<boolean>`
-   - Checks if checkout modal is displayed
-
-**Locators** (defined in `checkout-locators.ts`):
+**Locators Class Definition**:
 ```typescript
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.checkoutModal = // Checkout modal container
-  this.nameInput = // Name input field
-  this.countryInput = // Country input field
-  this.cityInput = // City input field
-  this.creditCardInput = // Credit card input field
-  this.monthInput = // Month input field
-  this.yearInput = // Year input field
-  this.purchaseButton = // "Purchase" button
-  this.confirmationPopup = // Confirmation popup container
-  this.confirmationMessage = // "Thank you for your purchase!" message
-  this.orderDetails = // Order details text
-  this.okButton = // "OK" button in confirmation
+import { Locator, Page } from '@playwright/test';
+import { CommonLocators } from '../common-locators';
+
+export class CheckoutLocators extends CommonLocators {
+  modalCheckout!: Locator;
+  inputName!: Locator;
+  inputCountry!: Locator;
+  inputCity!: Locator;
+  inputCreditCard!: Locator;
+  inputMonth!: Locator;
+  inputYear!: Locator;
+  btnPurchase!: Locator;
+  modalConfirmation!: Locator;
+  txtConfirmMessage!: Locator;
+  txtOrderDetails!: Locator;
+  btnOk!: Locator;
+
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();
+  }
+
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    
+    this.modalCheckout = this.page.locator('//div[@id="orderModal"]');
+    this.inputName = this.page.locator('//input[@id="name"]');
+    this.inputCountry = this.page.locator('//input[@id="country"]');
+    this.inputCity = this.page.locator('//input[@id="city"]');
+    this.inputCreditCard = this.page.locator('//input[@id="card"]');
+    this.inputMonth = this.page.locator('//input[@id="month"]');
+    this.inputYear = this.page.locator('//input[@id="year"]');
+    this.btnPurchase = this.page.locator('//button[text()="Purchase"]');
+    this.modalConfirmation = this.page.locator('//div[@class="sweet-alert showSweetAlert visible"]');
+    this.txtConfirmMessage = this.page.locator('//h2[contains(text(), "Thank you")]');
+    this.txtOrderDetails = this.page.locator('//p[@class="lead text-muted"]');
+    this.btnOk = this.page.locator('//button[text()="OK"]');
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `clickPurchase()`: Verify confirmation popup with "Thank you for your purchase!", order ID, amount
-- After `closeConfirmation()`: Verify navigation to home page, cart empty
-
----
-
-### 4.6 NavigationBar
-
-**Locator File**: `navigation-locators.ts`
-
-**Purpose**: Provide access to persistent navigation elements across all pages.
-
-**Methods**:
-1. `clickLogin(): Promise<void>`
-   - Clicks "Log in" button in navbar
-   - **Navigation**: Opens login modal
-
-2. `clickLogout(): Promise<void>`
-   - Clicks "Log out" button in navbar
-   - Waits for logout to complete
-   - **Navigation**: Returns to HomePage, unauthenticated state
-
-3. `clickCart(): Promise<CartPage>`
-   - Clicks "Cart" link in navbar
-   - **Navigation**: Navigates to CartPage, returns CartPage instance
-
-4. `clickHome(): Promise<HomePage>`
-   - Clicks "Home" link in navbar
-   - **Navigation**: Navigates to HomePage, returns HomePage instance
-
-5. `getWelcomeMessage(): Promise<string>`
-   - Returns the welcome message text (e.g., "Welcome autouser_20251005_1234")
-
-6. `isLoggedIn(): Promise<boolean>`
-   - Checks if "Log out" button is visible (indicates logged-in state)
-
-7. `isLoginButtonVisible(): Promise<boolean>`
-   - Checks if "Log in" button is visible
-
-8. `isLogoutButtonVisible(): Promise<boolean>`
-   - Checks if "Log out" button is visible
-
-**Locators** (defined in `navigation-locators.ts`):
+**Page Class Definition**:
 ```typescript
-protected initializeLocators(): void {
-  super.initializeLocators();
-  this.loginButton = // "Log in" button in navbar
-  this.logoutButton = // "Log out" button in navbar
-  this.cartLink = // "Cart" link in navbar
-  this.homeLink = // "Home" link in navbar
-  this.welcomeMessage = // Welcome message element (shows username)
+import { Page, expect } from '@playwright/test';
+import { CommonPage } from '../../../common_template/common-page';
+import { CheckoutLocators } from '../../../locators/demoblaze/checkout-locators';
+
+export interface CheckoutInfo {
+  name: string;
+  country: string;
+  city: string;
+  creditCard: string;
+  month: string;
+  year: string;
+}
+
+export interface OrderConfirmation {
+  orderId: string;
+  amount: string;
+  cardNumber: string;
+  name: string;
+  date: string;
+}
+
+export class CheckoutPage extends CommonPage {
+  readonly locators: CheckoutLocators;
+
+  constructor(page: Page) {
+    super(page);
+    this.locators = new CheckoutLocators(page);
+  }
+
+  // Action methods
+  async fillCheckoutForm(info: CheckoutInfo): Promise<void> {
+    await this.waitForVisible(this.locators.modalCheckout);
+    await this.fill(this.locators.inputName, info.name);
+    await this.fill(this.locators.inputCountry, info.country);
+    await this.fill(this.locators.inputCity, info.city);
+    await this.fill(this.locators.inputCreditCard, info.creditCard);
+    await this.fill(this.locators.inputMonth, info.month);
+    await this.fill(this.locators.inputYear, info.year);
+  }
+
+  async clickPurchase(): Promise<void> {
+    await this.click(this.locators.btnPurchase);
+    await this.waitForVisible(this.locators.modalConfirmation);
+  }
+
+  async closeConfirmation(): Promise<void> {
+    await this.click(this.locators.btnOk);
+    await this.waitForHidden(this.locators.modalConfirmation);
+  }
+
+  // Getter methods
+  async getOrderConfirmation(): Promise<OrderConfirmation> {
+    const orderDetailsText = await this.getText(this.locators.txtOrderDetails);
+    
+    // Parse order details from text
+    const lines = orderDetailsText.split('\n');
+    const confirmation: OrderConfirmation = {
+      orderId: '',
+      amount: '',
+      cardNumber: '',
+      name: '',
+      date: ''
+    };
+
+    lines.forEach(line => {
+      if (line.includes('Id:')) confirmation.orderId = line.split(':')[1].trim();
+      if (line.includes('Amount:')) confirmation.amount = line.split(':')[1].trim();
+      if (line.includes('Card Number:')) confirmation.cardNumber = line.split(':')[1].trim();
+      if (line.includes('Name:')) confirmation.name = line.split(':')[1].trim();
+      if (line.includes('Date:')) confirmation.date = line.split(':')[1].trim();
+    });
+
+    return confirmation;
+  }
+
+  // Verification methods
+  async verifyCheckoutModalVisible(): Promise<void> {
+    await expect.soft(this.locators.modalCheckout).toBeVisible();
+  }
+
+  async verifyConfirmationPopup(): Promise<void> {
+    await expect.soft(this.locators.modalConfirmation).toBeVisible();
+    await expect.soft(this.locators.txtConfirmMessage).toContainText('Thank you');
+  }
+
+  async verifyOrderId(orderId: string): Promise<void> {
+    const confirmation = await this.getOrderConfirmation();
+    expect.soft(confirmation.orderId).toBe(orderId);
+  }
+
+  async verifyOrderAmount(amount: string): Promise<void> {
+    const confirmation = await this.getOrderConfirmation();
+    expect.soft(confirmation.amount).toContain(amount);
+  }
 }
 ```
 
-**Expected Assertions**:
-- After `clickLogout()`: Verify "Log in" button visible, "Log out" hidden, welcome message hidden
+**Navigation**: 
+- `fillCheckoutForm()`: Stays on modal
+- `clickPurchase()`: Checkout modal closes, confirmation popup appears
+- `closeConfirmation()`: Returns to HomePage
 
 ---
 
 ### Navigation Patterns Summary
 
-| Current Page | Method Called | Resulting Page | Returns |
-|--------------|---------------|----------------|---------|
-| Any | `NavigationBar.clickHome()` | HomePage | `HomePage` |
-| Any | `NavigationBar.clickCart()` | CartPage | `CartPage` |
-| Any | `NavigationBar.clickLogin()` | Same page (modal opens) | `void` |
-| Any (logged in) | `NavigationBar.clickLogout()` | HomePage | `void` |
-| HomePage | `selectProduct(name)` | ProductPage | `ProductPage` |
-| ProductPage | `addToCart()` | ProductPage (stays) | `void` |
-| CartPage | `clickPlaceOrder()` | CartPage (modal opens) | `CheckoutPage` |
-| CheckoutPage (modal) | `closeConfirmation()` | HomePage | `void` |
+| Current Page | Method Called | Resulting Page | Key Points |
+|--------------|---------------|----------------|------------|
+| Any | `HomePage.navigateToHome()` | HomePage | Fresh page load |
+| Any | `CartPage.navigateToCart()` | CartPage | Via navbar Cart link |
+| HomePage | `HomePage.selectProduct(name)` | ProductPage | Product detail view |
+| ProductPage | `ProductPage.addToCart()` | ProductPage (stays) | Alert handled internally |
+| CartPage | `CartPage.clickPlaceOrder()` | CartPage (modal opens) | Checkout modal appears |
+| CheckoutPage (modal) | `CheckoutPage.closeConfirmation()` | HomePage | After successful purchase |
+| Any (logged in) | `HomePage.logout()` | HomePage | Unauthenticated state |
 
 ---
 
 ## 5. Test Script Mapping
 
-| Test Case ID | Test File Name | Test Function Name | Page Objects Required | Fixtures Needed | Special Handling |
-|--------------|----------------|--------------------|-----------------------|-----------------|------------------|
-| TC1 | `login.spec.ts` | `test('TC1: Login - Valid Login', ...)` | `LoginPage`, `NavigationBar` | `page` | Modal interaction, welcome message verification |
-| TC2 | `cart.spec.ts` | `test('TC2: Cart - Add Multiple Items', ...)` | `HomePage`, `ProductPage`, `CartPage`, `NavigationBar` | `page`, `authenticatedPage` | Alert handling (×2), category switching, multiple products |
-| TC3 | `checkout.spec.ts` | `test('TC3: Checkout - Place Order with Valid Info', ...)` | `CartPage`, `CheckoutPage`, `NavigationBar` | `page`, `cartWithItems` | Form filling, confirmation popup, cart clearing verification |
-| TC4 | `cart.spec.ts` | `test('TC4: Cart - Remove Item', ...)` | `CartPage`, `NavigationBar` | `page`, `cartWithTwoItems` | Dynamic item removal, total recalculation |
-| TC5 | `full-flow.spec.ts` | `test('TC5: Navigation - Full Shopping Flow', ...)` | `LoginPage`, `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage`, `NavigationBar` | `page` | Complete flow integration, logout verification |
+### Test Script Structure Requirements
+
+**CRITICAL: All test files MUST follow these rules:**
+
+1. **NO Hardcoded Playwright Actions**
+   ```typescript
+   // ❌ WRONG
+   await page.click('//button[@id="login"]');
+   await page.fill('//input[@name="username"]', 'user');
+   
+   // ✅ CORRECT
+   const loginPage = new LoginPage(page);
+   await loginPage.loginWithCredentials('user', 'pass');
+   ```
+
+2. **NO Direct Assertions in Test Files**
+   ```typescript
+   // ❌ WRONG
+   await expect(page.locator('//div[@class="cart"]')).toBeVisible();
+   await expect(page.locator('//span[@id="total"]')).toHaveText('1000');
+   
+   // ✅ CORRECT
+   const cartPage = new CartPage(page);
+   await cartPage.verifyItemCount(2);
+   await cartPage.verifyTotalPrice('1000');
+   ```
+
+3. **Required beforeEach Hook - Clear Cart**
+   ```typescript
+   test.beforeEach(async ({ page }) => {
+     // Navigate to site
+     await page.goto('https://www.demoblaze.com/');
+     
+     // Clear cart to ensure clean state
+     const cartPage = new CartPage(page);
+     await cartPage.navigateToCart();
+     await cartPage.clearAllItems();
+   });
+   ```
+
+4. **Test File Structure Pattern**
+   ```typescript
+   import { test, expect } from '@playwright/test';
+   import { LoginPage } from '../../pages/demoblaze/auth/login-page';
+   import { HomePage } from '../../pages/demoblaze/home/home-page';
+   
+   test.describe('Feature Name', () => {
+     test.beforeEach(async ({ page }) => {
+       // Setup: Navigate and clear cart
+       await page.goto('https://www.demoblaze.com/');
+       const cartPage = new CartPage(page);
+       await cartPage.navigateToCart();
+       await cartPage.clearAllItems();
+     });
+
+     test('TestcaseID - description - condition - expected outcome', async ({ page }) => {
+       // Arrange: Initialize page objects
+       const homePage = new HomePage(page);
+       const productPage = new ProductPage(page);
+       
+       // Act: Perform actions through page methods only
+       await homePage.selectCategory('Phones');
+       await homePage.selectProduct('Samsung galaxy s6');
+       await productPage.addToCart();
+       
+       // Assert: Verify through page methods only
+       await homePage.navigateToCart();
+       await cartPage.verifyItemInCart('Samsung galaxy s6');
+     });
+   });
+   ```
+
+### Test Case Mapping Table
+
+### Test Case Mapping Table
+
+| Test Case ID | Test File Name | Test Function Name | Page Objects Required | Special Handling |
+|--------------|----------------|--------------------|-----------------------|------------------|
+| TC1 | `login.spec.ts` | `test('TC1 - Login - when using valid credentials - user is authenticated successfully', ...)` | `LoginPage`, `HomePage` | Modal interaction, beforeEach clears cart |
+| TC2 | `cart.spec.ts` | `test('TC2 - Cart - when adding multiple products - all items appear with correct totals', ...)` | `HomePage`, `ProductPage`, `CartPage` | Alert handling, category switching, beforeEach clears cart |
+| TC3 | `checkout.spec.ts` | `test('TC3 - Checkout - when placing order with valid info - order completes successfully', ...)` | `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage` | Form filling, confirmation popup, beforeEach clears cart |
+| TC4 | `cart.spec.ts` | `test('TC4 - Cart - when removing item - remaining items and total update correctly', ...)` | `HomePage`, `ProductPage`, `CartPage` | Dynamic item removal, beforeEach clears cart |
+| TC5 | `full-flow.spec.ts` | `test('TC5 - Full Flow - when completing shopping journey - all steps execute successfully', ...)` | `LoginPage`, `HomePage`, `ProductPage`, `CartPage`, `CheckoutPage` | Complete flow, logout verification, beforeEach clears cart |
 
 ### Detailed Mapping
 
 #### TC1: Login - Valid Login
 ```typescript
 // File: tests/demoblaze/login.spec.ts
-test('TC1: Login - Valid Login', async ({ page }) => {
-  // Setup
-  const navigationBar = new NavigationBar(page);
-  const loginPage = new LoginPage(page);
-  
-  // Navigate to site
-  await page.goto('https://www.demoblaze.com/');
-  
-  // Step 1: Click [Log in] button
-  await navigationBar.clickLogin();
-  
-  // Steps 2-4: Login with credentials
-  await loginPage.loginWithCredentials('autouser_20251005_1234', 'autouser_20251005_1234');
-  
-  // Verifications 1-4 (using expect.soft)
-  // ... assertions
+import { test } from '@playwright/test';
+import { LoginPage } from '../../pages/demoblaze/auth/login-page';
+import { HomePage } from '../../pages/demoblaze/home/home-page';
+import { CartPage } from '../../pages/demoblaze/cart/cart-page';
+import { readJson } from '../../utils/data-reader';
+
+test.describe('Login Feature', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    
+    // Clear cart for clean state
+    const cartPage = new CartPage(page);
+    await cartPage.navigateToCart();
+    await cartPage.clearAllItems();
+  });
+
+  test('TC1 - Login - when using valid credentials - user is authenticated successfully', async ({ page }) => {
+    // Load test data from JSON
+    const users = readJson('data/demoblaze/users.json');
+    const validUser = users.validUser;
+    
+    // Initialize page objects
+    const loginPage = new LoginPage(page);
+    const homePage = new HomePage(page);
+    
+    // Step 1: Open login modal
+    await loginPage.openLoginModal();
+    
+    // Steps 2-4: Login with credentials from data file
+    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    
+    // Verifications (all through page methods)
+    await loginPage.verifyLoginModalHidden();
+    await homePage.verifyOnHomePage();
+    await homePage.verifyWelcomeMessage(validUser.username);
+    await homePage.verifyLogoutVisible();
+  });
 });
 ```
 
 #### TC2: Cart - Add Multiple Items
 ```typescript
 // File: tests/demoblaze/cart.spec.ts
-test('TC2: Cart - Add Multiple Items', async ({ page }) => {
-  // Precondition: User logged in (use fixture or setup)
-  
-  // Steps 1-8: Navigate categories, add products
-  // Verification 1-3: Cart contents and total
+import { test } from '@playwright/test';
+import { HomePage } from '../../pages/demoblaze/home/home-page';
+import { ProductPage } from '../../pages/demoblaze/product/product-page';
+import { CartPage } from '../../pages/demoblaze/cart/cart-page';
+import { readJson } from '../../utils/data-reader';
+
+test.describe('Cart Management', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    
+    // Clear cart for clean state
+    const cartPage = new CartPage(page);
+    await cartPage.navigateToCart();
+    await cartPage.clearAllItems();
+  });
+
+  test('TC2 - Cart - when adding multiple products - all items appear with correct totals', async ({ page }) => {
+    // Load test data from JSON
+    const products = readJson('data/demoblaze/products.json');
+    const phone = products.phones.samsungGalaxyS6;
+    const laptop = products.laptops.macBookPro;
+    
+    // Initialize page objects
+    const homePage = new HomePage(page);
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
+    
+    // Steps 1-3: Add first product
+    await homePage.selectCategory(phone.category);
+    await homePage.selectProduct(phone.name);
+    await productPage.addToCart();
+    
+    // Step 4: Return to home
+    await homePage.clickHomeInNavbar();
+    
+    // Steps 5-7: Add second product
+    await homePage.selectCategory(laptop.category);
+    await homePage.selectProduct(laptop.name);
+    await productPage.addToCart();
+    
+    // Step 8: Navigate to cart
+    await homePage.navigateToCart();
+    
+    // Verifications (all through page methods)
+    await cartPage.verifyItemCount(2);
+    await cartPage.verifyItemInCart(phone.name);
+    await cartPage.verifyItemInCart(laptop.name);
+  });
 });
 ```
 
 #### TC3: Checkout - Place Order with Valid Info
 ```typescript
 // File: tests/demoblaze/checkout.spec.ts
-test('TC3: Checkout - Place Order with Valid Info', async ({ page }) => {
-  // Precondition: User logged in with items in cart (use fixture)
-  
-  // Steps 1-5: Navigate to cart, place order, fill form
-  // Verifications 1-4: Confirmation, order details, navigation, cart state
+import { test } from '@playwright/test';
+import { HomePage } from '../../pages/demoblaze/home/home-page';
+import { ProductPage } from '../../pages/demoblaze/product/product-page';
+import { CartPage } from '../../pages/demoblaze/cart/cart-page';
+import { CheckoutPage } from '../../pages/demoblaze/cart/checkout-page';
+import { readJson } from '../../utils/data-reader';
+
+test.describe('Checkout Flow', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    
+    // Load test data
+    const products = readJson('data/demoblaze/products.json');
+    const phone = products.phones.samsungGalaxyS6;
+    
+    // Clear cart for clean state
+    const cartPage = new CartPage(page);
+    await cartPage.navigateToCart();
+    await cartPage.clearAllItems();
+    
+    // Add a product for checkout tests
+    const homePage = new HomePage(page);
+    const productPage = new ProductPage(page);
+    await homePage.navigateToHome();
+    await homePage.selectCategory(phone.category);
+    await homePage.selectProduct(phone.name);
+    await productPage.addToCart();
+  });
+
+  test('TC3 - Checkout - when placing order with valid info - order completes successfully', async ({ page }) => {
+    // Load checkout test data
+    const checkoutData = readJson('data/demoblaze/checkout-info.json');
+    const customer = checkoutData.customer1;
+    const products = readJson('data/demoblaze/products.json');
+    const phone = products.phones.samsungGalaxyS6;
+    
+    // Initialize page objects
+    const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
+    const homePage = new HomePage(page);
+    
+    // Steps 1-2: Navigate to cart and verify items
+    await cartPage.navigateToCart();
+    await cartPage.verifyItemInCart(phone.name);
+    
+    // Step 3: Click Place Order
+    await cartPage.clickPlaceOrder();
+    
+    // Step 4: Fill checkout form with data from JSON
+    await checkoutPage.fillCheckoutForm({
+      name: customer.name,
+      country: customer.country,
+      city: customer.city,
+      creditCard: customer.creditCard,
+      month: customer.month,
+      year: customer.year
+    });
+    
+    // Step 5: Click Purchase
+    await checkoutPage.clickPurchase();
+    
+    // Verifications (all through page methods)
+    await checkoutPage.verifyConfirmationPopup();
+    await checkoutPage.closeConfirmation();
+    await homePage.verifyOnHomePage();
+  });
 });
 ```
 
 #### TC4: Cart - Remove Item
 ```typescript
-// File: tests/demoblaze/cart.spec.ts
-test('TC4: Cart - Remove Item', async ({ page }) => {
-  // Precondition: User logged in with 2 items (use fixture or setup)
+// File: tests/demoblaze/cart.spec.ts (add to existing file)
+test('TC4 - Cart - when removing item - remaining items and total update correctly', async ({ page }) => {
+  // Load test data from JSON
+  const products = readJson('data/demoblaze/products.json');
+  const phone = products.phones.sonyXperiaZ5;
+  const laptop = products.laptops.macBookAir;
   
-  // Steps 1-4: Navigate to cart, remove item
-  // Verifications 1-3: Item removed, remaining item, total updated
+  // Setup: Add 2 products first
+  const homePage = new HomePage(page);
+  const productPage = new ProductPage(page);
+  const cartPage = new CartPage(page);
+  
+  // Add first product
+  await homePage.selectCategory(phone.category);
+  await homePage.selectProduct(phone.name);
+  await productPage.addToCart();
+  await homePage.clickHomeInNavbar();
+  
+  // Add second product
+  await homePage.selectCategory(laptop.category);
+  await homePage.selectProduct(laptop.name);
+  await productPage.addToCart();
+  
+  // Steps 1-2: Go to cart and verify both items
+  await homePage.navigateToCart();
+  await cartPage.verifyItemCount(2);
+  
+  // Step 3: Remove one item
+  await cartPage.removeItem(phone.name);
+  
+  // Verifications (all through page methods)
+  await cartPage.verifyItemNotInCart(phone.name);
+  await cartPage.verifyItemInCart(laptop.name);
+  await cartPage.verifyItemCount(1);
 });
 ```
 
-#### TC5: Navigation - Full Shopping Flow
+#### TC5: Full Shopping Flow
 ```typescript
 // File: tests/demoblaze/full-flow.spec.ts
-test('TC5: Navigation - Full Shopping Flow', async ({ page }) => {
-  // Steps 1-10: Complete flow from login to logout
-  // Verifications 1-4: Cart, checkout, navigation, logout state
+import { test } from '@playwright/test';
+import { LoginPage } from '../../pages/demoblaze/auth/login-page';
+import { HomePage } from '../../pages/demoblaze/home/home-page';
+import { ProductPage } from '../../pages/demoblaze/product/product-page';
+import { CartPage } from '../../pages/demoblaze/cart/cart-page';
+import { CheckoutPage } from '../../pages/demoblaze/cart/checkout-page';
+import { readJson } from '../../utils/data-reader';
+
+test.describe('Full Shopping Flow', () => {
+  test.beforeEach(async ({ page }) => {
+    await page.goto('https://www.demoblaze.com/');
+    
+    // Clear cart for clean state
+    const cartPage = new CartPage(page);
+    await cartPage.navigateToCart();
+    await cartPage.clearAllItems();
+  });
+
+  test('TC5 - Full Flow - when completing shopping journey - all steps execute successfully', async ({ page }) => {
+    // Load test data from JSON files
+    const users = readJson('data/demoblaze/users.json');
+    const validUser = users.validUser;
+    const products = readJson('data/demoblaze/products.json');
+    const laptop = products.laptops.sonyVaioI5;
+    const monitor = products.monitors.appleMonitor24;
+    const checkoutData = readJson('data/demoblaze/checkout-info.json');
+    const customer = checkoutData.customer2;
+    
+    // Initialize all page objects
+    const loginPage = new LoginPage(page);
+    const homePage = new HomePage(page);
+    const productPage = new ProductPage(page);
+    const cartPage = new CartPage(page);
+    const checkoutPage = new CheckoutPage(page);
+    
+    // Step 1: Login with data from JSON
+    await loginPage.openLoginModal();
+    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    
+    // Steps 2-5: Add products from different categories
+    await homePage.selectCategory(laptop.category);
+    await homePage.selectProduct(laptop.name);
+    await productPage.addToCart();
+    
+    await homePage.clickHomeInNavbar();
+    await homePage.selectCategory(monitor.category);
+    await homePage.selectProduct(monitor.name);
+    await productPage.addToCart();
+    
+    // Step 6: Verify cart
+    await homePage.navigateToCart();
+    await cartPage.verifyItemCount(2);
+    
+    // Steps 7-8: Checkout with customer data from JSON
+    await cartPage.clickPlaceOrder();
+    await checkoutPage.fillCheckoutForm({
+      name: customer.name,
+      country: customer.country,
+      city: customer.city,
+      creditCard: customer.creditCard,
+      month: customer.month,
+      year: customer.year
+    });
+    await checkoutPage.clickPurchase();
+    
+    // Step 9: Confirm and close
+    await checkoutPage.verifyConfirmationPopup();
+    await checkoutPage.closeConfirmation();
+    
+    // Step 10: Logout
+    await homePage.logout();
+    
+    // Verifications (all through page methods)
+    await homePage.verifyOnHomePage();
+  });
 });
 ```
 
@@ -1372,17 +2167,41 @@ test('TC1: Login - Valid Login', async ({ page }) => {
 #### Dynamic Selectors
 **Challenge**: Product names and prices may need dynamic selector construction
 
-**Solution**:
+**Solution - Handle in Page Object Methods (NOT in Locator Classes)**:
 ```typescript
-// In locator class
-productByName(name: string): Locator {
-  return this.page.locator(`a:has-text("${name}")`);
+// ❌ WRONG - Dynamic locator method in locator class
+export class ProductLocators extends CommonLocators {
+  productByName(name: string): Locator {
+    return this.page.locator(`//a[text()="${name}"]`);
+  }
 }
 
-deleteButtonByProduct(name: string): Locator {
-  return this.page.locator(`tr:has-text("${name}") >> text=Delete`);
+// ✅ CORRECT - Dynamic locator in page method using XPath
+export class HomePage extends CommonPage {
+  async selectProduct(productName: string): Promise<void> {
+    // Create dynamic locator using XPath with template literal
+    const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+    await this.click(productLocator);
+  }
+}
+
+// ✅ CORRECT - Dynamic delete button for cart items
+export class CartPage extends CommonPage {
+  async removeItem(productName: string): Promise<void> {
+    // Use XPath to find delete button for specific product
+    const deleteButton = this.page.locator(
+      `//tr[td[contains(text(), "${productName}")]]//a[text()="Delete"]`
+    );
+    await this.click(deleteButton);
+  }
 }
 ```
+
+**Key Principles**:
+- **NO dynamic methods in locator classes** - only static property declarations
+- **Use XPath with string interpolation** in page object methods for dynamic elements
+- Leverage XPath's powerful text matching and hierarchy navigation
+- Keep locator classes simple with only `initializeLocators()` method
 
 #### Shadow DOM (if present)
 **Note**: Demoblaze doesn't use Shadow DOM, but if encountered:
@@ -1701,7 +2520,123 @@ Each line after `</br>` should be treated as a distinct step in the test impleme
 
 ---
 
-**Document Version**: 1.0  
-**Created**: 2025-10-27  
-**Status**: Ready for Implementation
+## Summary: Critical Implementation Rules
+
+### 1. Page Object Model (POM) Compliance
+
+**MUST Follow:**
+- ✅ ALL interactions must be in page object methods
+- ✅ ALL verifications must be in page object methods
+- ✅ Test files should ONLY call page object methods
+- ❌ NO `page.click()`, `page.fill()`, `page.locator()` in test files
+- ❌ NO `expect()` assertions directly in test files
+
+### 2. Locator Class Structure
+
+**MUST Follow ButtonLocators Pattern:**
+```typescript
+export class YourLocators extends CommonLocators {
+  property!: Locator;  // Declare with !
+  
+  constructor(page: Page) {
+    super(page);
+    this.initializeLocators();  // Call initialization
+  }
+  
+  protected initializeLocators(): void {
+    super.initializeLocators();
+    this.property = this.page.locator('//xpath');  // Use XPath
+  }
+}
+```
+
+### 3. Page Class Structure
+
+**MUST Follow CheckBoxPage Pattern:**
+```typescript
+export class YourPage extends CommonPage {
+  readonly locators: YourLocators;
+  
+  constructor(page: Page) {
+    super(page);
+    this.locators = new YourLocators(page);  // Initialize locators
+  }
+  
+  // Action and verification methods using this.locators
+}
+```
+
+### 4. XPath Requirements
+
+**MUST:**
+- ✅ Use XPath for ALL locators: `//button[@id="login"]`
+- ✅ Handle dynamic locators in page methods: `this.page.locator(\`//a[text()="${name}"]\`)`
+- ❌ NO CSS selectors: `button#login`
+- ❌ NO dynamic locator methods in locator classes
+
+### 5. File Organization
+
+**Structure:**
+```
+pages/demoblaze/
+  auth/login-page.ts
+  home/home-page.ts
+  product/product-page.ts
+  cart/cart-page.ts, checkout-page.ts
+
+locators/demoblaze/
+  login-locators.ts (NO index.ts)
+  home-locators.ts
+  product-locators.ts
+  cart-locators.ts
+  checkout-locators.ts
+```
+
+### 6. Test Hooks
+
+**MUST have in every test file:**
+```typescript
+test.beforeEach(async ({ page }) => {
+  await page.goto('https://www.demoblaze.com/');
+  
+  // REQUIRED: Clear cart for clean state
+  const cartPage = new CartPage(page);
+  await cartPage.navigateToCart();
+  await cartPage.clearAllItems();
+});
+```
+
+### 7. Test Naming Convention
+
+**Format:**
+```typescript
+test('TestcaseID - feature - condition - expected outcome', async ({ page }) => {
+  // Test implementation using ONLY page object methods
+});
+```
+
+**Example:**
+```typescript
+test('TC001 - Login - when using valid credentials - user is authenticated successfully', async ({ page }) => {
+  const loginPage = new LoginPage(page);
+  await loginPage.openLoginModal();
+  await loginPage.loginWithCredentials('user', 'pass');
+  await loginPage.verifyLoginModalHidden();
+});
+```
+
+---
+
+**Document Version**: 2.0  
+**Last Updated**: 2025-10-27  
+**Status**: Ready for Implementation  
+**Changes**: 
+- Updated folder structure for pages (auth/, home/, product/, cart/)
+- Removed index.ts from locators folder
+- Added mandatory XPath requirement for all locators
+- Removed dynamic locator methods from locator classes
+- Added Page Object Model compliance rules
+- Added ButtonLocators and CheckBoxPage reference patterns
+- Added mandatory clearCart() in beforeEach hooks
+- Added complete code examples following correct patterns
 
