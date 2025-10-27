@@ -1,5 +1,5 @@
 import { expect, Page } from '@playwright/test';
-import TextBoxLocators from '../locators/textbox-locators';
+import TextBoxLocators from '../../locators/demoqa/textbox-locators';
 import TextBoxData from '../../interfaces/demoqa/textBoxData';
 import { CommonPage } from '../common-page';
 

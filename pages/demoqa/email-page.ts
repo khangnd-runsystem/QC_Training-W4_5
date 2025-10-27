@@ -1,5 +1,5 @@
 import {expect, Page, Locator} from '@playwright/test';
-import { EmailLocators } from '../locators/email-locators';
+import { EmailLocators } from '../../locators/demoqa/email-locators';
 import { CommonPage } from '../common-page';
 
 export default class EmailPage extends CommonPage {

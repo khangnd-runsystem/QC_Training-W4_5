@@ -1,5 +1,5 @@
 import {Locator, Page} from '@playwright/test';
-import {CommonLocators} from './common-locators';
+import {CommonLocators} from '../common-locators';
 
 export class ButtonLocators extends CommonLocators {
     // button-specific locator properties

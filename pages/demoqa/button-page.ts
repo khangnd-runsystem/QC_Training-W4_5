@@ -1,5 +1,5 @@
 import {expect, Page} from '@playwright/test';
-import {ButtonLocators} from '../locators/button-locators';
+import {ButtonLocators} from '../../locators/demoqa/button-locators';
 import { CommonPage } from '../common-page';
 
 export default class ButtonPage extends CommonPage {

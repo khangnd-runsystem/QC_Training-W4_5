@@ -1,5 +1,5 @@
 import {expect, Page} from '@playwright/test';
-import Login_AddCartLocators from '../locators/login-addcart-locators';
+import Login_AddCartLocators from '../../locators/demoqa/login-addcart-locators';
 import { CommonPage } from '../common-page';
 
 export default class LoginAddCartPage extends CommonPage {
