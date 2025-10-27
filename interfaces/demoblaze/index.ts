@@ -1,7 +1,5 @@
-/**
- * Central export file for all Demoblaze interfaces
- */
-export * from './user.interface';
-export * from './product.interface';
-export * from './checkout-info.interface';
-export * from './order-confirmation.interface';
+export { LoginPage } from "./auth/login-page";
+export { InventoryPage } from "./product/inventory-page";
+export { CartPage } from "./cart/cart-page";
+export { CheckoutPage } from "./cart/checkout-page";
+export { MenuPage } from "./product/menu-page";

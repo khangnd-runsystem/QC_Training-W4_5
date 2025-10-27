@@ -1,45 +1,57 @@
 import { test as baseTest } from '@playwright/test';
-import { LoginPage } from '../../pages/demoblaze/auth/login-page';
-import { HomePage } from '../../pages/demoblaze/home/home-page';
-import { ProductPage } from '../../pages/demoblaze/product/product-page';
-import { CartPage } from '../../pages/demoblaze/cart/cart-page';
-import { CheckoutPage } from '../../pages/demoblaze/cart/checkout-page';
+import { LoginPage, HomePage,  CartPage, CheckoutPage, ProductPage} from '../../pages/demoblaze';
 import { readJson } from '../../utils/dataReader';
 
-// Export
+//Export
 export { expect } from '@playwright/test';
 
-// Define fixtures type
-type DemoblazeFixtures = {
-  loginPage: LoginPage;
-  homePage: HomePage;
-  productPage: ProductPage;
-  cartPage: CartPage;
-  checkoutPage: CheckoutPage;
+type MyFixtures = {
+    loginPage: LoginPage;
+    homePage: HomePage;
+    cartPage: CartPage; 
+    checkoutPage: CheckoutPage;
+    productPage: ProductPage;
 }
 
-// Extend base test with page object fixtures
-export const test = baseTest.extend<DemoblazeFixtures>({
-  loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
-  },
-  homePage: async ({ page }, use) => {
-    await use(new HomePage(page));
-  },
-  productPage: async ({ page }, use) => {
-    await use(new ProductPage(page));
-  },
-  cartPage: async ({ page }, use) => {
-    await use(new CartPage(page));
-  },
-  checkoutPage: async ({ page }, use) => {
-    await use(new CheckoutPage(page));
-  }
+export const test = baseTest.extend<MyFixtures>(
+    {
+    loginPage: async ({ page }, use) => {
+        await use(new LoginPage(page));
+    },
+    homePage: async ({ page }, use) => {
+        await use(new HomePage(page));
+    },
+    cartPage: async ({ page }, use) => {
+        await use(new CartPage(page));
+    },
+    checkoutPage: async ({ page }, use) => {
+        await use(new CheckoutPage(page));
+    },
+    productPage: async ({ page }, use) => {
+        await use(new ProductPage(page));
+    }
+
 });
 
-// BaseTest class for loading test data
+
 export class BaseTest {
-  loadTestData<T>(filePath: string): T {
-    return readJson<T>(filePath);
-  }
+
+    loadDataInfo<T>(filePath: string): T | null {
+        const fullPath = `data/${process.env.TEST_ENV || 'demoblaze'}/${filePath}`;
+
+        try {
+            const dataInfo = readJson<T>(fullPath);
+            if (dataInfo) {
+                console.log(`Data loaded successfully from file ${fullPath}`);
+                return dataInfo;
+            } else {
+                console.error(`Error: Unable to read data from file ${fullPath}`);
+            }
+        } catch (error) {
+            console.error(`Exception occurred while reading file ${fullPath}:`, error);
+        }
+
+        return null;
+    }
+
 }
