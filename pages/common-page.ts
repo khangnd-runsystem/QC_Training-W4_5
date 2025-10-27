@@ -120,6 +120,12 @@ export class CommonPage {
       }
     }
   }
+  @step("Wait for page to fully load")
+  async waitForPageLoad(): Promise<void> {
+    await this.page.waitForLoadState("domcontentloaded");
+    // Small buffer to ensure elements are rendered
+    await this.page.waitForTimeout(2000);
+  }
 
   /**
    * Fill input value

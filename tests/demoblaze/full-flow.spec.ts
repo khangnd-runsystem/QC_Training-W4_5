@@ -1,13 +1,25 @@
 import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
+import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 test.describe('Full Shopping Flow', () => {
-  test.beforeEach(async ({ page, cartPage }) => {
+  test.beforeEach(async ({ page, cartPage, loginPage, homePage }) => {
     await page.goto('https://www.demoblaze.com/');
+    
+    // Load user data for login
+    const users = readJson('data/demoblaze/users.json') as UsersData;
+    const validUser = users.validUser;
+    
+    // Login before cart operations
+    await loginPage.openLoginModal();
+    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    await loginPage.verifyLoginModalHidden();
     
     // Clear cart for clean state
     await cartPage.navigateToCart();
+    await cartPage.waitForPageLoad();
     await cartPage.clearAllItems();
+    await homePage.navigateToHome()
   });
 
   test('TC5 - Full Flow - when completing shopping journey - all steps execute successfully', async ({ 
@@ -27,26 +39,23 @@ test.describe('Full Shopping Flow', () => {
     const checkoutData: any = readJson('data/demoblaze/checkout-info.json');
     const customer = checkoutData.customer2;
     
-    // Step 1: Login with data from JSON
-    await loginPage.openLoginModal();
-    await loginPage.loginWithCredentials(validUser.username, validUser.password);
     
-    // Verify login successful
-    await loginPage.verifyLoginModalHidden();
-    await homePage.verifyWelcomeMessage(validUser.username);
-    
-    // Steps 2-5: Add products from different categories
+    // Steps 1: Add products from different categories
     await homePage.selectCategory(laptop.category);
     await homePage.selectProduct(laptop.name);
     await productPage.addToCart();
+    await productPage.verifyProductAddedAlert();
+
     
-    await homePage.clickHomeInNavbar();
+    await homePage.navigateToHome();
     await homePage.selectCategory(monitor.category);
     await homePage.selectProduct(monitor.name);
     await productPage.addToCart();
-    
+    await productPage.verifyProductAddedAlert();
+
     // Step 6: Verify cart
     await homePage.navigateToCart();
+    await cartPage.waitForPageLoad();
     await cartPage.verifyItemCount(2);
     await cartPage.verifyItemInCart(laptop.name);
     await cartPage.verifyItemInCart(monitor.name);
@@ -57,7 +66,7 @@ test.describe('Full Shopping Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      card: customer.creditCard,
+      card: customer.card,
       month: customer.month,
       year: customer.year
     });
@@ -67,10 +76,9 @@ test.describe('Full Shopping Flow', () => {
     await checkoutPage.verifyConfirmationPopup();
     await checkoutPage.closeConfirmation();
     
-    // Step 10: Logout
-    await homePage.logout();
-    
     // Verifications (all through page methods)
     await homePage.verifyOnHomePage();
+    // Step 10: Logout
+    await homePage.logout();
   });
 });

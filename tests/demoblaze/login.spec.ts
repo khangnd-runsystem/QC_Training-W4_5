@@ -3,16 +3,11 @@ import { readJson } from '../../utils/dataReader';
 import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 test.describe('Login Feature', () => {
-  test.beforeEach(async ({ page, homePage, cartPage }) => {
+  test.beforeEach(async ({ page}) => {
     await page.goto('https://www.demoblaze.com/');
-    
-    // Clear cart for clean state
-    await cartPage.navigateToCart();
-    await cartPage.clearAllItems();
   });
 
   test('TC1 - Login - when using valid credentials - user is authenticated successfully', async ({ 
-    page, 
     loginPage, 
     homePage 
   }) => {

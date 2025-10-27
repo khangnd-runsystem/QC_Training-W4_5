@@ -34,15 +34,17 @@ export class CartPage extends CommonPage {
 
   async clearAllItems(): Promise<void> {
     const deleteButtons = this.page.locator('//a[text()="Delete"]');
-    const count = await deleteButtons.count();
+    let count = await deleteButtons.count();
     
     while (count > 0) {
       // Always click the first delete button since the list updates after each deletion
       const firstDeleteButton = deleteButtons.first();
       if (await firstDeleteButton.isVisible()) {
         await this.click(firstDeleteButton);
-        await this.page.waitForTimeout(500);
+        await this.waitForPageLoad();
       }
+      // Update count after each deletion
+      count = count - 1;
     }
   }
 
@@ -76,11 +78,13 @@ export class CartPage extends CommonPage {
   }
 
   async verifyItemCount(expectedCount: number): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
     const count = await this.locators.rowCartItem.count();
     await expect.soft(count).toBe(expectedCount);
   }
 
   async verifyTotalAmount(expectedTotal: number): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
     const actualTotal = await this.getTotalPrice();
     await expect.soft(actualTotal).toBe(expectedTotal);
   }

@@ -3,7 +3,7 @@
     "name": "John Doe",
     "country": "USA",
     "city": "New York",
-    "creditCard": "4111111111111111",
+    "card": "4111111111111111",
     "month": "12",
     "year": "2025"
   },
@@ -11,7 +11,7 @@
     "name": "Anna",
     "country": "VN",
     "city": "HCM",
-    "creditCard": "12345678",
+    "card": "12345678",
     "month": "01",
     "year": "2026"
   }

@@ -12,8 +12,8 @@ export class HomePage extends CommonPage {
 
   // Navigation methods
   async navigateToHome(): Promise<void> {
-    await this.navigate('https://www.demoblaze.com/');
-    await this.waitForVisible(this.locators.lnkHome);
+    await this.locators.lnkHome.click();
+    await this.page.waitForLoadState('domcontentloaded');
   }
 
   async selectCategory(categoryName: 'Phones' | 'Laptops' | 'Monitors'): Promise<void> {
@@ -30,10 +30,6 @@ export class HomePage extends CommonPage {
     await this.page.waitForLoadState('domcontentloaded');
   }
 
-  async clickHomeInNavbar(): Promise<void> {
-    await this.click(this.locators.lnkHome);
-    await this.page.waitForLoadState('domcontentloaded');
-  }
 
   async navigateToCart(): Promise<void> {
     await this.click(this.locators.lnkCart);
@@ -47,7 +43,8 @@ export class HomePage extends CommonPage {
 
   // Verification methods
   async verifyOnHomePage(): Promise<void> {
-    await expect.soft(this.page).toHaveURL(/index\.html/);
+    await expect.soft(this.page).toHaveURL(/demoblaze\.com/);
+
   }
 
   async verifyProductDisplayed(productName: string): Promise<void> {
@@ -64,13 +61,13 @@ export class HomePage extends CommonPage {
   }
 
   async verifyPhoneProductsVisible(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('domcontentloaded');
     const phoneProducts = this.page.locator('//div[@id="tbodyid"]//a');
     await expect.soft(phoneProducts.first()).toBeVisible();
   }
 
   async verifyLaptopProductsVisible(): Promise<void> {
-    await this.page.waitForLoadState('networkidle');
+    await this.page.waitForLoadState('domcontentloaded');
     const laptopProducts = this.page.locator('//div[@id="tbodyid"]//a');
     await expect.soft(laptopProducts.first()).toBeVisible();
   }

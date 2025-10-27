@@ -14,12 +14,18 @@ export class CheckoutPage extends CommonPage {
 
   // Action methods
   async fillCheckoutForm(info: CheckoutInfo): Promise<void> {
-    await this.waitForVisible(this.locators.modalCheckout);
+    await this.waitForPageLoad();
+    await this.click(this.locators.inputName)
     await this.fill(this.locators.inputName, info.name);
+    await this.click(this.locators.inputCountry)
     await this.fill(this.locators.inputCountry, info.country);
+    await this.click(this.locators.inputCity)
     await this.fill(this.locators.inputCity, info.city);
+    await this.click(this.locators.inputCreditCard)
     await this.fill(this.locators.inputCreditCard, info.card);
+    await this.click(this.locators.inputMonth)
     await this.fill(this.locators.inputMonth, info.month);
+    await this.click(this.locators.inputYear)
     await this.fill(this.locators.inputYear, info.year);
   }
 
