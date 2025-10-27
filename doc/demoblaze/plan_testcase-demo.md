@@ -355,7 +355,7 @@ const customer = checkoutData.customer1;
     "name": "John Doe",
     "country": "USA",
     "city": "New York",
-    "creditCard": "4111111111111111",
+    "card": "4111111111111111",
     "month": "12",
     "year": "2025"
   },
@@ -363,7 +363,7 @@ const customer = checkoutData.customer1;
     "name": "Anna",
     "country": "VN",
     "city": "HCM",
-    "creditCard": "12345678",
+    "card": "12345678",
     "month": "01",
     "year": "2026"
   }
@@ -394,7 +394,7 @@ export interface CheckoutInfo {
   name: string;
   country: string;
   city: string;
-  creditCard: string;
+  card: string;
   month: string;
   year: string;
 }
@@ -411,26 +411,46 @@ export interface OrderConfirmation {
 
 ### Handling Preconditions Efficiently
 
-#### Strategy 1: Fixture-Based Setup
-Extend `base-test.ts` to include setup fixtures:
+#### Strategy 1: Fixture-Based Setup (Current Implementation)
+The project uses `base-test.ts` with page object fixtures that are automatically initialized:
 
 ```typescript
-// Example fixture structure (pseudocode)
+// Current implementation in tests/demoblaze/base-test.ts
+type MyFixtures = {
+    loginPage: LoginPage;
+    homePage: HomePage;
+    cartPage: CartPage; 
+    checkoutPage: CheckoutPage;
+    productPage: ProductPage;
+}
+
 export const test = baseTest.extend<MyFixtures>({
-  authenticatedPage: async ({ page }, use) => {
-    // Setup: Login before test
-    const loginPage = new LoginPage(page);
-    await loginPage.navigate();
-    await loginPage.loginWithCredentials('user', 'pass');
-    await use(page);
-  },
-  
-  cartWithItems: async ({ page, authenticatedPage }, use) => {
-    // Setup: Add items to cart
-    const homePage = new HomePage(page);
-    await homePage.addProductToCart('Samsung galaxy s6');
-    await use(page);
-  }
+    loginPage: async ({ page }, use) => {
+        await use(new LoginPage(page));
+    },
+    homePage: async ({ page }, use) => {
+        await use(new HomePage(page));
+    },
+    cartPage: async ({ page }, use) => {
+        await use(new CartPage(page));
+    },
+    checkoutPage: async ({ page }, use) => {
+        await use(new CheckoutPage(page));
+    },
+    productPage: async ({ page }, use) => {
+        await use(new ProductPage(page));
+    }
+});
+```
+
+**Usage in tests:**
+```typescript
+test('TC1 - Login', async ({ page, loginPage, homePage }) => {
+  // Page objects are automatically initialized via fixtures
+  await page.goto('https://www.demoblaze.com/');
+  await loginPage.openLoginModal();
+  await loginPage.loginWithCredentials('user', 'pass');
+  await homePage.verifyWelcomeMessage('user');
 });
 ```
 
@@ -1025,7 +1045,7 @@ export class CheckoutLocators extends CommonLocators {
   inputName!: Locator;
   inputCountry!: Locator;
   inputCity!: Locator;
-  inputCreditCard!: Locator;
+  inputcard!: Locator;
   inputMonth!: Locator;
   inputYear!: Locator;
   btnPurchase!: Locator;
@@ -1046,7 +1066,7 @@ export class CheckoutLocators extends CommonLocators {
     this.inputName = this.page.locator('//input[@id="name"]');
     this.inputCountry = this.page.locator('//input[@id="country"]');
     this.inputCity = this.page.locator('//input[@id="city"]');
-    this.inputCreditCard = this.page.locator('//input[@id="card"]');
+    this.inputcard = this.page.locator('//input[@id="card"]');
     this.inputMonth = this.page.locator('//input[@id="month"]');
     this.inputYear = this.page.locator('//input[@id="year"]');
     this.btnPurchase = this.page.locator('//button[text()="Purchase"]');
@@ -1068,7 +1088,7 @@ export interface CheckoutInfo {
   name: string;
   country: string;
   city: string;
-  creditCard: string;
+  card: string;
   month: string;
   year: string;
 }
@@ -1095,7 +1115,7 @@ export class CheckoutPage extends CommonPage {
     await this.fill(this.locators.inputName, info.name);
     await this.fill(this.locators.inputCountry, info.country);
     await this.fill(this.locators.inputCity, info.city);
-    await this.fill(this.locators.inputCreditCard, info.creditCard);
+    await this.fill(this.locators.inputcard, info.card);
     await this.fill(this.locators.inputMonth, info.month);
     await this.fill(this.locators.inputYear, info.year);
   }
@@ -1419,7 +1439,7 @@ test.describe('Checkout Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      creditCard: customer.creditCard,
+      card: customer.card,
       month: customer.month,
       year: customer.year
     });
@@ -1536,7 +1556,7 @@ test.describe('Full Shopping Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      creditCard: customer.creditCard,
+      card: customer.card,
       month: customer.month,
       year: customer.year
     });
@@ -1606,7 +1626,7 @@ test.describe('Full Shopping Flow', () => {
       "name": "John Doe",
       "country": "USA",
       "city": "New York",
-      "creditCard": "4111111111111111",
+      "card": "4111111111111111",
       "month": "12",
       "year": "2025"
     },
@@ -1614,7 +1634,7 @@ test.describe('Full Shopping Flow', () => {
       "name": "Anna",
       "country": "VN",
       "city": "HCM",
-      "creditCard": "12345678",
+      "card": "12345678",
       "month": "01",
       "year": "2026"
     }
@@ -1839,15 +1859,8 @@ await expect.soft(loginPage.errorMessage).toHaveText('User does not exist.');
 
 **Note**: Current test cases don't include error scenarios, but this approach should be used for negative testing.
 
-### 5. Email Verification (Not Applicable)
 
-- The current test cases do not include email verification
-- If future tests require email validation, consider:
-  - Using email testing services (e.g., MailSlurp, Mailtrap)
-  - Verifying email subject, body, and recipient
-  - Using `expect.soft` for all email-related assertions
-
-### 6. Popup/Modal Verification
+### 5. Popup/Modal Verification
 
 #### Modal Appearance
 ```typescript
