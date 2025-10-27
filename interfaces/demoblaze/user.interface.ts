@@ -11,5 +11,5 @@ export interface User {
  */
 export interface UsersData {
   validUser: User;
-  invalidUser?: User;
+
 }

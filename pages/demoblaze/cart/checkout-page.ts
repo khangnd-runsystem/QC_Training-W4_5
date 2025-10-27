@@ -1,18 +1,8 @@
 import { Page, expect } from '@playwright/test';
 import { CommonPage } from '../../../common_template/common-page';
 import { CheckoutLocators } from '../../../locators/demoblaze/checkout-locators';
-import { CheckoutInfo, OrderConfirmation } from '../../../interfaces/demoblaze';
-
-// Extended interface for the form that includes creditCard field
-// (maps to 'card' in the JSON data)
-export interface CheckoutFormData {
-  name: string;
-  country: string;
-  city: string;
-  creditCard: string;  // This is the form field name
-  month: string;
-  year: string;
-}
+import { CheckoutInfo } from '../../../interfaces/demoblaze/checkout-info.interface';
+import { OrderConfirmation } from '../../../interfaces/demoblaze/order-confirmation.interface';
 
 export class CheckoutPage extends CommonPage {
   readonly locators: CheckoutLocators;
@@ -23,12 +13,12 @@ export class CheckoutPage extends CommonPage {
   }
 
   // Action methods
-  async fillCheckoutForm(info: CheckoutFormData): Promise<void> {
+  async fillCheckoutForm(info: CheckoutInfo): Promise<void> {
     await this.waitForVisible(this.locators.modalCheckout);
     await this.fill(this.locators.inputName, info.name);
     await this.fill(this.locators.inputCountry, info.country);
     await this.fill(this.locators.inputCity, info.city);
-    await this.fill(this.locators.inputCreditCard, info.creditCard);
+    await this.fill(this.locators.inputCreditCard, info.card);
     await this.fill(this.locators.inputMonth, info.month);
     await this.fill(this.locators.inputYear, info.year);
   }

@@ -57,7 +57,7 @@ test.describe('Full Shopping Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      creditCard: customer.creditCard,
+      card: customer.creditCard,
       month: customer.month,
       year: customer.year
     });

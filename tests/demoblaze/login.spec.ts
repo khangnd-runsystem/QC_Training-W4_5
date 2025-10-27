@@ -1,6 +1,6 @@
 import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
-import { UsersData } from '../../interfaces/demoblaze';
+import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 test.describe('Login Feature', () => {
   test.beforeEach(async ({ page, homePage, cartPage }) => {

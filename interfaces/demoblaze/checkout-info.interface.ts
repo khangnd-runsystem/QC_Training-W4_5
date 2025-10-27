@@ -15,6 +15,5 @@ export interface CheckoutInfo {
  */
 export interface CheckoutData {
   customer1: CheckoutInfo;
-  customer2: CheckoutInfo;
   [key: string]: CheckoutInfo;
 }

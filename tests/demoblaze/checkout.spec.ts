@@ -1,6 +1,7 @@
 import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
-import { CheckoutData, ProductsData } from '../../interfaces/demoblaze';
+import { ProductsData } from '../../interfaces/demoblaze/product.interface';
+import { CheckoutData} from '../../interfaces/demoblaze/checkout-info.interface';
 
 test.describe('Checkout Flow', () => {
   test.beforeEach(async ({ page, homePage, productPage, cartPage }) => {
@@ -45,7 +46,7 @@ test.describe('Checkout Flow', () => {
       name: customer.name,
       country: customer.country,
       city: customer.city,
-      creditCard: customer.card,
+      card: customer.card,
       month: customer.month,
       year: customer.year
     });
