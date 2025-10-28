@@ -42,14 +42,12 @@ test.describe('Full Shopping Flow', () => {
     await homePage.selectCategory(laptop.category);
     await homePage.selectProduct(laptop.name);
     await productPage.addToCart();
-    await productPage.verifyProductAddedAlert();
 
     
     await homePage.navigateToHome();
     await homePage.selectCategory(monitor.category);
     await homePage.selectProduct(monitor.name);
     await productPage.addToCart();
-    await productPage.verifyProductAddedAlert();
 
     // Step 6: Verify cart
     await homePage.navigateToCart();

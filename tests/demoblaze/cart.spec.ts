@@ -41,7 +41,6 @@ test.describe('Cart Management', () => {
     await homePage.selectProduct(phone.name);
     await productPage.verifyOnProductPage(phone.name);
     await productPage.addToCart();
-    await productPage.verifyProductAddedAlert();
     
     // Step 4: Return to home
     await homePage.navigateToHome();
@@ -52,7 +51,6 @@ test.describe('Cart Management', () => {
     await homePage.selectProduct(laptop.name);
     await productPage.verifyOnProductPage(laptop.name);
     await productPage.addToCart();
-    await productPage.verifyProductAddedAlert();
     
     // Step 8: Navigate to cart
     await homePage.navigateToCart();

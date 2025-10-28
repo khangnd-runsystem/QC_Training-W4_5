@@ -32,7 +32,6 @@ test.describe('Checkout Flow', () => {
     await homePage.verifyPhoneProductsVisible();
     await homePage.selectProduct(phone.name);
     await productPage.addToCart();
-    await productPage.verifyProductAddedAlert();
 
   });
 

@@ -46,10 +46,4 @@ export class ProductPage extends CommonPage {
   async verifyProductName(expectedName: string): Promise<void> {
     await expect.soft(this.locators.txtProductName).toHaveText(expectedName);
   }
-
-  async verifyProductAddedAlert(): Promise<void> {
-    // Alert is already handled in addToCart() method
-    // This method is here for test readability
-    await this.page.waitForTimeout(100);
-  }
 }
