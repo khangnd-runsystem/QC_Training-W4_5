@@ -37,6 +37,7 @@ export class CartPage extends CommonPage {
         await this.waitForPageLoad();
       }
     }
+    await this.verifyItemCount(0);
   }
 
   async getTotalPrice(): Promise<number> {

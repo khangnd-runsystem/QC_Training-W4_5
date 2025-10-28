@@ -1,8 +1,8 @@
 import { test, expect } from './base-test';
-import { readJson } from '../../utils/dataReader';
-import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
+const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Login Feature', () => {
   test.beforeEach(async ({ page}) => {
@@ -13,20 +13,17 @@ test.describe('Login Feature', () => {
     loginPage, 
     homePage 
   }) => {
-    // Load test data from JSON with type safety
-    const users = readJson('data/demoblaze/users.json') as UsersData;
-    const validUser = users.validUser;
-    
     // Step 1: Open login modal
     await loginPage.openLoginModal();
     
-    // Steps 2-4: Login with credentials from data file
-    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    // Steps 2-4: Login with credentials from environment variables
+    await loginPage.loginWithCredentials(USERNAME, PASSWORD);
     
     // Verifications (all through page methods)
     await loginPage.verifyLoginModalHidden();
     await homePage.verifyOnHomePage();
-    await homePage.verifyWelcomeMessage(validUser.username);
+    await homePage.verifyWelcomeMessage(USERNAME);
     await homePage.verifyLogoutVisible();
+    await loginPage.verifyLoginButtonHidden();
   });
 });

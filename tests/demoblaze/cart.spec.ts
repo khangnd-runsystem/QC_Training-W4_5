@@ -2,21 +2,18 @@ import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
 import { HomePage } from '../../pages/demoblaze/home/home-page';
 import { ProductsData } from '../../interfaces/demoblaze/product.interface';
-import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
+const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Cart Management', () => {
   test.beforeEach(async ({ page, loginPage, cartPage, homePage }) => {
     await page.goto(BASE_URL);
     
-    // Load user data for login
-    const users = readJson('data/demoblaze/users.json') as UsersData;
-    const validUser = users.validUser;
-    
-    // Login before cart operations
+    // Login before cart operations using environment variables
     await loginPage.openLoginModal();
-    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    await loginPage.loginWithCredentials(USERNAME, PASSWORD);
     await loginPage.verifyLoginModalHidden();
     
     // Clear cart for clean state

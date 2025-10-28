@@ -2,21 +2,18 @@ import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
 import { ProductsData } from '../../interfaces/demoblaze/product.interface';
 import { CheckoutData } from '../../interfaces/demoblaze/checkout-info.interface';
-import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
+const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Checkout Flow', () => {
   test.beforeEach(async ({ page, loginPage, homePage, productPage, cartPage }) => {
     await page.goto(BASE_URL);
     
-    // Load user data for login
-    const users = readJson('data/demoblaze/users.json') as UsersData;
-    const validUser = users.validUser;
-    
-    // Login before checkout operations
+    // Login before checkout operations using environment variables
     await loginPage.openLoginModal();
-    await loginPage.loginWithCredentials(validUser.username, validUser.password);
+    await loginPage.loginWithCredentials(USERNAME, PASSWORD);
     await loginPage.verifyLoginModalHidden();
     
     // Load test data with type safety

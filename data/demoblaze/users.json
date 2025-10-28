@@ -1,6 +1,8 @@
 {
-  "validUser": {
-    "username": "autouser_20251005_1234",
-    "password": "autouser_20251005_1234"
+  "testUserProfiles": {
+    "defaultProfile": {
+      "displayName": "Auto User",
+      "email": "autouser@example.com"
+    }
   }
 }

@@ -36,4 +36,8 @@ export class LoginPage extends CommonPage {
   async verifyLoginModalHidden(): Promise<void> {
     await expect.soft(this.locators.modalLogin).toBeHidden();
   }
+
+  async verifyLoginButtonHidden(): Promise<void> {
+    await expect.soft(this.locators.btnLoginNav).toBeHidden();
+  }
 }
