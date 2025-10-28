@@ -1,6 +1,5 @@
-import { test, expect } from './base-test';
+import { test} from './base-test';
 import { readJson } from '../../utils/dataReader';
-import { HomePage } from '../../pages/demoblaze/home/home-page';
 import { ProductsData } from '../../interfaces/demoblaze/product.interface';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';

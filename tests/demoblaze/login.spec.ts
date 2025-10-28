@@ -1,4 +1,4 @@
-import { test, expect } from './base-test';
+import { test } from './base-test';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
 const USERNAME = process.env.DEMOBLAZE_USERNAME || '';

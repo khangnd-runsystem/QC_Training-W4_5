@@ -1,4 +1,4 @@
-import { test, expect } from './base-test';
+import { test } from './base-test';
 import { readJson } from '../../utils/dataReader';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';

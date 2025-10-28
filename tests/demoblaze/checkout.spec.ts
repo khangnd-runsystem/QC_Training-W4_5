@@ -1,4 +1,4 @@
-import { test, expect } from './base-test';
+import { test } from './base-test';
 import { readJson } from '../../utils/dataReader';
 import { ProductsData } from '../../interfaces/demoblaze/product.interface';
 import { CheckoutData } from '../../interfaces/demoblaze/checkout-info.interface';
