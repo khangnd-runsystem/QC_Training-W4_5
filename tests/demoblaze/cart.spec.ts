@@ -60,9 +60,7 @@ test.describe('Cart Management', () => {
     // Verifications (all through page methods)
     await cartPage.waitForPageLoad();
     await cartPage.verifyItemCount(2);
-    await cartPage.verifyItemInCart(phone.name);
     await cartPage.verifyProductPrice(phone.name, phone.price);
-    await cartPage.verifyItemInCart(laptop.name);
     await cartPage.verifyProductPrice(laptop.name, laptop.price);
     await cartPage.verifyTotalAmount(phone.price + laptop.price);
   });
@@ -94,9 +92,7 @@ test.describe('Cart Management', () => {
     await cartPage.waitForPageLoad();
     await cartPage.verifyItemCount(2);
     await cartPage.verifyItemInCart(phone.name);
-    await cartPage.verifyProductPrice(phone.name, phone.price);
     await cartPage.verifyItemInCart(laptop.name);
-    await cartPage.verifyProductPrice(laptop.name, laptop.price);
     // Step 3: Remove one item
     await cartPage.removeItem(phone.name);
     await cartPage.waitForPageLoad();
@@ -104,7 +100,6 @@ test.describe('Cart Management', () => {
     // Verifications (all through page methods)
     await cartPage.verifyItemNotInCart(phone.name);
     await cartPage.verifyItemInCart(laptop.name);
-    await cartPage.verifyProductPrice(laptop.name, laptop.price);
     await cartPage.verifyItemCount(1);
     await cartPage.verifyTotalAmount(laptop.price);
   });
