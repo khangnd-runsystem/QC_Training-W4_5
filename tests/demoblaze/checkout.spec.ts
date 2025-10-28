@@ -53,6 +53,7 @@ test.describe('Checkout Flow', () => {
     // Step 1: Navigate to cart and verify item
     await cartPage.navigateToCart();
     await cartPage.verifyItemInCart(phone.name);
+    await cartPage.verifyProductPrice(phone.name, phone.price);
 
     
     // Step 4: Click Place Order

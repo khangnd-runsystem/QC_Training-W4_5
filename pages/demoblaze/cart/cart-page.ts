@@ -45,20 +45,15 @@ export class CartPage extends CommonPage {
   }
 
   // Verification methods
-  async verifyProductInCart(productName: string, expectedPrice?: number): Promise<void> {
+  async verifyItemInCart(productName: string): Promise<void> {
     const productRow = this.locators.getProductRowByName(productName);
     await expect.soft(productRow).toBeVisible();
-    
-    if (expectedPrice !== undefined) {
-      const priceCell = this.locators.getProductPriceByName(productName);
-      const actualPrice = await this.getText(priceCell);
-      await expect.soft(parseInt(actualPrice)).toBe(expectedPrice);
-    }
   }
 
-  async verifyItemInCart(productName: string): Promise<void> {
-    const productLocator = this.locators.getProductCellByName(productName);
-    await expect.soft(productLocator).toBeVisible();
+  async verifyProductPrice(productName: string, expectedPrice: number): Promise<void> {
+    const priceCell = this.locators.getProductPriceByName(productName);
+    const actualPrice = await this.getText(priceCell);
+    await expect.soft(parseInt(actualPrice)).toBe(expectedPrice);
   }
 
   async verifyItemNotInCart(productName: string): Promise<void> {

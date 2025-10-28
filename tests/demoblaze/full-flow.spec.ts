@@ -56,7 +56,9 @@ test.describe('Full Shopping Flow', () => {
     await cartPage.waitForPageLoad();
     await cartPage.verifyItemCount(2);
     await cartPage.verifyItemInCart(laptop.name);
+    await cartPage.verifyProductPrice(laptop.name, laptop.price);
     await cartPage.verifyItemInCart(monitor.name);
+    await cartPage.verifyProductPrice(monitor.name, monitor.price);
     
     // Steps 7-8: Checkout with customer data from JSON
     await cartPage.clickPlaceOrder();
