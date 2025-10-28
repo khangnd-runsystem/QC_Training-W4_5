@@ -35,11 +35,8 @@ test.describe('Checkout Flow', () => {
   });
 
   test('TC3 - Checkout - when placing order with valid info - order completes successfully', async ({ 
-    page, 
     cartPage, 
-    checkoutPage, 
-    homePage,
-    productPage 
+    checkoutPage
   }) => {
     // Load checkout test data with type safety
     const checkoutData = readJson('data/demoblaze/checkout-info.json') as CheckoutData;

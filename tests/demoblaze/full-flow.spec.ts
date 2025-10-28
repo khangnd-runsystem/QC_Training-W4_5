@@ -22,12 +22,11 @@ test.describe('Full Shopping Flow', () => {
   });
 
   test('TC5 - Full Flow - when completing shopping journey - all steps execute successfully', async ({ 
-    page, 
-    loginPage, 
     homePage, 
     productPage, 
     cartPage, 
-    checkoutPage 
+    checkoutPage,
+    loginPage
   }) => {
     // Load test data from JSON files
     const products: any = readJson('data/demoblaze/products.json');
@@ -77,5 +76,6 @@ test.describe('Full Shopping Flow', () => {
     await homePage.verifyOnHomePage();
     // Step 10: Logout
     await homePage.logout();
+    await loginPage.verifyLoginButtonVisible();
   });
 });

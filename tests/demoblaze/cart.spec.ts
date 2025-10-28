@@ -24,7 +24,6 @@ test.describe('Cart Management', () => {
   });
 
   test('TC2 - Cart - when adding multiple products - all items appear with correct totals', async ({ 
-    page, 
     homePage, 
     productPage, 
     cartPage 
@@ -63,7 +62,6 @@ test.describe('Cart Management', () => {
   });
 
   test('TC4 - Cart - when removing item - remaining items and total update correctly', async ({ 
-    page, 
     homePage, 
     productPage, 
     cartPage 
