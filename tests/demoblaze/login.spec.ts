@@ -2,9 +2,11 @@ import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
 import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
+const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+
 test.describe('Login Feature', () => {
   test.beforeEach(async ({ page}) => {
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto(BASE_URL);
   });
 
   test('TC1 - Login - when using valid credentials - user is authenticated successfully', async ({ 

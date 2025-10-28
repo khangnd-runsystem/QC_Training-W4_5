@@ -4,9 +4,11 @@ import { HomePage } from '../../pages/demoblaze/home/home-page';
 import { ProductsData } from '../../interfaces/demoblaze/product.interface';
 import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
+const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+
 test.describe('Cart Management', () => {
   test.beforeEach(async ({ page, loginPage, cartPage, homePage }) => {
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto(BASE_URL);
     
     // Load user data for login
     const users = readJson('data/demoblaze/users.json') as UsersData;

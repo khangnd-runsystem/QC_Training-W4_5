@@ -12,7 +12,7 @@ export class HomePage extends CommonPage {
 
   // Navigation methods
   async navigateToHome(): Promise<void> {
-    await this.locators.lnkHome.click();
+    await this.click(this.locators.lnkHome);
     await this.page.waitForLoadState('domcontentloaded');
   }
 

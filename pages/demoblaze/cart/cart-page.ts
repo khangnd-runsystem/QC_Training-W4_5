@@ -29,17 +29,13 @@ export class CartPage extends CommonPage {
   }
 
   async clearAllItems(): Promise<void> {
-    let count = await this.locators.btnDeleteAll.count();
-    
-    while (count > 0) {
+    while (await this.locators.btnDeleteAll.count() > 0) {
       // Always click the first delete button since the list updates after each deletion
       const firstDeleteButton = this.locators.btnDeleteAll.first();
       if (await firstDeleteButton.isVisible()) {
         await this.click(firstDeleteButton);
         await this.waitForPageLoad();
       }
-      // Update count after each deletion
-      count = count - 1;
     }
   }
 
@@ -54,7 +50,7 @@ export class CartPage extends CommonPage {
     await expect.soft(productRow).toBeVisible();
     
     if (expectedPrice !== undefined) {
-      const priceCell = productRow.locator('td').nth(2);
+      const priceCell = this.locators.getProductPriceByName(productName);
       const actualPrice = await this.getText(priceCell);
       await expect.soft(parseInt(actualPrice)).toBe(expectedPrice);
     }

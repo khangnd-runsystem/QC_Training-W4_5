@@ -37,4 +37,8 @@ export class CartLocators extends CommonLocators {
   getProductCellByName(productName: string): Locator {
     return this.page.locator(`//td[contains(text(), "${productName}")]`);
   }
+
+  getProductPriceByName(productName: string): Locator {
+    return this.page.locator(`//tr[td[contains(text(), "${productName}")]]//td[3]`);
+  }
 }

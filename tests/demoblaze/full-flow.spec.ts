@@ -2,9 +2,11 @@ import { test, expect } from './base-test';
 import { readJson } from '../../utils/dataReader';
 import { UsersData } from '../../interfaces/demoblaze/user.interface';
 
+const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
+
 test.describe('Full Shopping Flow', () => {
   test.beforeEach(async ({ page, cartPage, loginPage, homePage }) => {
-    await page.goto('https://www.demoblaze.com/');
+    await page.goto(BASE_URL);
     
     // Load user data for login
     const users = readJson('data/demoblaze/users.json') as UsersData;
