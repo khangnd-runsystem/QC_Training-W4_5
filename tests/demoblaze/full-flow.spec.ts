@@ -31,8 +31,6 @@ test.describe('Full Shopping Flow', () => {
     checkoutPage 
   }) => {
     // Load test data from JSON files
-    const users: any = readJson('data/demoblaze/users.json');
-    const validUser = users.validUser;
     const products: any = readJson('data/demoblaze/products.json');
     const laptop = products.laptops.sonyVaioI5;
     const monitor = products.monitors.appleMonitor24;
