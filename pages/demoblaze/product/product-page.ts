@@ -32,8 +32,7 @@ export class ProductPage extends CommonPage {
   }
 
   async navigateToCart(): Promise<void> {
-    const cartLink = this.page.locator('//a[@id="cartur"]');
-    await this.click(cartLink);
+    await this.click(this.locators.lnkCart);
     await this.page.waitForLoadState('domcontentloaded');
   }
 

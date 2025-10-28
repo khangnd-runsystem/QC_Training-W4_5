@@ -6,6 +6,7 @@ export class ProductLocators extends CommonLocators {
   txtProductName!: Locator;
   txtProductPrice!: Locator;
   lnkHome!: Locator;
+  lnkCart!: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -19,5 +20,6 @@ export class ProductLocators extends CommonLocators {
     this.txtProductName = this.page.locator('//h2[@class="name"]');
     this.txtProductPrice = this.page.locator('//h3[@class="price-container"]');
     this.lnkHome = this.page.locator('//a[@class="nav-link" and contains(text(), "Home")]');
+    this.lnkCart = this.page.locator('//a[@id="cartur"]');
   }
 }

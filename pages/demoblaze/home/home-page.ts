@@ -17,15 +17,13 @@ export class HomePage extends CommonPage {
   }
 
   async selectCategory(categoryName: 'Phones' | 'Laptops' | 'Monitors'): Promise<void> {
-    // Handle dynamic category selection in page method using XPath
-    const categoryLocator = this.page.locator(`//a[text()="${categoryName}"]`);
+    const categoryLocator = this.locators.getCategoryLink(categoryName);
     await this.click(categoryLocator);
     await this.page.waitForTimeout(1000); // Wait for products to load
   }
 
   async selectProduct(productName: string): Promise<void> {
-    // Handle dynamic product selection in page method using XPath
-    const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+    const productLocator = this.locators.getProductLink(productName);
     await this.click(productLocator);
     await this.page.waitForLoadState('domcontentloaded');
   }
@@ -50,7 +48,7 @@ export class HomePage extends CommonPage {
   }
 
   async verifyProductDisplayed(productName: string): Promise<void> {
-    const productLocator = this.page.locator(`//a[contains(text(), "${productName}")]`);
+    const productLocator = this.locators.getProductLink(productName);
     await expect.soft(productLocator).toBeVisible();
   }
 
@@ -64,13 +62,11 @@ export class HomePage extends CommonPage {
 
   async verifyPhoneProductsVisible(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
-    const phoneProducts = this.page.locator('//div[@id="tbodyid"]//a');
-    await expect.soft(phoneProducts.first()).toBeVisible();
+    await expect.soft(this.locators.lnkProducts.first()).toBeVisible();
   }
 
   async verifyLaptopProductsVisible(): Promise<void> {
     await this.page.waitForLoadState('domcontentloaded');
-    const laptopProducts = this.page.locator('//div[@id="tbodyid"]//a');
-    await expect.soft(laptopProducts.first()).toBeVisible();
+    await expect.soft(this.locators.lnkProducts.first()).toBeVisible();
   }
 }

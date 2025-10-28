@@ -10,6 +10,7 @@ export class HomeLocators extends CommonLocators {
   lnkCart!: Locator;
   btnLogout!: Locator;
   txtWelcome!: Locator;
+  lnkProducts!: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -27,5 +28,15 @@ export class HomeLocators extends CommonLocators {
     this.lnkCart = this.page.locator('//a[@id="cartur"]');
     this.btnLogout = this.page.locator('//a[@id="logout2"]');
     this.txtWelcome = this.page.locator('//a[@id="nameofuser"]');
+    this.lnkProducts = this.page.locator('//div[@id="tbodyid"]//a');
+  }
+
+  // Dynamic locator methods
+  getCategoryLink(categoryName: 'Phones' | 'Laptops' | 'Monitors'): Locator {
+    return this.page.locator(`//a[text()="${categoryName}"]`);
+  }
+
+  getProductLink(productName: string): Locator {
+    return this.page.locator(`//a[contains(text(), "${productName}")]`);
   }
 }

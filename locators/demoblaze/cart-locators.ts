@@ -6,6 +6,8 @@ export class CartLocators extends CommonLocators {
   btnPlaceOrder!: Locator;
   txtTotal!: Locator;
   lnkHome!: Locator;
+  lnkCart!: Locator;
+  btnDeleteAll!: Locator;
 
   constructor(page: Page) {
     super(page);
@@ -19,5 +21,20 @@ export class CartLocators extends CommonLocators {
     this.btnPlaceOrder = this.page.locator('//button[text()="Place Order"]');
     this.txtTotal = this.page.locator('//h3[@id="totalp"]');
     this.lnkHome = this.page.locator('//a[@class="nav-link" and contains(text(), "Home")]');
+    this.lnkCart = this.page.locator('//a[@id="cartur"]');
+    this.btnDeleteAll = this.page.locator('//a[text()="Delete"]');
+  }
+
+  // Dynamic locator methods
+  getDeleteButtonByProduct(productName: string): Locator {
+    return this.page.locator(`//tr[td[contains(text(), "${productName}")]]//a[text()="Delete"]`);
+  }
+
+  getProductRowByName(productName: string): Locator {
+    return this.page.locator(`//tr[td[contains(text(), "${productName}")]]`);
+  }
+
+  getProductCellByName(productName: string): Locator {
+    return this.page.locator(`//td[contains(text(), "${productName}")]`);
   }
 }
