@@ -15,12 +15,14 @@ export class ProductPage extends CommonPage {
     // Set up alert handler before clicking
     this.page.once('dialog', async (dialog) => {
       console.log(`Alert message: ${dialog.message()}`);
-      await this.waitForPageLoad();
       await dialog.accept();
+      await this.waitForPageLoad();
+
     });
     
     await this.click(this.locators.btnAddToCart);
     await this.waitForPageLoad();
+    
 
   }
 

@@ -78,7 +78,7 @@ export class CartPage extends CommonPage {
   }
 
   async verifyItemCount(expectedCount: number): Promise<void> {
-    await this.page.waitForLoadState('domcontentloaded');
+    await this.waitForPageLoad();
     const count = await this.locators.rowCartItem.count();
     await expect.soft(count).toBe(expectedCount);
   }

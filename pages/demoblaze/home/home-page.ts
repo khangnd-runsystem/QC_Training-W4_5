@@ -37,13 +37,15 @@ export class HomePage extends CommonPage {
   }
 
   async logout(): Promise<void> {
+    await this.page.waitForLoadState('domcontentloaded');
     await this.click(this.locators.btnLogout);
     await this.page.waitForTimeout(1000);
   }
 
   // Verification methods
   async verifyOnHomePage(): Promise<void> {
-    await expect.soft(this.page).toHaveURL(/demoblaze\.com/);
+    const url = this.page.url();
+    expect.soft(url).toMatch(/demoblaze.com/);
 
   }
 
