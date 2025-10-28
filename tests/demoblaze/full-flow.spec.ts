@@ -1,13 +1,22 @@
 import { test } from './base-test';
 import { readJson } from '../../utils/dataReader';
+import { ProductsData } from '../../interfaces/demoblaze/product.interface';
+import { CheckoutData } from '../../interfaces/demoblaze/checkout-info.interface';
 
 const BASE_URL = process.env.DEMOBLAZE_BASE_URL || 'https://www.demoblaze.com';
 const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
 const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Full Shopping Flow', () => {
+  let products: ProductsData;
+  let checkoutData: CheckoutData;
+
   test.beforeEach(async ({ page, cartPage, loginPage, homePage }) => {
     await page.goto(BASE_URL);
+    
+    // Load test data
+    products = readJson('data/demoblaze/products.json') as ProductsData;
+    checkoutData = readJson('data/demoblaze/checkout-info.json') as CheckoutData;
     
     // Login before cart operations using environment variables
     await loginPage.openLoginModal();
@@ -28,22 +37,19 @@ test.describe('Full Shopping Flow', () => {
     checkoutPage,
     loginPage
   }) => {
-    // Load test data from JSON files
-    const products: any = readJson('data/demoblaze/products.json');
     const laptop = products.laptops.sonyVaioI5;
     const monitor = products.monitors.appleMonitor24;
-    const checkoutData: any = readJson('data/demoblaze/checkout-info.json');
     const customer = checkoutData.customer2;
     
     
     // Steps 1: Add products from different categories
-    await homePage.selectCategory(laptop.category);
+    await homePage.selectCategory(laptop.category!);
     await homePage.selectProduct(laptop.name);
     await productPage.addToCart();
 
     
     await homePage.navigateToHome();
-    await homePage.selectCategory(monitor.category);
+    await homePage.selectCategory(monitor.category!);
     await homePage.selectProduct(monitor.name);
     await productPage.addToCart();
 

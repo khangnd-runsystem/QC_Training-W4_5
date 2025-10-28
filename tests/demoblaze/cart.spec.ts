@@ -7,8 +7,13 @@ const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
 const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Cart Management', () => {
+  let products: ProductsData;
+
   test.beforeEach(async ({ page, loginPage, cartPage, homePage }) => {
     await page.goto(BASE_URL);
+    
+    // Load test data
+    products = readJson('data/demoblaze/products.json') as ProductsData;
     
     // Login before cart operations using environment variables
     await loginPage.openLoginModal();
@@ -27,8 +32,6 @@ test.describe('Cart Management', () => {
     productPage, 
     cartPage 
   }) => {
-    // Load test data from JSON with type safety
-    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.samsungGalaxyS6;
     const laptop = products.laptops.macBookPro;
     
@@ -65,8 +68,6 @@ test.describe('Cart Management', () => {
     productPage, 
     cartPage 
   }) => {
-    // Load test data from JSON with type safety
-    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.sonyXperiaZ5;
     const laptop = products.laptops.macBookAir;
     

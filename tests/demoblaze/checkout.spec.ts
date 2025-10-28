@@ -8,16 +8,21 @@ const USERNAME = process.env.DEMOBLAZE_USERNAME || '';
 const PASSWORD = process.env.DEMOBLAZE_PASSWORD || '';
 
 test.describe('Checkout Flow', () => {
+  let products: ProductsData;
+  let checkoutData: CheckoutData;
+
   test.beforeEach(async ({ page, loginPage, homePage, productPage, cartPage }) => {
     await page.goto(BASE_URL);
+    
+    // Load test data
+    products = readJson('data/demoblaze/products.json') as ProductsData;
+    checkoutData = readJson('data/demoblaze/checkout-info.json') as CheckoutData;
     
     // Login before checkout operations using environment variables
     await loginPage.openLoginModal();
     await loginPage.loginWithCredentials(USERNAME, PASSWORD);
     await loginPage.verifyLoginModalHidden();
     
-    // Load test data with type safety
-    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.samsungGalaxyS6;
     
     // Clear cart for clean state
@@ -38,10 +43,7 @@ test.describe('Checkout Flow', () => {
     cartPage, 
     checkoutPage
   }) => {
-    // Load checkout test data with type safety
-    const checkoutData = readJson('data/demoblaze/checkout-info.json') as CheckoutData;
     const customer = checkoutData.customer1;
-    const products = readJson('data/demoblaze/products.json') as ProductsData;
     const phone = products.phones.samsungGalaxyS6;
     
     // Step 1: Navigate to cart and verify item
